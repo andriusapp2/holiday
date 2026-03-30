@@ -3,1490 +3,794 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>✈️ My Holiday Shortlist</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Our Holiday Shortlist 🌞</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --sand: #f5ede0;
-    --ocean: #1a5f7a;
-    --ocean-light: #2d8baa;
-    --coral: #e05c3a;
-    --gold: #d4a94a;
-    --text: #1c1c1c;
-    --text-muted: #7a6a5a;
+    --ocean: #1a6b8a;
+    --ocean-light: #2a8ab0;
+    --sunset: #e8793a;
+    --sunset-light: #f4a261;
+    --leaf: #4caf7d;
+    --leaf-light: #72c49a;
+    --text: #2c2c2c;
+    --muted: #6e6e6e;
     --card-bg: #ffffff;
-    --shadow: 0 4px 24px rgba(26,95,122,0.10);
+    --border: #e8ddd0;
+    --liked: #e74c3c;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
+    font-family: 'Nunito', sans-serif;
     background: var(--sand);
-    font-family: 'DM Sans', sans-serif;
     color: var(--text);
     min-height: 100vh;
-    background-image:
-      radial-gradient(ellipse at 80% 0%, rgba(212,169,74,0.13) 0%, transparent 60%),
-      radial-gradient(ellipse at 10% 100%, rgba(26,95,122,0.10) 0%, transparent 60%);
   }
 
+  /* ── HEADER ── */
   header {
+    background: linear-gradient(135deg, var(--ocean) 0%, #0d3d54 60%, #1a5c40 100%);
+    color: white;
+    padding: 2.5rem 2rem 2rem;
     text-align: center;
-    padding: 3rem 1rem 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    bottom: -20px; left: 0; right: 0;
+    height: 40px;
+    background: var(--sand);
+    clip-path: ellipse(55% 100% at 50% 100%);
   }
   header h1 {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(2.2rem, 5vw, 3.5rem);
-    color: var(--ocean);
-    letter-spacing: -1px;
-    line-height: 1.1;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    letter-spacing: -0.5px;
+    margin-bottom: 0.4rem;
   }
-  header h1 span { color: var(--coral); font-style: italic; }
   header p {
-    margin-top: 0.6rem;
-    color: var(--text-muted);
-    font-size: 1rem;
-    font-weight: 300;
+    opacity: 0.85;
+    font-size: 1.05rem;
+    font-weight: 600;
   }
+  .wave-emoji { font-size: 1.5rem; vertical-align: middle; }
 
+  /* ── CONTROLS ── */
   .controls {
-    max-width: 1100px;
-    margin: 1.5rem auto 0;
-    padding: 0 1rem;
     display: flex;
     flex-wrap: wrap;
-    gap: 0.7rem;
-    align-items: center;
+    gap: 0.6rem;
     justify-content: center;
+    padding: 2rem 1.5rem 1rem;
   }
 
   .filter-btn {
-    border: 2px solid var(--ocean);
-    background: transparent;
-    color: var(--ocean);
+    background: white;
+    border: 2px solid var(--border);
+    color: var(--text);
+    padding: 0.45rem 1.1rem;
     border-radius: 50px;
-    padding: 0.45rem 1.2rem;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 0.88rem;
-    font-weight: 500;
+    font-weight: 700;
     cursor: pointer;
     transition: all 0.2s;
-    letter-spacing: 0.02em;
   }
-  .filter-btn:hover, .filter-btn.active {
+  .filter-btn:hover { border-color: var(--ocean); color: var(--ocean); }
+  .filter-btn.active {
     background: var(--ocean);
-    color: #fff;
+    border-color: var(--ocean);
+    color: white;
   }
-  .filter-btn.all { border-color: var(--coral); color: var(--coral); }
-  .filter-btn.all:hover, .filter-btn.all.active { background: var(--coral); color: #fff; }
+  .filter-btn.liked-filter.active {
+    background: var(--liked);
+    border-color: var(--liked);
+  }
 
   .sort-row {
-    max-width: 1100px;
-    margin: 1rem auto 0;
-    padding: 0 1rem;
     display: flex;
-    gap: 0.7rem;
+    justify-content: center;
     align-items: center;
-    justify-content: flex-end;
-    flex-wrap: wrap;
-  }
-  .sort-label { color: var(--text-muted); font-size: 0.85rem; }
-  select {
-    border: 1.5px solid #ccc;
-    background: #fff;
-    border-radius: 8px;
-    padding: 0.35rem 0.8rem;
-    font-family: 'DM Sans', sans-serif;
+    gap: 0.6rem;
+    padding: 0 1.5rem 0.5rem;
     font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--muted);
+  }
+  .sort-row select {
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    padding: 0.3rem 0.7rem;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.88rem;
+    background: white;
     color: var(--text);
     cursor: pointer;
   }
 
-  .stats-bar {
-    max-width: 1100px;
-    margin: 1rem auto 0;
-    padding: 0 1rem;
-    display: flex;
-    gap: 1.5rem;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-  .stat { font-size: 0.82rem; color: var(--text-muted); }
-  .stat strong { color: var(--ocean); }
-
+  /* ── GRID ── */
   .grid {
-    max-width: 1100px;
-    margin: 1.5rem auto 3rem;
-    padding: 0 1rem;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.3rem;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem 1.5rem 3rem;
+    max-width: 1400px;
+    margin: 0 auto;
   }
 
+  /* ── CARD ── */
   .card {
     background: var(--card-bg);
     border-radius: 18px;
-    box-shadow: var(--shadow);
     overflow: hidden;
+    box-shadow: 0 3px 18px rgba(0,0,0,0.08);
+    transition: transform 0.25s, box-shadow 0.25s;
     display: flex;
     flex-direction: column;
-    transition: transform 0.35s cubic-bezier(0.22,0.61,0.36,1), box-shadow 0.35s cubic-bezier(0.22,0.61,0.36,1);
     position: relative;
-    transform-style: preserve-3d;
-    will-change: transform;
+    border: 2px solid transparent;
   }
-  .card:hover { box-shadow: 0 18px 48px rgba(26,95,122,0.22); }
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 35px rgba(0,0,0,0.13);
+  }
+  .card.liked {
+    border-color: var(--liked);
+  }
+
+  /* hidden when filtered */
   .card.hidden { display: none; }
 
-  /* Card entrance animation */
-  @keyframes card-enter {
-    from { opacity: 0; transform: translateY(28px) scale(0.96); }
-    to   { opacity: 1; transform: translateY(0) scale(1); }
+  /* ── CARD HEADER BAND ── */
+  .card-band {
+    height: 10px;
   }
-  .card.entering {
-    animation: card-enter 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) both;
-  }
+  .band-capeverde { background: linear-gradient(90deg, #27ae60, #1abc9c); }
+  .band-rhodes    { background: linear-gradient(90deg, #e67e22, #f39c12); }
+  .band-crete     { background: linear-gradient(90deg, #3498db, #2980b9); }
+  .band-zakynthos { background: linear-gradient(90deg, #9b59b6, #8e44ad); }
+  .band-kos       { background: linear-gradient(90deg, #e74c3c, #c0392b); }
+  .band-corfu     { background: linear-gradient(90deg, #1a6b8a, #0d3d54); }
 
-  .card-header {
-    padding: 1.1rem 1.2rem 0.7rem;
-    border-bottom: 1px solid #f0e8de;
+  /* ── CARD BODY ── */
+  .card-body { padding: 1.2rem 1.3rem; flex: 1; }
+
+  .card-top {
     display: flex;
-    align-items: flex-start;
     justify-content: space-between;
-    gap: 0.5rem;
-  }
-  .card-dest {
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--coral);
-    margin-bottom: 0.2rem;
-  }
-  .card-hotel {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.05rem;
-    color: var(--ocean);
-    line-height: 1.25;
-    flex: 1;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
   }
 
-  .fav-btn {
+  .destination-tag {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    margin-bottom: 0.4rem;
+    display: inline-block;
+  }
+  .tag-capeverde  { background: #d5f5e3; color: #1a7a4a; }
+  .tag-rhodes     { background: #fdebd0; color: #a84300; }
+  .tag-crete      { background: #d6eaf8; color: #1a5276; }
+  .tag-zakynthos  { background: #e8daef; color: #6c3483; }
+  .tag-kos        { background: #fde8e8; color: #922b21; }
+  .tag-corfu      { background: #d0e8f0; color: #0d3d54; }
+
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.18rem;
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--text);
+    margin-bottom: 0.25rem;
+  }
+
+  .stars {
+    color: #f0a500;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+  }
+
+  /* like button */
+  .like-btn {
     background: none;
     border: none;
+    font-size: 1.5rem;
     cursor: pointer;
-    font-size: 1.4rem;
-    padding: 0;
     line-height: 1;
+    transition: transform 0.15s;
     flex-shrink: 0;
-    transition: transform 0.2s;
-    filter: grayscale(1) opacity(0.4);
+    margin-left: 0.5rem;
   }
-  .fav-btn:hover { transform: scale(1.2); filter: none; }
-  .fav-btn.on { filter: none; }
+  .like-btn:hover { transform: scale(1.2); }
 
-  .card-body {
-    padding: 0.85rem 1.2rem;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 0.55rem;
-  }
-
-  .card-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-  }
-  .tag {
-    background: #eef5f8;
-    color: var(--ocean);
-    border-radius: 6px;
-    padding: 0.2rem 0.55rem;
-    font-size: 0.78rem;
-    font-weight: 500;
-  }
-  .tag.date { background: #fff5ea; color: #b86b1a; }
-  .tag.board { background: #edf7ed; color: #2e7d32; }
-
-  .card-area { font-size: 0.83rem; color: var(--text-muted); }
-
+  /* rating bar */
   .rating-row {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    margin-top: 0.2rem;
+    margin: 0.6rem 0;
   }
-  .stars-input { display: flex; gap: 2px; }
-  .star {
-    font-size: 1.15rem;
-    cursor: pointer;
-    color: #d4a94a;
-    transition: transform 0.1s;
-    opacity: 0.25;
+  .rating-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--muted);
+    width: 80px;
+    flex-shrink: 0;
   }
-  .star.filled { opacity: 1; }
-  .star:hover { transform: scale(1.2); }
-  .rating-label { font-size: 0.78rem; color: var(--text-muted); }
+  .rating-track {
+    flex: 1;
+    background: #f0e9de;
+    border-radius: 10px;
+    height: 8px;
+    overflow: hidden;
+  }
+  .rating-fill {
+    height: 100%;
+    border-radius: 10px;
+    background: linear-gradient(90deg, var(--ocean-light), var(--leaf));
+    transition: width 0.6s ease;
+  }
+  .rating-num {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--ocean);
+    width: 30px;
+    text-align: right;
+  }
 
-  .note-area {
+  /* summary text */
+  .summary {
+    font-size: 0.88rem;
+    color: #555;
+    line-height: 1.5;
+    margin: 0.6rem 0;
+  }
+
+  /* pros/cons */
+  .pros-cons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.4rem;
+    margin: 0.7rem 0;
+  }
+  .pros, .cons {
+    background: #f9f5ef;
+    border-radius: 10px;
+    padding: 0.5rem 0.6rem;
+  }
+  .pros { border-left: 3px solid var(--leaf); }
+  .cons { border-left: 3px solid var(--sunset); }
+  .pros h4, .cons h4 {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.3rem;
+  }
+  .pros h4 { color: var(--leaf); }
+  .cons h4 { color: var(--sunset); }
+  .pros ul, .cons ul {
+    list-style: none;
+    padding: 0;
+  }
+  .pros ul li::before { content: '✓ '; color: var(--leaf); font-weight: 700; }
+  .cons ul li::before { content: '✗ '; color: var(--sunset); font-weight: 700; }
+  .pros ul li, .cons ul li {
+    font-size: 0.78rem;
+    color: #555;
+    line-height: 1.4;
+    margin-bottom: 0.15rem;
+  }
+
+  /* tags row */
+  .badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    margin-top: 0.7rem;
+  }
+  .badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.18rem 0.55rem;
+    border-radius: 20px;
+    background: #eef4fa;
+    color: var(--ocean);
+    border: 1px solid #c5d9e8;
+  }
+  .badge.adults { background: #fdebd0; color: #a84300; border-color: #f0c090; }
+  .badge.ai     { background: #d5f5e3; color: #1a7a4a; border-color: #a0dbb8; }
+  .badge.beach  { background: #d6eaf8; color: #1a5276; border-color: #a0c8e0; }
+  .badge.spa    { background: #e8daef; color: #6c3483; border-color: #c8a8d8; }
+
+  /* ── CARD FOOTER ── */
+  .card-footer {
+    display: flex;
+    gap: 0.6rem;
+    padding: 0.9rem 1.3rem;
+    border-top: 1px solid var(--border);
+    background: #fdf9f4;
+  }
+  .btn-ta, .btn-book {
+    flex: 1;
+    text-align: center;
+    padding: 0.5rem 0;
+    border-radius: 10px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .btn-ta {
+    background: white;
+    border: 2px solid var(--ocean);
+    color: var(--ocean);
+  }
+  .btn-ta:hover { background: var(--ocean); color: white; }
+  .btn-book {
+    background: var(--sunset);
+    border: 2px solid var(--sunset);
+    color: white;
+  }
+  .btn-book:hover { background: #c9622e; border-color: #c9622e; }
+
+  /* no book button placeholder */
+  .btn-nobook {
+    flex: 1;
+    text-align: center;
+    padding: 0.5rem 0;
+    border-radius: 10px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    background: #eee;
+    color: #999;
+    border: 2px dashed #ddd;
+  }
+
+  /* notes area */
+  .notes-area {
+    margin: 0.6rem 0 0;
+  }
+  .notes-area textarea {
     width: 100%;
-    border: 1.5px solid #e0d8ce;
-    border-radius: 8px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
     padding: 0.5rem 0.7rem;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 0.82rem;
     color: var(--text);
     resize: vertical;
-    min-height: 52px;
-    background: #faf8f5;
+    min-height: 55px;
+    background: #fdf9f4;
     transition: border-color 0.2s;
   }
-  .note-area:focus { outline: none; border-color: var(--ocean-light); }
-  .note-area::placeholder { color: #bbb; }
-
-  .other-note {
-    background: #f0f6fa;
-    border-left: 3px solid var(--ocean-light);
-    border-radius: 0 8px 8px 0;
-    padding: 0.45rem 0.7rem;
-    font-size: 0.8rem;
-    color: var(--text);
-    line-height: 1.45;
+  .notes-area textarea:focus {
+    outline: none;
+    border-color: var(--ocean);
   }
-  .other-note-label {
-    font-weight: 600;
-    color: var(--ocean);
-    margin-right: 0.3rem;
-  }
-
-  /* ── Sound / mute toggle ── */
-  .sound-toggle {
-    position: fixed;
-    bottom: 1.2rem;
-    right: 1.2rem;
-    z-index: 9000;
-    background: #fff;
-    border: 2px solid var(--ocean);
-    border-radius: 50px;
-    padding: 0.45rem 1rem;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: var(--ocean);
-    cursor: pointer;
-    box-shadow: 0 2px 12px rgba(26,95,122,0.14);
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    transition: background 0.18s, color 0.18s;
-  }
-  .sound-toggle:hover { background: var(--ocean); color: #fff; }
-  .sound-toggle.muted { border-color: #bbb; color: #999; }
-  .sound-toggle.muted:hover { background: #bbb; color: #fff; }
-
-  .card-footer {
-    padding: 0.7rem 1.2rem 1rem;
-    display: flex;
-    gap: 0.6rem;
-  }
-  .btn-book {
-    flex: 1;
-    background: var(--ocean);
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    padding: 0.55rem 0.8rem;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 500;
-    cursor: pointer;
-    text-decoration: none;
-    text-align: center;
-    transition: background 0.2s;
-  }
-  .btn-book:hover { background: var(--ocean-light); }
-  .btn-yes {
-    flex: 0 0 auto;
-    background: #f4f4f2;
-    color: #555;
-    border: 1.5px solid #ddd;
-    border-radius: 10px;
-    padding: 0.45rem 0.85rem;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 1.15rem;
-    cursor: pointer;
-    transition: all 0.18s;
-    line-height: 1;
-  }
-  .btn-yes:hover { background: #e6f4ea; border-color: #a8d5b0; transform: scale(1.1); }
-  .btn-yes.active { background: #2e7d32; border-color: #2e7d32; }
-  .btn-no {
-    flex: 0 0 auto;
-    background: #f4f4f2;
-    color: #555;
-    border: 1.5px solid #ddd;
-    border-radius: 10px;
-    padding: 0.45rem 0.85rem;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 1.15rem;
-    cursor: pointer;
-    transition: all 0.18s;
-    line-height: 1;
-  }
-  .btn-no:hover { background: #fdecea; border-color: #f5a8a8; transform: scale(1.1); }
-  .btn-no.active { background: #c62828; border-color: #c62828; }
-  .card.voted-yes { border: 2.5px solid #66bb6a; }
-  .card.voted-no { border: 2.5px solid #ef5350; opacity: 0.55; }
-
-  .fav-badge {
-    position: absolute;
-    top: 0.7rem;
-    right: 3rem;
-    background: var(--gold);
-    color: #fff;
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
-    border-radius: 4px;
-    padding: 0.15rem 0.45rem;
-    display: none;
-  }
-  .card.favourite .fav-badge { display: block; }
-
-  .mutual-badge {
-    position: absolute;
-    top: 0.7rem;
-    left: 1.1rem;
-    background: #43a047;
-    color: #fff;
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    border-radius: 4px;
-    padding: 0.15rem 0.5rem;
-  }
-
-  #no-results {
-    text-align: center;
-    color: var(--text-muted);
-    padding: 3rem 1rem;
-    font-size: 1.1rem;
-    display: none;
-    grid-column: 1/-1;
-  }
-
-  .shortlist-banner {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 1rem;
-    display: none;
-  }
-  .shortlist-banner.visible { display: block; }
-  .shortlist-inner h3 { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; }
-  .shortlist-inner p { font-size: 0.85rem; opacity: 0.85; flex: 1; min-width: 200px; }
-  .btn-export {
-    background: #fff;
-    color: var(--ocean);
-    border: none;
-    border-radius: 8px;
-    padding: 0.5rem 1.1rem;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 600;
-    cursor: pointer;
-  }
-
-  @media (max-width: 600px) {
-    .grid { grid-template-columns: 1fr; }
-    .sort-row { justify-content: flex-start; }
-  }
-
-  /* ── Per-destination card themes – refined, muted palette ── */
-
-  /* Shared: all cards get a top accent bar via a pseudo-element */
-  .card::before {
-    content: '';
+  .notes-area label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--muted);
     display: block;
-    height: 3px;
-    width: 100%;
-    background: var(--card-accent, #c8bfb0);
-    border-radius: 18px 18px 0 0;
-    position: absolute;
-    top: 0; left: 0;
+    margin-bottom: 0.2rem;
   }
 
-  /* Cape Verde – warm driftwood */
-  .card[data-dest="Cape Verde"] { --card-accent: #8b7355; --card-label: #6b5740; --card-pill: #f0ebe3; }
-  /* Greece – dusty aegean slate */
-  .card[data-dest="Greece"]     { --card-accent: #6b8fa3; --card-label: #4a6f82; --card-pill: #eaf0f4; }
-  /* Spain – terracotta */
-  .card[data-dest="Spain"]      { --card-accent: #b07060; --card-label: #8c5244; --card-pill: #f5edea; }
-  /* Majorca – muted sage */
-  .card[data-dest="Majorca"]    { --card-accent: #7a9480; --card-label: #4e6e56; --card-pill: #eaf1ec; }
-  /* Fuerteventura – warm sand */
-  .card[data-dest="Fuerteventura"] { --card-accent: #c4a882; --card-label: #9a7a52; --card-pill: #f7f1e8; }
-  /* Tenerife – deep olive */
-  .card[data-dest="Tenerife"]   { --card-accent: #7a8c6e; --card-label: #556248; --card-pill: #edf0ea; }
-  /* Ibiza – muted dusty rose */
-  .card[data-dest="Ibiza"]      { --card-accent: #a8808c; --card-label: #7d5564; --card-pill: #f5edf0; }
-  /* Gran Canaria – warm amber stone */
-  .card[data-dest="Gran Canaria"] { --card-accent: #c4a060; --card-label: #957840; --card-pill: #f7f2e6; }
-  /* Lanzarote – charcoal basalt */
-  .card[data-dest="Lanzarote"]  { --card-accent: #7a7068; --card-label: #555048; --card-pill: #eeece9; }
-
-  /* Apply the accent colour to dest label, hotel name, book button */
-  .card-dest { color: var(--card-label, var(--coral)); }
-  .card-hotel { color: var(--card-label, var(--ocean)); }
-  .btn-book { background: var(--card-label, var(--ocean)) !important; }
-  .btn-book:hover { filter: brightness(1.12); }
-
-  /* Subtle pill behind the dest label */
-  .card-dest {
-    display: inline-block;
-    background: var(--card-pill, transparent);
-    border-radius: 4px;
-    padding: 0.15rem 0.5rem 0.15rem 0.4rem;
-    margin-bottom: 0.25rem;
-  }
-
-  /* Destination legend strip at top of each card */
-  .dest-flag {
-    display: inline-block;
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
-  }
-
-  /* ── Login screen ── */
-  #login-screen {
-    position: fixed;
-    inset: 0;
-    background: var(--sand);
-    background-image:
-      radial-gradient(ellipse at 80% 0%, rgba(212,169,74,0.13) 0%, transparent 60%),
-      radial-gradient(ellipse at 10% 100%, rgba(26,95,122,0.10) 0%, transparent 60%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-    flex-direction: column;
-    gap: 0;
-  }
-  #login-screen.hidden { display: none; }
-  .login-card h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.7rem;
-    color: var(--ocean);
-    margin-bottom: 0.3rem;
-  }
-  .login-card p {
-    color: var(--text-muted);
-    font-size: 0.9rem;
-    margin-bottom: 1.6rem;
-  }
-  .login-users {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    margin-bottom: 1.2rem;
-  }
-  .login-user-btn {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 0.9rem 1.2rem;
-    border-radius: 14px;
-    border: 2px solid #e5e0d8;
-    background: #faf8f5;
-    cursor: pointer;
-    transition: all 0.2s;
-    text-align: left;
-    font-family: 'DM Sans', sans-serif;
-  }
-  .login-user-btn:hover { border-color: var(--ocean-light); background: #eef5f8; }
-  .login-user-btn[data-user="andrius"] .login-avatar { background: #6b8fa3; }
-  .login-user-btn[data-user="beatrix"]  .login-avatar { background: #a8808c; }
-  .login-avatar {
-    width: 42px; height: 42px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    color: #fff;
-    font-size: 1.1rem;
-    font-weight: 700;
-    flex-shrink: 0;
-    font-family: 'Playfair Display', serif;
-  }
-  .login-name { font-size: 1rem; font-weight: 600; color: var(--text); }
-  .login-sub  { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.1rem; }
-  .remember-row {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-top: 0.2rem;
-  }
-  .remember-row input[type=checkbox] { accent-color: var(--ocean); width: 15px; height: 15px; cursor: pointer; }
-  .remember-row label { font-size: 0.83rem; color: var(--text-muted); cursor: pointer; }
-
-  /* ── Who-selected indicators on cards ── */
-  .vote-pill.mine { outline: 2px solid currentColor; outline-offset: 1px; }
-
-  /* ── User chip in header ── */
-  .active-user-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: #fff;
-    border-radius: 50px;
-    padding: 0.35rem 1rem 0.35rem 0.5rem;
-    box-shadow: 0 2px 12px rgba(26,95,122,0.10);
-    margin-top: 0.9rem;
-    font-size: 0.88rem;
-    font-weight: 500;
-    color: var(--text);
-  }
-  .active-user-chip .chip-dot {
-    width: 26px; height: 26px;
-    border-radius: 50%;
-    color: #fff;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Playfair Display', serif;
-    font-size: 0.85rem;
-    font-weight: 700;
-  }
-  .active-user-chip[data-user="andrius"] .chip-dot { background: #6b8fa3; }
-  .active-user-chip[data-user="beatrix"]  .chip-dot { background: #a8808c; }
-  .chip-switch {
-    margin-left: 0.4rem;
-    font-size: 0.75rem;
-    color: var(--ocean-light);
-    cursor: pointer;
-    text-decoration: underline;
-    background: none;
-    border: none;
-    font-family: 'DM Sans', sans-serif;
-    padding: 0;
-  }
-  .chip-switch:hover { color: var(--ocean); }
-
-  /* ── User switcher ── */
-  .user-switcher {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-top: 1.1rem;
-  }
-  .user-btn {
-    border: 2px solid transparent;
-    border-radius: 50px;
-    padding: 0.4rem 1.3rem;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-    background: #fff;
-    color: var(--text-muted);
-    letter-spacing: 0.01em;
-  }
-  .user-btn[data-user="andrius"] { border-color: #6b8fa3; }
-  .user-btn[data-user="andrius"].active { background: #6b8fa3; color: #fff; }
-  .user-btn[data-user="beatrix"] { border-color: #a8808c; }
-  .user-btn[data-user="beatrix"].active { background: #a8808c; color: #fff; }
-  .user-label {
-    font-size: 0.78rem;
-    color: var(--text-muted);
-    font-weight: 400;
-    margin-right: 0.3rem;
-  }
-
-  /* ── Dual vote display on each card ── */
-  .votes-row {
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-    margin-top: 0.1rem;
-  }
-  .vote-pill {
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-    font-size: 0.75rem;
-    font-weight: 500;
-    padding: 0.18rem 0.55rem;
-    border-radius: 20px;
-    background: #f0ede8;
-    color: #999;
-    border: 1.5px solid #e5e0d8;
-  }
-  .vote-pill .pip { font-size: 0.85rem; }
-  .vote-pill.up   { background: #e8f4ea; color: #2e7d32; border-color: #b2d8b5; }
-  .vote-pill.down { background: #fdecea; color: #c62828; border-color: #f5b8b5; }
-
-  /* Card border based on combined votes */
-  .card.both-yes  {
-    border: 2.5px solid #43a047;
-    box-shadow: 0 0 12px 2px rgba(67,160,71,0.18), var(--shadow);
-  }
-  .card.split     { border: 2.5px solid #f9a825; }
-  .card.both-no   { border: 2.5px solid #ef5350; opacity: 0.5; }
-
-  /* Active user highlight on vote buttons */
-  body[data-user="andrius"] .btn-yes.active-a,
-  body[data-user="beatrix"]  .btn-yes.active-b { background: #2e7d32; border-color: #2e7d32; }
-  body[data-user="andrius"] .btn-no.active-a,
-  body[data-user="beatrix"]  .btn-no.active-b  { background: #c62828; border-color: #c62828; }
-
-  /* ── Particle / burst effects ── */
-  .particle {
-    position: fixed;
-    pointer-events: none;
-    z-index: 99999;
-    font-size: 1.4rem;
-    line-height: 1;
-    animation: particle-fly 1s cubic-bezier(0.22,0.61,0.36,1) forwards;
-    will-change: transform, opacity;
-  }
-  @keyframes particle-fly {
-    0%   { transform: translate(0,0) scale(1.2); opacity: 1; }
-    70%  { opacity: 1; }
-    100% { transform: translate(var(--dx), var(--dy)) scale(0); opacity: 0; }
-  }
-
-  .btn-yes.burst { animation: btn-pop-green 0.4s cubic-bezier(0.22,0.61,0.36,1); }
-  @keyframes btn-pop-green {
-    0%   { box-shadow: 0 0 0 0 rgba(46,125,50,0.7);  transform: scale(1); }
-    30%  { box-shadow: 0 0 0 18px rgba(46,125,50,0); transform: scale(1.28); }
-    60%  { transform: scale(0.92); }
-    100% { box-shadow: 0 0 0 0 rgba(46,125,50,0);     transform: scale(1); }
-  }
-
-  .btn-no.burst { animation: btn-pop-red 0.4s cubic-bezier(0.22,0.61,0.36,1); }
-  @keyframes btn-pop-red {
-    0%   { box-shadow: 0 0 0 0 rgba(198,40,40,0.7);  transform: scale(1); }
-    30%  { box-shadow: 0 0 0 18px rgba(198,40,40,0); transform: scale(1.28); }
-    60%  { transform: scale(0.92); }
-    100% { box-shadow: 0 0 0 0 rgba(198,40,40,0);     transform: scale(1); }
-  }
-
-  .fav-btn.burst { animation: star-burst 0.55s cubic-bezier(0.22,0.61,0.36,1); }
-  @keyframes star-burst {
-    0%   { transform: scale(1)    rotate(0deg);   filter: none; }
-    25%  { transform: scale(2.0)  rotate(-22deg); filter: drop-shadow(0 0 12px #f9a825) brightness(1.3); }
-    55%  { transform: scale(1.4)  rotate(14deg);  filter: drop-shadow(0 0 6px #f9a825); }
-    80%  { transform: scale(1.1)  rotate(-5deg); }
-    100% { transform: scale(1)    rotate(0deg);   filter: none; }
-  }
-
-  .heart-burst {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    pointer-events: none;
-    z-index: 10;
-    font-size: 4rem;
-    animation: heart-explode 0.9s cubic-bezier(0.22,0.61,0.36,1) forwards;
-  }
-  @keyframes heart-explode {
-    0%   { transform: scale(0.1) rotate(-20deg); opacity: 1; }
-    40%  { transform: scale(1.8) rotate(5deg);   opacity: 1; }
-    100% { transform: scale(3)   rotate(-10deg); opacity: 0; }
-  }
-
-  /* ── Confetti ── */
-  .confetti-piece {
-    position: fixed;
-    pointer-events: none;
-    z-index: 99998;
-    border-radius: 2px;
-    animation: confetti-fall linear forwards;
-  }
-  @keyframes confetti-fall {
-    0%   { transform: translateY(-30px) rotate(0deg) scaleX(1); opacity: 1; }
-    80%  { opacity: 1; }
-    100% { transform: translateY(110vh) rotate(var(--spin)) scaleX(var(--flip)); opacity: 0; }
-  }
-
-  /* ── Ripple ── */
-  .ripple-wave {
-    position: absolute;
-    border-radius: 50%;
-    transform: scale(0);
-    animation: ripple-expand 0.55s linear forwards;
-    background: rgba(255,255,255,0.4);
-    pointer-events: none;
-    z-index: 5;
-  }
-  @keyframes ripple-expand {
-    to { transform: scale(4); opacity: 0; }
-  }
-
-  /* ── Star wave ── */
-  @keyframes star-wave {
-    0%   { transform: scale(1)   translateY(0); }
-    30%  { transform: scale(1.5) translateY(-5px); filter: drop-shadow(0 2px 6px #d4a94a); }
-    60%  { transform: scale(1.2) translateY(-2px); }
-    100% { transform: scale(1)   translateY(0); }
-  }
-  .star.wave { animation: star-wave 0.4s cubic-bezier(0.22,0.61,0.36,1); }
-
-  /* ── Animated background shapes ── */
-  .bg-float {
-    position: fixed;
-    pointer-events: none;
-    z-index: 0;
-    font-size: 2rem;
-    opacity: 0.045;
-    animation: bg-float linear infinite;
-    user-select: none;
-  }
-  @keyframes bg-float {
-    from { transform: translateY(105vh) rotate(0deg); }
-    to   { transform: translateY(-15vh) rotate(360deg); }
-  }
-
-  /* ── Shortlist banner shimmer ── */
-  .shortlist-inner {
-    color: #fff;
-    border-radius: 14px;
-    padding: 1rem 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    flex-wrap: wrap;
-    background: linear-gradient(135deg, var(--ocean), var(--ocean-light), #1a8aaa, var(--ocean));
-    background-size: 300% 300%;
-    animation: banner-shimmer 4s ease infinite;
-  }
-  @keyframes banner-shimmer {
-    0%   { background-position: 0% 50%; }
-    50%  { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-
-  /* ── Login slide-in ── */
-  @keyframes login-enter {
-    from { opacity: 0; transform: translateY(24px) scale(0.97); }
-    to   { opacity: 1; transform: translateY(0) scale(1); }
-  }
-  .login-card {
-    background: #fff;
-    border-radius: 24px;
-    box-shadow: 0 8px 48px rgba(26,95,122,0.14);
-    padding: 2.5rem 2.2rem 2rem;
-    width: 100%;
-    max-width: 380px;
+  /* ── SUMMARY BAR ── */
+  .liked-summary {
+    position: sticky;
+    bottom: 0;
+    background: var(--ocean);
+    color: white;
     text-align: center;
-    animation: login-enter 0.5s cubic-bezier(0.22,0.61,0.36,1) both;
+    padding: 0.75rem 1rem;
+    font-weight: 700;
+    font-size: 0.95rem;
+    z-index: 100;
+    transition: all 0.3s;
+  }
+  .liked-summary span { color: var(--sunset-light); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 500px) {
+    .pros-cons { grid-template-columns: 1fr; }
+    .grid { grid-template-columns: 1fr; padding: 1rem; }
   }
 </style>
 </head>
 <body>
 
-<!-- Sound toggle -->
-<button class="sound-toggle" id="sound-toggle" onclick="toggleSound()">🔊 Sound on</button>
-
-<!-- Login screen -->
-<div id="login-screen">
-  <div class="login-card">
-    <h2>Welcome back ✈️</h2>
-    <p>Who's picking holidays today?</p>
-    <div class="login-users">
-      <button class="login-user-btn" data-user="andrius" onclick="doLogin('andrius')">
-        <div class="login-avatar">A</div>
-        <div>
-          <div class="login-name">Andrius</div>
-          <div class="login-sub">Vote, rate & add notes</div>
-        </div>
-      </button>
-      <button class="login-user-btn" data-user="beatrix" onclick="doLogin('beatrix')">
-        <div class="login-avatar">B</div>
-        <div>
-          <div class="login-name">Beatrix</div>
-          <div class="login-sub">Vote, rate & add notes</div>
-        </div>
-      </button>
-    </div>
-    <div class="remember-row">
-      <input type="checkbox" id="remember-me">
-      <label for="remember-me">Remember me on this device</label>
-    </div>
-  </div>
-</div>
-
 <header>
-  <h1>My Holiday <span>Shortlist</span></h1>
-  <p>Rate, favourite, and choose your perfect getaway ☀️</p>
-  <div class="active-user-chip" id="user-chip" data-user="andrius">
-    <div class="chip-dot" id="chip-dot">A</div>
-    <span id="chip-name">Andrius</span>
-    <button class="chip-switch" onclick="showLogin()">switch user</button>
-  </div>
+  <h1><span class="wave-emoji">☀️</span> Our Holiday Shortlist <span class="wave-emoji">🌊</span></h1>
+  <p>12 options — click the hearts to shortlist your favourites!</p>
 </header>
 
-<div class="controls" id="filter-btns">
-  <button class="filter-btn all active" data-dest="all">All Destinations</button>
-  <button class="filter-btn" data-dest="Cape Verde">🌊 Cape Verde</button>
-  <button class="filter-btn" data-dest="Greece">🏛️ Greece</button>
-  <button class="filter-btn" data-dest="Spain">🇪🇸 Spain</button>
-  <button class="filter-btn" data-dest="Majorca">🌴 Majorca</button>
-  <button class="filter-btn" data-dest="Fuerteventura">🏜️ Fuerteventura</button>
-  <button class="filter-btn" data-dest="Tenerife">🌋 Tenerife</button>
-  <button class="filter-btn" data-dest="Ibiza">🎶 Ibiza</button>
-  <button class="filter-btn" data-dest="Gran Canaria">☀️ Gran Canaria</button>
-  <button class="filter-btn" data-dest="Lanzarote">🪨 Lanzarote</button>
-  <button class="filter-btn fav" data-dest="fav">⭐ Favourites</button>
-  <button class="filter-btn" data-dest="both-yes" style="border-color:#43a047;color:#43a047;">👍👍 Both Like</button>
-  <button class="filter-btn" data-dest="yes" style="border-color:#2e7d32;color:#2e7d32;">👍 My Picks</button>
-  <button class="filter-btn" data-dest="no" style="border-color:#c62828;color:#c62828;">👎 My Rejects</button>
+<div class="controls">
+  <button class="filter-btn active" data-filter="all">All (12)</button>
+  <button class="filter-btn" data-filter="capeverde">🌴 Cape Verde</button>
+  <button class="filter-btn" data-filter="rhodes">🏛 Rhodes</button>
+  <button class="filter-btn" data-filter="crete">🫒 Crete</button>
+  <button class="filter-btn" data-filter="zakynthos">🐢 Zakynthos</button>
+  <button class="filter-btn" data-filter="kos">🌺 Kos</button>
+  <button class="filter-btn" data-filter="corfu">🏔 Corfu</button>
+  <button class="filter-btn liked-filter" data-filter="liked">❤️ Liked</button>
 </div>
 
 <div class="sort-row">
-  <span class="sort-label">Sort by:</span>
+  Sort by:
   <select id="sort-select">
-    <option value="default">Default</option>
-    <option value="rating-desc">My Rating (High → Low)</option>
-    <option value="rating-asc">My Rating (Low → High)</option>
-    <option value="hotel-az">Hotel A → Z</option>
-    <option value="dest-az">Destination A → Z</option>
-    <option value="date-asc">Departure (Earliest)</option>
+    <option value="default">Default order</option>
+    <option value="rating-hi">Rating: High → Low</option>
+    <option value="rating-lo">Rating: Low → High</option>
   </select>
 </div>
 
-<div class="stats-bar">
-  <div class="stat">Showing <strong id="visible-count">0</strong> of <strong id="total-count">0</strong> options</div>
-  <div class="stat">👍👍 <strong id="both-yes-count">0</strong> both like</div>
-  <div class="stat" id="stat-a">👍 Andrius: <strong id="yes-count-a">0</strong></div>
-  <div class="stat" id="stat-b">👍 Beatrix: <strong id="yes-count-b">0</strong></div>
-</div>
+<div class="grid" id="grid"></div>
 
-<div class="shortlist-banner" id="shortlist-banner">
-  <div class="shortlist-inner">
-    <div>
-      <h3>👍👍 Both Like</h3>
-      <p id="fav-names">Hotels both Andrius and Beatrix have thumbed up will appear here.</p>
-    </div>
-    <button class="btn-export" onclick="exportFavourites()">Copy to Clipboard</button>
-  </div>
-</div>
-
-<div class="grid" id="grid">
-  <div id="no-results">No options match this filter.</div>
+<div class="liked-summary" id="liked-summary">
+  ❤️ You've liked <span id="liked-count">0</span> hotel(s) — scroll up to see them!
 </div>
 
 <script>
-const holidays = [
-  // Cape Verde
-  { dest: "Cape Verde", area: "Sal, Santa Maria", hotel: "Meliá Tortuga Beach Resort & Spa", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/cape-verde/sal/santa-maria/melia-tortuga-beach-resort-and-spa?ibf=true&to=08-06-2026&from=01-06-2026&dst=CV,CY,MT,ME,MA,TN,GIV,BIV,CIV,BGBO,HRDB,HRIR,HRSP,EGHR,EGSS,FRMO,FRFR,GRAL,GRAC,GRCF,GRCR,GRHA,GRKF,GRKG,GRPA,GRPE,GRRH,GRSK,GRTH,GRZA,ITLG,ITPU,ITSA,ITSI,PTAL,PTMD,ESCB,ESBV,ESCC,ESAL,ESCO,ESCD,ESDO,ESCT,ESCZ,ESFU,ESGC,ESIB,ESLZ,ESMJ,ESMN,ESTF,TRAN,TRBD,TRDL,TRIZ,GRSN,GRMK,GRLE&sAccId=&geog=CV|CY|MT|ME|MA|TN|GR|ES|BG|HR|EG|FR|IT|PT|TR,CVSL|CYLN|CYPF|MTMT|METI|MAAG|MAMA|TNDJ|TNNB|BGBO|HRDB|HRIR|HRSP|EGHR|EGSS|FRMO|FRFR|GRAL|GRAC|GRCF|GRCR|GRHA|GRKF|GRKG|GRPA|GRPE|GRRH|GRSK|GRTH|GRZA|ITLG|ITPU|ITSA|ITSI|PTAL|PTMD|ESCB|ESBV|ESCC|ESAL|ESCO|ESCD|ESDO|ESCT|ESCZ|ESFU|ESGC|ESIB|ESLZ|ESMJ|ESMN|ESTF|TRAN|TRBD|TRDL|TRIZ|GRSN|GRMK|GRLE&flex=3&org=BRS&aa=1&rooms=2&outId=E300e41f133e9a798002044f0c301a351&inId=Eebe905f95a125812a00c8f25a203b650&accId=CVSL0002&packId=2321269414/2/3070/7&boardType=AI&offerRooms=2/2SW01&transfer=ECOV64984KSS&dtransfer=ECOV64984KSS&isExt=0&lateRoomCheckout=0&theme=beach&promo=/deals/all-inclusive-holiday-deals&__ejhsort=promo_hotels_list|21|Q4ebvGL8" },
-  { dest: "Cape Verde", area: "Sal, Santa Maria", hotel: "Meliá Llana", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/cape-verde/sal/santa-maria/melia-llana?ibf=true&to=08-06-2026&from=01-06-2026&dst=CV,CY,MT,ME,MA,TN,GIV,BIV,CIV,BGBO,HRDB,HRIR,HRSP,EGHR,EGSS,FRMO,FRFR,GRAL,GRAC,GRCF,GRCR,GRHA,GRKF,GRKG,GRPA,GRPE,GRRH,GRSK,GRTH,GRZA,ITLG,ITPU,ITSA,ITSI,PTAL,PTMD,ESCB,ESBV,ESCC,ESAL,ESCO,ESCD,ESDO,ESCT,ESCZ,ESFU,ESGC,ESIB,ESLZ,ESMJ,ESMN,ESTF,TRAN,TRBD,TRDL,TRIZ,GRSN,GRMK,GRLE&sAccId=&geog=CV|CY|MT|ME|MA|TN|GR|ES|BG|HR|EG|FR|IT|PT|TR,CVSL|CYLN|CYPF|MTMT|METI|MAAG|MAMA|TNDJ|TNNB|BGBO|HRDB|HRIR|HRSP|EGHR|EGSS|FRMO|FRFR|GRAL|GRAC|GRCF|GRCR|GRHA|GRKF|GRKG|GRPA|GRPE|GRRH|GRSK|GRTH|GRZA|ITLG|ITPU|ITSA|ITSI|PTAL|PTMD|ESCB|ESBV|ESCC|ESAL|ESCO|ESCD|ESDO|ESCT|ESCZ|ESFU|ESGC|ESIB|ESLZ|ESMJ|ESMN|ESTF|TRAN|TRBD|TRDL|TRIZ|GRSN|GRMK|GRLE&flex=3&org=BRS&aa=1&rooms=2&outId=E300e41f133e9a798002044f0c301a351&inId=Eebe905f95a125812a00c8f25a203b650&accId=CVSL0003&packId=2321270479/2/3070/7&boardType=AI&offerRooms=2/DB02&transfer=ECOV64984KSS&dtransfer=ECOV64984KSS&isExt=0&lateRoomCheckout=0&theme=beach&promo=/deals/all-inclusive-holiday-deals&__ejhsort=promo_hotels_list|83|kDVzMyFF" },
-  // Greece - Rhodes
-  { dest: "Greece", area: "Rhodes, Ixia", hotel: "Sol by Meliá Cosmopolitan Rhodes", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/greece/rhodes/ixia/sol-by-melia-cosmopolitan-rhodes?ibf=true&to=08-06-2026&from=01-06-2026&dst=CV,CY,MT,ME,MA,TN,GIV,BIV,CIV,BGBO,HRDB,HRIR,HRSP,EGHR,EGSS,FRMO,FRFR,GRAL,GRAC,GRCF,GRCR,GRHA,GRKF,GRKG,GRPA,GRPE,GRRH,GRSK,GRTH,GRZA,ITLG,ITPU,ITSA,ITSI,PTAL,PTMD,ESCB,ESBV,ESCC,ESAL,ESCO,ESCD,ESDO,ESCT,ESCZ,ESFU,ESGC,ESIB,ESLZ,ESMJ,ESMN,ESTF,TRAN,TRBD,TRDL,TRIZ,GRSN,GRMK,GRLE&sAccId=&geog=CV|CY|MT|ME|MA|TN|GR|ES|BG|HR|EG|FR|IT|PT|TR,CVSL|CYLN|CYPF|MTMT|METI|MAAG|MAMA|TNDJ|TNNB|BGBO|HRDB|HRIR|HRSP|EGHR|EGSS|FRMO|FRFR|GRAL|GRAC|GRCF|GRCR|GRHA|GRKF|GRKG|GRPA|GRPE|GRRH|GRSK|GRTH|GRZA|ITLG|ITPU|ITSA|ITSI|PTAL|PTMD|ESCB|ESBV|ESCC|ESAL|ESCO|ESCD|ESDO|ESCT|ESCZ|ESFU|ESGC|ESIB|ESLZ|ESMJ|ESMN|ESTF|TRAN|TRBD|TRDL|TRIZ|GRSN|GRMK|GRLE&flex=3&org=LGW&aa=1&rooms=2&outId=Ec420367b0892f9fe2e0956a6feccf255&inId=Ecdc45e4cf6d728b1c7a1f4d5c236d10b&accId=GRRH0056&packId=2165061653/2/3071/7&boardType=AI&offerRooms=2/DB04&transfer=GEMT55058KSS&dtransfer=GEMT55058KSS&isExt=0&lateRoomCheckout=0&theme=beach&promo=/deals/all-inclusive-holiday-deals&__ejhsort=promo_hotels_list|17|KlrH4vxr" },
-  { dest: "Greece", area: "Rhodes Town", hotel: "Canvas by Mitsis Petit Palais", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/greece/rhodes/rhodes-town/canvas-by-mitsis-petit-palais?ibf=true&to=08-06-2026&from=01-06-2026&dst=CV,CY,MT,ME,MA,TN,GIV,BIV,CIV,BGBO,HRDB,HRIR,HRSP,EGHR,EGSS,FRMO,FRFR,GRAL,GRAC,GRCF,GRCR,GRHA,GRKF,GRKG,GRPA,GRPE,GRRH,GRSK,GRTH,GRZA,ITLG,ITPU,ITSA,ITSI,PTAL,PTMD,ESCB,ESBV,ESCC,ESAL,ESCO,ESCD,ESDO,ESCT,ESCZ,ESFU,ESGC,ESIB,ESLZ,ESMJ,ESMN,ESTF,TRAN,TRBD,TRDL,TRIZ,GRSN,GRMK,GRLE&sAccId=&geog=CV|CY|MT|ME|MA|TN|GR|ES|BG|HR|EG|FR|IT|PT|TR,CVSL|CYLN|CYPF|MTMT|METI|MAAG|MAMA|TNDJ|TNNB|BGBO|HRDB|HRIR|HRSP|EGHR|EGSS|FRMO|FRFR|GRAL|GRAC|GRCF|GRCR|GRHA|GRKF|GRKG|GRPA|GRPE|GRRH|GRSK|GRTH|GRZA|ITLG|ITPU|ITSA|ITSI|PTAL|PTMD|ESCB|ESBV|ESCC|ESAL|ESCO|ESCD|ESDO|ESCT|ESCZ|ESFU|ESGC|ESIB|ESLZ|ESMJ|ESMN|ESTF|TRAN|TRBD|TRDL|TRIZ|GRSN|GRMK|GRLE&flex=3&org=LTN&aa=1&rooms=2" },
-  { dest: "Greece", area: "Rhodes, Kolymbia", hotel: "Blue Sea Island", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/greece/rhodes/kolymbia/blue-sea-island?ibf=true&to=08-06-2026&from=01-06-2026" },
-  { dest: "Greece", area: "Rhodes, Ialyssos", hotel: "Blue Bay Beach Resort", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/greece/rhodes/ialyssos/blue-bay-beach-resort?ibf=true&to=08-06-2026&from=01-06-2026" },
-  // Greece - Zante
-  { dest: "Greece", area: "Zante, Argassi", hotel: "Diana Palace Hotel", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/greece/zante/argassi/diana-palace-hotel?ibf=true&to=08-06-2026&from=01-06-2026" },
-  { dest: "Greece", area: "Zante, Kalamaki", hotel: "Golden Sun Hotel", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/greece/zante/kalamaki/golden-sun-hotel?ibf=true&to=08-06-2026&from=01-06-2026" },
-  // Greece - Crete
-  { dest: "Greece", area: "Crete, Agia Pelagia", hotel: "Alexander House Hotel", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/greece/crete/agia-pelagia/alexander-house-hotel?ibf=true&to=08-06-2026&from=01-06-2026" },
-  { dest: "Greece", area: "Crete, Hersonissos", hotel: "Silva Beach", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/greece/crete/hersonissos/silva-beach?ibf=true&to=08-06-2026&from=01-06-2026" },
-  { dest: "Greece", area: "Crete, Agia Pelagia", hotel: "Blue Bay Resort Hotel", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/greece/crete/agia-pelagia/blue-bay-resort-hotel?ibf=true&to=08-06-2026&from=01-06-2026" },
-  { dest: "Greece", area: "Crete, Hersonissos", hotel: "Grand Hotel Holiday Resort", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/greece/crete/hersonissos/grand-hotel-holiday-resort?ibf=true&to=08-06-2026&from=01-06-2026" },
-  { dest: "Greece", area: "Crete, Bali", hotel: "Mitsis Bali Paradise", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/greece/crete/bali/mitsis-bali-paradise?ibf=true&to=08-06-2026&from=01-06-2026" },
-  { dest: "Greece", area: "Crete, Kalyves", hotel: "Kalyves Beach", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/greece/crete/kalyves/kalyves-beach?ibf=true&to=08-06-2026&from=01-06-2026" },
-  // Greece - Other
-  { dest: "Greece", area: "Athens Coast, Marathon", hotel: "Golden Coast", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/greece/athens-coast/marathon/golden-coast?ibf=true&to=08-06-2026&from=01-06-2026" },
-  { dest: "Greece", area: "Kos, Kardamena", hotel: "Akti Palace Hotel", date: "1 Jun – 8 Jun 2026", board: "All Inclusive+", url: "https://www.easyjet.com/en/holidays/greece/kos/kardamena/akti-palace-hotel?ibf=true&to=08-06-2026&from=01-06-2026" },
-  { dest: "Greece", area: "Kos, Kardamena", hotel: "Canvas by Mitsis Family Village", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/greece/kos/kardamena/canvas-by-mitsis-family-village?ibf=true&to=08-06-2026&from=01-06-2026" },
-  { dest: "Greece", area: "Corfu, Boukari", hotel: "Mythos Palace Resort", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/greece/corfu/boukari/mythos-palace-resort?ibf=true&to=08-06-2026&from=01-06-2026" },
-  // Spain
-  { dest: "Spain", area: "Costa de Almería, Mojacar", hotel: "Best Indalo Hotel", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/spain/costa-de-almeria/mojacar/best-indalo-hotel?ibf=true&to=08-06-2026&from=01-06-2026" },
-  { dest: "Spain", area: "Costa Dorada, La Pineda", hotel: "Golden Donaire Beach Hotel", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/spain/costa-dorada/la-pineda/golden-donaire-beach-hotel?ibf=true&to=08-06-2026&from=01-06-2026" },
-  { dest: "Spain", area: "Costa del Sol, Torremolinos", hotel: "Puente Real", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/spain/costa-del-sol/torremolinos/puente-real?ibf=true&to=08-06-2026&from=01-06-2026" },
-  { dest: "Spain", area: "Costa de la Luz, Punta Umbría", hotel: "Barceló Punta Umbría Beach Resort", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/spain/costa-de-la-luz/punta-umbria/barcelo-punta-umbria-beach-resort?ibf=true&to=08-06-2026&from=01-06-2026" },
-  { dest: "Spain", area: "Costa de la Luz, El Rompido", hotel: "Playacartaya", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/spain/costa-de-la-luz/el-rompido/playacartaya?ibf=true&to=08-06-2026&from=01-06-2026" },
-  { dest: "Spain", area: "Costa de Almería, Roquetas de Mar", hotel: "Protur Roquetas Hotel & Spa", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/spain/costa-de-almeria/roquetas-de-mar/protur-roquetas-hotel-spa?ibf=true&to=08-06-2026&from=01-06-2026" },
-  { dest: "Spain", area: "Costa del Sol, Fuengirola", hotel: "Globales Gardenia", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/spain/costa-del-sol/fuengirola/globales-gardenia?ibf=true&to=08-06-2026&from=01-06-2026" },
-  { dest: "Spain", area: "Costa de Azahar, Oropesa", hotel: "Magic Games", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/spain/costa-de-azahar/oropesa/magic-games?ibf=true&to=08-06-2026&from=01-06-2026" },
-  { dest: "Spain", area: "Costa Blanca, Benidorm", hotel: "Magic Aqua Rock Gardens", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/spain/costa-blanca/benidorm/magic-aqua-rock-gardens?ibf=true&to=08-06-2026&from=01-06-2026" },
-  { dest: "Spain", area: "Costa de la Luz, Isla Canela", hotel: "Playamarina", date: "1 Jun – 8 Jun 2026", board: "All Inclusive+", url: "https://www.easyjet.com/en/holidays/spain/costa-de-la-luz/isla-canela/playamarina?ibf=true&to=08-06-2026&from=01-06-2026" },
-  { dest: "Spain", area: "Costa Brava, Pineda de Mar", hotel: "Golden Taurus Aquapark Resort", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/spain/costa-brava/pineda-de-mar/golden-taurus-aquapark-resort?ibf=true&to=08-06-2026&from=01-06-2026" },
-  { dest: "Spain", area: "Costa Tropical, Motril", hotel: "Impressive Playa Granada Golf", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/spain/costa-tropical/motril/impressive-playa-granada-golf?ibf=true&to=08-06-2026&from=01-06-2026" },
-  { dest: "Spain", area: "Costa Brava, Santa Susanna", hotel: "Alegria Florida", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/spain/costa-brava/santa-susanna/alegria-florida?ibf=true&to=08-06-2026&from=01-06-2026" },
-  { dest: "Spain", area: "Costa Blanca, Benidorm", hotel: "Hotel Villa España", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/spain/costa-blanca/benidorm/hotel-villa-espana?ibf=true&to=08-06-2026&from=01-06-2026" },
-  { dest: "Spain", area: "Costa Dorada, Cambrils", hotel: "Estival El Dorado Resort", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/spain/costa-dorada/cambrils/estival-el-dorado-resort?ibf=true&to=08-06-2026&from=01-06-2026" },
-  // Majorca
-  { dest: "Majorca", area: "Palma Nova", hotel: "Fergus Bermudas", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/spain/majorca/palma-nova/fergus-bermudas?ibf=true&to=08-06-2026&from=01-06-2026" },
-  { dest: "Majorca", area: "Calas de Mallorca", hotel: "Globales America", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/spain/majorca/calas-de-mallorca/globales-america?ibf=true&to=08-06-2026&from=01-06-2026" },
-  { dest: "Majorca", area: "Can Picafort", hotel: "Globales Janeiro Hotel & Spa", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/spain/majorca/can-picafort/globales-janeiro-hotel-and-spa?ibf=true&to=08-06-2026&from=01-06-2026" },
-  // Fuerteventura
-  { dest: "Fuerteventura", area: "Playa de Jandía", hotel: "Occidental Jandía Playa", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/spain/fuerteventura/playa-de-jandia/occidental-jandia-playa?ibf=true&to=08-06-2026&from=01-06-2026" },
-  { dest: "Fuerteventura", area: "Playa de Jandía", hotel: "Fergus Cactus Garden", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/spain/fuerteventura/playa-de-jandia/fergus-cactus-garden?ibf=true&to=08-06-2026&from=01-06-2026" },
-  { dest: "Fuerteventura", area: "Corralejo", hotel: "Alua Suites Fuerteventura", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/spain/fuerteventura/corralejo/alua-suites-fuerteventura?ibf=true&to=08-06-2026&from=01-06-2026" },
-  { dest: "Fuerteventura", area: "Corralejo", hotel: "Las Marismas de Corralejo", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/spain/fuerteventura/corralejo/las-marismas-de-corralejo?ibf=true&to=08-06-2026&from=01-06-2026" },
-  { dest: "Fuerteventura", area: "Caleta de Fuste", hotel: "Elba Sara Beach & Golf Resort", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/spain/fuerteventura/caleta-de-fuste/elba-sara-beach-and-golf-resort?ibf=true&to=08-06-2026&from=01-06-2026" },
-  { dest: "Fuerteventura", area: "Costa Calma", hotel: "R2 Pajara Beach", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/spain/fuerteventura/costa-calma/r2-pajara-beach?ibf=true&to=08-06-2026&from=01-06-2026" },
-  // Tenerife
-  { dest: "Tenerife", area: "Playa de la Arena", hotel: "Allegro Isora", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/spain/tenerife/playa-de-la-arena/allegro-isora?ibf=true&to=08-06-2026&from=01-06-2026" },
-  { dest: "Tenerife", area: "Costa Adeje", hotel: "GF Fanabé", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/spain/tenerife/costa-adeje/gf-fanabe?ibf=true&to=08-06-2026&from=01-06-2026" },
-  { dest: "Tenerife", area: "Costa Adeje", hotel: "Hotel Best Jacaranda", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/spain/tenerife/costa-adeje/hotel-best-jacaranda?ibf=true&to=08-06-2026&from=01-06-2026" },
-  { dest: "Tenerife", area: "Callao Salvaje", hotel: "Hotel Tropical Park", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/spain/tenerife/callao-salvaje/hotel-tropical-park?ibf=true&to=08-06-2026&from=01-06-2026" },
-  { dest: "Tenerife", area: "Playa de las Américas", hotel: "Coral Ocean View Hotel", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/spain/tenerife/playa-de-las-americas/coral-ocean-view-hotel?ibf=true&to=08-06-2026&from=01-06-2026" },
-  // Ibiza
-  { dest: "Ibiza", area: "Playa Es Figueral", hotel: "Invisa Figueral Resort Hotel Cala Blanca", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/spain/ibiza/playa-es-figueral/invisa-figueral-resort-hotel-cala-blanca?ibf=true&to=08-06-2026&from=01-06-2026" },
-  { dest: "Ibiza", area: "San Antonio", hotel: "Vibra District", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/spain/ibiza/san-antonio/vibra-district?ibf=true&to=08-06-2026&from=01-06-2026" },
-  // Gran Canaria
-  { dest: "Gran Canaria", area: "Playa del Inglés", hotel: "BlueSea Marieta", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/spain/gran-canaria/playa-del-ingles/bluesea-marieta?ibf=true&to=08-06-2026&from=01-06-2026" },
-  { dest: "Gran Canaria", area: "Puerto Rico", hotel: "Servatur Puerto Azul", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/spain/gran-canaria/puerto-rico/servatur-puerto-azul?ibf=true&to=08-06-2026&from=01-06-2026" },
-  { dest: "Gran Canaria", area: "Playa del Inglés", hotel: "Akeah Broncemar", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/spain/gran-canaria/playa-del-ingles/akeah-broncemar?ibf=true&to=08-06-2026&from=01-06-2026" },
-  // Lanzarote
-  { dest: "Lanzarote", area: "Costa Teguise", hotel: "Los Zocos Impressive Lanzarote", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/spain/lanzarote/costa-teguise/los-zocos-impressive-lanzarote?ibf=true&to=08-06-2026&from=01-06-2026" },
-  { dest: "Lanzarote", area: "Playa Blanca", hotel: "Sandos Papagayo Hotel", date: "1 Jun – 8 Jun 2026", board: "All Inclusive", url: "https://www.easyjet.com/en/holidays/spain/lanzarote/playa-blanca/sandos-papagayo-hotel?ibf=true&to=08-06-2026&from=01-06-2026" },
+const hotels = [
+  {
+    id: "melia-llana",
+    name: "Meliá Llana Beach Resort & Spa",
+    dest: "capeverde",
+    destLabel: "Cape Verde, Sal",
+    stars: 5,
+    rating: 4.1,
+    reviews: 3200,
+    tags: ["Adults Only", "All-Inclusive", "Beachfront", "Spa", "3 Pools"],
+    badges: ["adults","ai","beach","spa"],
+    summary: "Adults-only, all-inclusive beachfront retreat on Sal island. Stunning private beach, spacious rooms, YHI Spa and 9 restaurants/bars. Feels remote from Santa Maria town but ideal for those who want to just unwind on the beach.",
+    pros: ["Beachfront location", "Lovely staff overall", "Spacious rooms & pools", "Good food variety"],
+    cons: ["Remote from town", "Inconsistent service", "Extras add up quickly", "WiFi patchy in rooms"],
+    taLink: "https://www.tripadvisor.co.uk/Hotel_Review-g482848-d10678936-Reviews-Melia_Llana_Beach_Resort_Spa_All_Inclusive_Adults_only-Santa_Maria_Ilha_do_Sal.html",
+    bookLink: "https://www.easyjet.com/en/holidays/cape-verde/sal/santa-maria/melia-llana?ibf=true&to=05-06-2026&from=29-05-2026",
+  },
+  {
+    id: "sol-cosmopolitan",
+    name: "Sol Cosmopolitan Rhodes",
+    dest: "rhodes",
+    destLabel: "Rhodes Town",
+    stars: 4,
+    rating: 4.2,
+    reviews: 4100,
+    tags: ["All-Inclusive", "Beachfront", "Pools", "Spa", "Kids Club"],
+    badges: ["ai","beach","spa"],
+    summary: "Amphitheatrically built 4-star resort on the coast of Ixia, 14km from the airport and minutes from Rhodes Old Town. Consistently praised for cleanliness and friendly staff. Beach is across the road. Great family or couples hotel.",
+    pros: ["Very clean throughout", "Friendly attentive staff", "Great location for Old Town", "Sunset sea views"],
+    cons: ["Beach is pebble/stony", "Can get very noisy", "Sunbeds run out at peak", "Pool bar queues"],
+    taLink: "https://www.tripadvisor.co.uk/Hotel_Review-g635613-d316715-Reviews-Sol_Cosmopolitan_Rhodes-Rhodes_Town_Rhodes_Dodecanese_South_Aegean.html",
+    bookLink: null,
+  },
+  {
+    id: "canvas-petit-palais",
+    name: "Canvas by Mitsis Petit Palais",
+    dest: "rhodes",
+    destLabel: "Rhodes Town",
+    stars: 4,
+    rating: 4.2,
+    reviews: 3148,
+    tags: ["All-Inclusive", "Beach Nearby", "Old Town Walking", "Pool"],
+    badges: ["ai","beach"],
+    summary: "The only all-inclusive 4-star hotel in central Rhodes Town. 700m from the Old Town, 100m from the beach, 500m from Mandraki Port. Superb location for exploring. Friendly staff are its standout feature. Small pool — not a resort pool.",
+    pros: ["Unbeatable central location", "Exceptional staff", "Excellent varied food", "Walk to Old Town & beach"],
+    cons: ["Small pool", "Nearby construction noise", "Thin walls in rooms", "Not a big resort feel"],
+    taLink: "https://www.tripadvisor.co.uk/Hotel_Review-g635613-d500438-Reviews-Canvas_by_Mitsis_Petit_Palais-Rhodes_Town_Rhodes_Dodecanese_South_Aegean.html",
+    bookLink: null,
+  },
+  {
+    id: "silva-beach",
+    name: "Silva Beach",
+    dest: "crete",
+    destLabel: "Hersonissos, Crete",
+    stars: 4,
+    rating: 4.0,
+    reviews: 3136,
+    tags: ["All-Inclusive", "Cretan Village Style", "Beach", "2 Pools"],
+    badges: ["ai","beach"],
+    summary: "Charming Cretan-village-style resort at the edge of Hersonissos. Beautiful gardens, two pools (freshwater & saltwater), direct beach access and within walking distance of the lively town. Great for couples and families.",
+    pros: ["Village-style setting & gardens", "Two pools, easy sunbeds", "Direct beach access", "Close to Hersonissos nightlife"],
+    cons: ["Cocktails not made with real juice", "Food repetitive after a week", "Average entertainment"],
+    taLink: "https://www.tripadvisor.co.uk/Hotel_Review-g503710-d250616-Reviews-Silva_Beach-Hersonissos_Crete.html",
+    bookLink: null,
+  },
+  {
+    id: "golden-sun",
+    name: "Golden Sun Resort & Spa",
+    dest: "zakynthos",
+    destLabel: "Kalamaki, Zakynthos",
+    stars: 4,
+    rating: 4.0,
+    reviews: 1573,
+    tags: ["All-Inclusive", "150m from Beach", "Quiet Area", "Pool"],
+    badges: ["ai","beach","spa"],
+    summary: "Modern resort 150m from Kalamaki's sandy beach, surrounded by greenery and only 6km from Zakynthos Town. Quiet, relaxed setting ideal for couples seeking peace. Incredible pool praised by guests. Good value for money.",
+    pros: ["Massive peaceful pool", "Friendly helpful staff", "Great beach nearby", "Good value all-inclusive"],
+    cons: ["Restaurant can feel small", "Limited choice at peak times", "Drinks not top-shelf"],
+    taLink: "https://www.tripadvisor.co.uk/Hotel_Review-g659629-d496247-Reviews-Golden_Sun_Resort_Spa-Kalamaki_Zakynthos_Ionian_Islands.html",
+    bookLink: null,
+  },
+  {
+    id: "blue-bay-crete",
+    name: "Blue Bay Resort Hotel",
+    dest: "crete",
+    destLabel: "Mononaftis, Crete",
+    stars: 4,
+    rating: 4.0,
+    reviews: 2158,
+    tags: ["All-Inclusive", "Sea Views", "6 Pools", "Hillside"],
+    badges: ["ai","beach","spa"],
+    summary: "Hillside resort perched above Mononaftis Bay with breathtaking Cretan Sea views. 6 pools including kids' pools with slides. Free shuttle to the beach below. Ideal for a quiet relaxing break. Note: steep slopes throughout the property.",
+    pros: ["Stunning sea views from all rooms", "6 pools with great variety", "Warm friendly staff", "Good evening entertainment"],
+    cons: ["Very hilly — hard for mobility issues", "Food can be repetitive", "Remote from town (22km Heraklion)", "WiFi weak in rooms"],
+    taLink: "https://www.tripadvisor.co.uk/Hotel_Review-g8242451-d595581-Reviews-Blue_Bay_Resort_Hotel-Mononaftis_Crete.html",
+    bookLink: null,
+  },
+  {
+    id: "grand-holiday",
+    name: "Grand Hotel Holiday Resort",
+    dest: "crete",
+    destLabel: "Hersonissos, Crete",
+    stars: 4,
+    rating: 4.0,
+    reviews: 2073,
+    tags: ["All-Inclusive", "Water Park", "3 Pools", "5 min from Hersonissos"],
+    badges: ["ai","beach"],
+    summary: "Large bungalow-style resort between Hersonissos and Stalis with sea views. Features an aqua park, indoor pool, multiple restaurants and tennis courts. Only 5 minutes from Hersonissos town by taxi. Great for active families.",
+    pros: ["Aqua park & multiple pools", "Excellent food variety", "Lovely attentive staff", "5 min to Hersonissos"],
+    cons: ["Very hilly & steep internally", "Drinks quality mixed (wine/cocktails)", "Bathroom cleaning inconsistent"],
+    taLink: "https://www.tripadvisor.co.uk/Hotel_Review-g503710-d500649-Reviews-Grand_Hotel_Holiday_Resort-Hersonissos_Crete.html",
+    bookLink: null,
+  },
+  {
+    id: "blue-bay-rhodes",
+    name: "Blue Bay Beach Resort",
+    dest: "rhodes",
+    destLabel: "Ialysos, Rhodes",
+    stars: 4,
+    rating: 4.0,
+    reviews: 4792,
+    tags: ["All-Inclusive", "Private Beach", "Water Park", "Kids Club"],
+    badges: ["ai","beach"],
+    summary: "Popular all-inclusive resort on the Ialysos coast of Rhodes with private beach, water park and kids' club. 3km from the airport and close to Rhodes Town. Good family resort with lots of activities. One of the most reviewed hotels on the list.",
+    pros: ["Private beach & water park", "Lots of activities & kids club", "Close to airport & Rhodes Town", "Good family facilities"],
+    cons: ["Can feel busy/crowded", "Standard resort atmosphere"],
+    taLink: "https://www.tripadvisor.co.uk/Hotel_Review-g635614-d289547-Reviews-Blue_Bay_Beach_Resort-Ialysos_Rhodes_Dodecanese_South_Aegean.html",
+    bookLink: null,
+  },
+  {
+    id: "kalyves-beach",
+    name: "Kalyves Beach Hotel",
+    dest: "crete",
+    destLabel: "Kalyves, Chania, Crete",
+    stars: 4,
+    rating: 4.2,
+    reviews: 2447,
+    tags: ["All-Inclusive", "Blue Flag Beach", "Village Setting", "3 Pools", "Spa"],
+    badges: ["ai","beach","spa"],
+    summary: "Award-winning boutique hotel in the charming village of Kalyves, next to a Blue Flag beach with a river alongside. 30 minutes from Chania. Smaller and more personal than big resorts. Praised heavily for staff warmth and a beautiful authentic setting.",
+    pros: ["Unique riverside & beach setting", "Exceptionally warm staff", "Charming village location", "Good authentic Cretan food"],
+    cons: ["Smaller hotel — less choice", "Bathrooms a bit dated/small", "Limited entertainment", "Smaller pool area"],
+    taLink: "https://www.tripadvisor.co.uk/Hotel_Review-g1191167-d549385-Reviews-Kalyves_Beach_Hotel-Kalyves_Apokoronas_Chania_Prefecture_Crete.html",
+    bookLink: null,
+  },
+  {
+    id: "blue-sea-island",
+    name: "Blue Sea Island",
+    dest: "rhodes",
+    destLabel: "Kolimbia, Rhodes",
+    stars: 4,
+    rating: 4.1,
+    reviews: 1185,
+    tags: ["All-Inclusive", "Private Beach", "3 Pools", "Quiet Area", "Spa"],
+    badges: ["ai","beach","spa"],
+    summary: "All-inclusive resort in the quiet village of Kolimbia on eastern Rhodes. Private beach, 3 pools, indoor jacuzzi and spa. Praised for exceptional staff and cleanliness. Easy bus access to Lindos and Rhodes Town.",
+    pros: ["Spotlessly clean", "Outstanding staff warmth", "Lovely spa & indoor pool", "Great bus links to Lindos & Rhodes"],
+    cons: ["Quiet area — limited outside options", "Cocktails weak", "Some mixed reviews on service consistency"],
+    taLink: "https://www.tripadvisor.co.uk/Hotel_Review-g635615-d23909093-Reviews-Blue_Sea_Island-Kolimbia_Rhodes_Dodecanese_South_Aegean.html",
+    bookLink: null,
+  },
+  {
+    id: "canvas-family-village",
+    name: "Canvas by Mitsis Family Village",
+    dest: "kos",
+    destLabel: "Kardamena, Kos",
+    stars: 4,
+    rating: 4.2,
+    reviews: 2800,
+    tags: ["All-Inclusive", "Beach", "Multiple Pools", "Kids Club", "Family"],
+    badges: ["ai","beach"],
+    summary: "Large family-focused all-inclusive resort near Kardamena on Kos. Multiple pools, direct beach, kids' club and entertainment programme. Spotlessly clean rooms, great staff. Couples welcome but very family orientated. Bus to Kardamena village nearby.",
+    pros: ["Excellent for families with kids", "Spotless rooms (minibar topped up)", "Multiple pools & great beach", "Outstanding staff"],
+    cons: ["Very family-focused — less peaceful", "Can feel crowded in peak season", "Limited local dining feeling"],
+    taLink: "https://www.tripadvisor.co.uk/Hotel_Review-g659630-d576480-Reviews-Canvas_by_Mitsis_Family_Village-Kardamena_Kos_Dodecanese_South_Aegean.html",
+    bookLink: null,
+  },
+  {
+    id: "mythos-palace",
+    name: "Mythos Palace Resort (Adults Only)",
+    dest: "corfu",
+    destLabel: "Chlomos, Corfu",
+    stars: 5,
+    rating: 4.0,
+    reviews: 2096,
+    tags: ["Adults Only", "All-Inclusive", "5-Star", "Ionian Sea Views", "4 Pools", "Spa"],
+    badges: ["adults","ai","beach","spa"],
+    summary: "Adults-only 5-star resort on the quiet south-east coast of Corfu with breathtaking Ionian Sea views. 4 pools, rooftop bar, spa, and themed restaurant nights. Very peaceful and romantic — ideal for couples. Remote location: car/taxi needed to explore.",
+    pros: ["Stunning Ionian sea views", "Rooftop bar & sunset views", "Adults-only — very peaceful", "Excellent food with themed nights"],
+    cons: ["Very remote — need a car/taxi", "Steep slopes on site", "Some rooms need refurbishment", "45 min from Corfu Airport"],
+    taLink: "https://www.tripadvisor.co.uk/Hotel_Review-g2290791-d20142612-Reviews-Mythos_Palace_Resort_Adults_Only-Chlomos_Corfu_Ionian_Islands.html",
+    bookLink: null,
+  },
 ];
 
-// State — per-user votes/ratings/notes, plus shared fav
-const USERS = ['andrius', 'beatrix'];
-let currentUser = null;
+const likedSet = new Set(JSON.parse(localStorage.getItem('likedHotels') || '[]'));
+const notes = JSON.parse(localStorage.getItem('hotelNotes') || '{}');
 
-const state = {};
-holidays.forEach((h, i) => {
-  state[i] = {
-    fav: false,
-    andrius: { vote: null, rating: 0, note: '' },
-    beatrix:  { vote: null, rating: 0, note: '' },
-  };
-});
-
-function loadState() {
-  try {
-    const saved = localStorage.getItem('holiday_picker_v2');
-    if (saved) {
-      const parsed = JSON.parse(saved);
-      Object.keys(parsed).forEach(k => {
-        if (state[k]) Object.assign(state[k], parsed[k]);
-      });
-    }
-  } catch(e) {}
+function saveLiked() {
+  localStorage.setItem('likedHotels', JSON.stringify([...likedSet]));
 }
-function saveState() {
-  try { localStorage.setItem('holiday_picker_v2', JSON.stringify(state)); } catch(e) {}
+function saveNotes() {
+  localStorage.setItem('hotelNotes', JSON.stringify(notes));
 }
 
-// ── Login / Remember-me ──
-function doLogin(user) {
-  const remember = document.getElementById('remember-me').checked;
-  if (remember) {
-    localStorage.setItem('holiday_remembered_user', user);
-  } else {
-    localStorage.removeItem('holiday_remembered_user');
-  }
-  setActiveUser(user);
-  document.getElementById('login-screen').classList.add('hidden');
-  soundLogin();
+function renderStars(n) {
+  return '★'.repeat(n) + '☆'.repeat(5 - n);
 }
 
-function showLogin() {
-  // Pre-tick remember if they were remembered
-  const remembered = localStorage.getItem('holiday_remembered_user');
-  document.getElementById('remember-me').checked = !!remembered;
-  document.getElementById('login-screen').classList.remove('hidden');
-}
-
-function setActiveUser(user) {
-  currentUser = user;
-  document.body.dataset.user = user;
-
-  // Update header chip
-  const chip = document.getElementById('user-chip');
-  chip.dataset.user = user;
-  document.getElementById('chip-dot').textContent = user === 'andrius' ? 'A' : 'B';
-  document.getElementById('chip-name').textContent = user === 'andrius' ? 'Andrius' : 'Beatrix';
-
-  buildCards();
-  applyCurrentFilter();
-}
-
-function getUserState(i) { return state[i][currentUser]; }
-
-function switchUser(user) { setActiveUser(user); }
-
-let firstBuild = true;
-
-function buildCards() {
-  const grid = document.getElementById('grid');
-  grid.querySelectorAll('.card').forEach(c => c.remove());
-  const isFirst = firstBuild;
-  firstBuild = false;
-
-  holidays.forEach((h, i) => {
-    const s = state[i];
-    const u = getUserState(i);
-    const va = s.andrius.vote;
-    const vb = s.beatrix.vote;
-    const bothYes = va === 'yes' && vb === 'yes';
-    const bothNo  = va === 'no'  && vb === 'no';
-    const split   = (va === 'yes' && vb === 'no') || (va === 'no' && vb === 'yes');
-
-    let cardClass = 'card';
-    if (s.fav) cardClass += ' favourite';
-    if (bothYes) cardClass += ' both-yes';
-    else if (bothNo) cardClass += ' both-no';
-    else if (split) cardClass += ' split';
-
-    const card = document.createElement('div');
-    card.className = cardClass;
-    card.dataset.index = i;
-    card.dataset.dest = h.dest;
-
-    // Vote pills — highlight current user's pill with "mine" outline
-    const pillA = va === 'yes' ? 'up' : va === 'no' ? 'down' : '';
-    const pillB = vb === 'yes' ? 'up' : vb === 'no' ? 'down' : '';
-    const iconA = va === 'yes' ? '👍' : va === 'no' ? '👎' : '–';
-    const iconB = vb === 'yes' ? '👍' : vb === 'no' ? '👎' : '–';
-    const mineA = currentUser === 'andrius' ? ' mine' : '';
-    const mineB = currentUser === 'beatrix'  ? ' mine' : '';
-
-    // Mutual badge
-    const mutualBadge = bothYes ? '<span class="mutual-badge">🤝 Mutual Pick</span>' : '';
-
-    // Other user's note
-    const otherUser = currentUser === 'andrius' ? 'beatrix' : 'andrius';
-    const otherName = currentUser === 'andrius' ? 'Beatrix' : 'Andrius';
-    const otherNote = s[otherUser].note;
-
-    card.innerHTML = `
-      <span class="fav-badge">★ Favourite</span>
-      ${mutualBadge}
-      <div class="card-header">
+function renderCard(h) {
+  const liked = likedSet.has(h.id);
+  const noteVal = notes[h.id] || '';
+  return `
+  <div class="card ${liked ? 'liked' : ''}" data-id="${h.id}" data-dest="${h.dest}" data-rating="${h.rating}">
+    <div class="card-band band-${h.dest}"></div>
+    <div class="card-body">
+      <div>
+        <span class="destination-tag tag-${h.dest}">${h.destLabel}</span>
+      </div>
+      <div class="card-top">
         <div>
-          <div class="card-dest dest-flag">${h.dest}</div>
-          <div class="card-hotel">${h.hotel}</div>
+          <div class="card-title">${h.name}</div>
+          <div class="stars">${renderStars(h.stars)}</div>
         </div>
-        <button class="fav-btn ${s.fav ? 'on' : ''}" title="Toggle favourite" onclick="toggleFav(${i})">⭐</button>
+        <button class="like-btn" data-id="${h.id}" title="Like this hotel">${liked ? '❤️' : '🤍'}</button>
       </div>
-      <div class="card-body">
-        <div class="card-meta">
-          <span class="tag date">📅 ${h.date}</span>
-          <span class="tag board">🍽️ ${h.board}</span>
-        </div>
-        <div class="card-area">📍 ${h.area}</div>
-        <div class="votes-row">
-          <div class="vote-pill ${pillA}${mineA}"><span class="pip">${iconA}</span> Andrius</div>
-          <div class="vote-pill ${pillB}${mineB}"><span class="pip">${iconB}</span> Beatrix</div>
-        </div>
-        <div class="rating-row">
-          <div class="stars-input" id="stars-${i}">
-            ${[1,2,3,4,5].map(n => `<span class="star ${u.rating >= n ? 'filled' : ''}" onclick="setRating(${i},${n})" title="${n} star${n>1?'s':''}">★</span>`).join('')}
-          </div>
-          <span class="rating-label">${currentUser === 'andrius' ? 'Andrius' : 'Beatrix'}'s rating</span>
-        </div>
-        <textarea class="note-area" placeholder="Add a note… (pros, cons, things to check)" oninput="setNote(${i}, this.value)">${u.note}</textarea>
-        ${otherNote ? `<div class="other-note"><span class="other-note-label">${otherName} says:</span> ${otherNote}</div>` : ''}
+
+      <div class="rating-row">
+        <span class="rating-label">TA Rating</span>
+        <div class="rating-track"><div class="rating-fill" style="width:${(h.rating/5)*100}%"></div></div>
+        <span class="rating-num">${h.rating.toFixed(1)}</span>
       </div>
-      <div class="card-footer">
-        <a class="btn-book" href="${h.url}" target="_blank">View on easyJet ↗</a>
-        <button class="btn-yes ${u.vote === 'yes' ? 'active' : ''}" onclick="setVote(${i}, 'yes')" title="Thumbs up">👍</button>
-        <button class="btn-no ${u.vote === 'no' ? 'active' : ''}" onclick="setVote(${i}, 'no')" title="Thumbs down">👎</button>
+      <div class="rating-row">
+        <span class="rating-label">Reviews</span>
+        <div class="rating-track"><div class="rating-fill" style="width:${Math.min((h.reviews/5000)*100,100)}%;background:linear-gradient(90deg,#e8793a,#f4a261)"></div></div>
+        <span class="rating-num" style="font-size:0.72rem;color:var(--sunset)">${h.reviews.toLocaleString()}</span>
       </div>
-    `;
-    grid.appendChild(card);
-    // Staggered entrance animation — only on first load
-    if (isFirst) {
-      card.style.animationDelay = (i * 0.04) + 's';
-      card.classList.add('entering');
-      card.addEventListener('animationend', () => card.classList.remove('entering'), { once: true });
-    }
-    // 3D tilt
-    addTiltEffect(card);
-  });
-  updateStats();
-}
 
-function toggleFav(i) {
-  state[i].fav = !state[i].fav;
-  saveState();
-  buildCards();
-  applyCurrentFilter();
-  // Star burst effect
-  const btn = document.querySelector(`.card[data-index="${i}"] .fav-btn`);
-  if (btn && state[i].fav) {
-    burstStar(btn);
-    spawnParticles(btn, ['⭐','✨','💛'], 7);
-    soundFav();
-  }
-}
+      <p class="summary">${h.summary}</p>
 
-function setRating(i, val) {
-  getUserState(i).rating = val;
-  saveState();
-  soundStar(val);
-  document.querySelectorAll(`#stars-${i} .star`).forEach((s, idx) => {
-    s.classList.toggle('filled', idx < val);
-    if (idx < val) {
-      s.classList.remove('wave');
-      void s.offsetWidth;
-      s.style.animationDelay = (idx * 0.07) + 's';
-      s.classList.add('wave');
-      s.addEventListener('animationend', () => s.classList.remove('wave'), { once: true });
-    }
-  });
-}
+      <div class="pros-cons">
+        <div class="pros">
+          <h4>✅ Pros</h4>
+          <ul>${h.pros.map(p => `<li>${p}</li>`).join('')}</ul>
+        </div>
+        <div class="cons">
+          <h4>⚠️ Watch out</h4>
+          <ul>${h.cons.map(c => `<li>${c}</li>`).join('')}</ul>
+        </div>
+      </div>
 
-function setNote(i, val) {
-  getUserState(i).note = val;
-  saveState();
-}
+      <div class="badges">
+        ${h.tags.map(t => {
+          const b = t.toLowerCase().replace(/[^a-z]/g,'');
+          const cls = h.badges.find(x => b.includes(x)) || '';
+          return `<span class="badge ${cls}">${t}</span>`;
+        }).join('')}
+      </div>
 
-function setVote(i, vote) {
-  const u = getUserState(i);
-  const wasVote = u.vote;
-  u.vote = u.vote === vote ? null : vote;
-  const isActive = u.vote !== null;
-  saveState();
-  buildCards();
-  applyCurrentFilter();
+      <div class="notes-area">
+        <label>📝 Your notes</label>
+        <textarea data-id="${h.id}" placeholder="Add your thoughts here…">${noteVal}</textarea>
+      </div>
+    </div>
 
-  // Find the button that was just clicked
-  const card = document.querySelector(`.card[data-index="${i}"]`);
-  if (!card) return;
-
-  if (u.vote === 'yes') {
-    const btn = card.querySelector('.btn-yes');
-    if (btn) { burstGreen(btn); spawnParticles(btn, ['👍','✅','💚'], 6); }
-    soundYes();
-  } else if (u.vote === 'no') {
-    const btn = card.querySelector('.btn-no');
-    if (btn) { burstRed(btn); spawnParticles(btn, ['👎','❌','💔'], 6); }
-    soundNo();
-  } else {
-    soundUnvote();
-  }
-
-  // Mutual heart — fires when BOTH users now have 'yes'
-  const s = state[i];
-  const isMutual = s.andrius.vote === 'yes' && s.beatrix.vote === 'yes';
-  if (isMutual) {
-    setTimeout(() => {
-      const c2 = document.querySelector(`.card[data-index="${i}"]`);
-      if (c2) spawnHeartBurst(c2);
-    }, 150);
-    soundMutual();
-  }
+    <div class="card-footer">
+      <a class="btn-ta" href="${h.taLink}" target="_blank">🔍 TripAdvisor</a>
+      ${h.bookLink
+        ? `<a class="btn-book" href="${h.bookLink}" target="_blank">✈️ Book Now</a>`
+        : `<span class="btn-nobook">Search to Book</span>`}
+    </div>
+  </div>`;
 }
 
 let currentFilter = 'all';
+let currentSort = 'default';
 
-function applyFilter(dest) {
-  currentFilter = dest;
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.dest === dest));
-  document.querySelectorAll('.card').forEach(card => {
-    const i = +card.dataset.index;
-    const s = state[i];
-    const u = getUserState(i);
-    if (dest === 'all') card.classList.remove('hidden');
-    else if (dest === 'fav') card.classList.toggle('hidden', !s.fav);
-    else if (dest === 'both-yes') card.classList.toggle('hidden', !(s.andrius.vote === 'yes' && s.beatrix.vote === 'yes'));
-    else if (dest === 'yes') card.classList.toggle('hidden', u.vote !== 'yes');
-    else if (dest === 'no')  card.classList.toggle('hidden', u.vote !== 'no');
-    else card.classList.toggle('hidden', card.dataset.dest !== dest);
-  });
-  updateStats();
+function getFiltered() {
+  let list = [...hotels];
+  if (currentFilter === 'liked') {
+    list = list.filter(h => likedSet.has(h.id));
+  } else if (currentFilter !== 'all') {
+    list = list.filter(h => h.dest === currentFilter);
+  }
+  if (currentSort === 'rating-hi') list.sort((a,b) => b.rating - a.rating);
+  if (currentSort === 'rating-lo') list.sort((a,b) => a.rating - b.rating);
+  return list;
 }
 
-function applyCurrentFilter() { applyFilter(currentFilter); }
-
-function applySort(val) {
+function render() {
   const grid = document.getElementById('grid');
-  const cards = [...grid.querySelectorAll('.card')];
-  cards.sort((a, b) => {
-    const ia = +a.dataset.index, ib = +b.dataset.index;
-    const ha = holidays[ia], hb = holidays[ib];
-    const sa = getUserState(ia), sb = getUserState(ib);
-    if (val === 'rating-desc') return sb.rating - sa.rating;
-    if (val === 'rating-asc') return sa.rating - sb.rating;
-    if (val === 'hotel-az') return ha.hotel.localeCompare(hb.hotel);
-    if (val === 'dest-az') return ha.dest.localeCompare(hb.dest);
-    return ia - ib;
-  });
-  cards.forEach(c => grid.appendChild(c));
-}
-
-function updateStats() {
-  const cards = document.querySelectorAll('.card');
-  const visible = [...cards].filter(c => !c.classList.contains('hidden')).length;
-  const bothYes = Object.values(state).filter(s => s.andrius.vote === 'yes' && s.beatrix.vote === 'yes').length;
-  const yesA = Object.values(state).filter(s => s.andrius.vote === 'yes').length;
-  const yesB = Object.values(state).filter(s => s.beatrix.vote === 'yes').length;
-
-  document.getElementById('visible-count').textContent = visible;
-  document.getElementById('total-count').textContent = cards.length;
-  document.getElementById('both-yes-count').textContent = bothYes;
-  document.getElementById('yes-count-a').textContent = yesA;
-  document.getElementById('yes-count-b').textContent = yesB;
-
-  document.getElementById('no-results').style.display = visible === 0 ? 'block' : 'none';
-
-  const banner = document.getElementById('shortlist-banner');
-  const bothYesNames = holidays.filter((h, i) => state[i] && state[i].andrius.vote === 'yes' && state[i].beatrix.vote === 'yes').map(h => h.hotel).join(', ');
-  if (bothYes > 0) {
-    banner.classList.add('visible');
-    document.getElementById('fav-names').textContent = bothYesNames;
+  const list = getFiltered();
+  if (list.length === 0) {
+    grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--muted);font-size:1.1rem;">No hotels match this filter yet. Like some hotels first! 💛</p>';
   } else {
-    banner.classList.remove('visible');
+    grid.innerHTML = list.map(renderCard).join('');
   }
+  updateLikedSummary();
+  attachEvents();
 }
 
-// ── Visual effect helpers ──
-function burstGreen(el) {
-  el.classList.remove('burst');
-  void el.offsetWidth;
-  el.classList.add('burst');
-  addRipple(el, 'rgba(46,125,50,0.35)');
-  el.addEventListener('animationend', () => el.classList.remove('burst'), { once: true });
-}
-function burstRed(el) {
-  el.classList.remove('burst');
-  void el.offsetWidth;
-  el.classList.add('burst');
-  addRipple(el, 'rgba(198,40,40,0.35)');
-  el.addEventListener('animationend', () => el.classList.remove('burst'), { once: true });
-}
-function burstStar(el) {
-  el.classList.remove('burst');
-  void el.offsetWidth;
-  el.classList.add('burst');
-  el.addEventListener('animationend', () => el.classList.remove('burst'), { once: true });
+function updateLikedSummary() {
+  document.getElementById('liked-count').textContent = likedSet.size;
 }
 
-function addRipple(el, color) {
-  const wave = document.createElement('span');
-  wave.className = 'ripple-wave';
-  wave.style.background = color || 'rgba(255,255,255,0.4)';
-  const size = Math.max(el.offsetWidth, el.offsetHeight) * 2;
-  wave.style.width = wave.style.height = size + 'px';
-  wave.style.left = (el.offsetWidth / 2 - size / 2) + 'px';
-  wave.style.top  = (el.offsetHeight / 2 - size / 2) + 'px';
-  el.style.position = 'relative';
-  el.style.overflow = 'hidden';
-  el.appendChild(wave);
-  wave.addEventListener('animationend', () => wave.remove());
-}
-
-function spawnParticles(anchor, emojis, count) {
-  const rect = anchor.getBoundingClientRect();
-  const cx = rect.left + rect.width / 2;
-  const cy = rect.top + rect.height / 2;
-  for (let k = 0; k < count; k++) {
-    const el = document.createElement('span');
-    el.className = 'particle';
-    el.textContent = emojis[k % emojis.length];
-    const angle = (Math.PI * 2 * k / count) + (Math.random() - 0.5) * 0.9;
-    const dist = 70 + Math.random() * 90;
-    el.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
-    el.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
-    el.style.left = cx + 'px';
-    el.style.top  = cy + 'px';
-    el.style.fontSize = (1.0 + Math.random() * 1.2) + 'rem';
-    el.style.animationDelay = (k * 0.05) + 's';
-    el.style.animationDuration = (0.8 + Math.random() * 0.5) + 's';
-    document.body.appendChild(el);
-    el.addEventListener('animationend', () => el.remove());
-  }
-}
-
-function spawnHeartBurst(card) {
-  const rect = card.getBoundingClientRect();
-  const cx = rect.left + rect.width / 2;
-  const cy = rect.top + rect.height / 2;
-  ['❤️','💕','💖','💗','💓','✨','🌟'].forEach((emoji, k) => {
-    const el = document.createElement('span');
-    el.className = 'particle';
-    el.textContent = emoji;
-    el.style.fontSize = (1.8 + Math.random() * 1.2) + 'rem';
-    const angle = -Math.PI/2 + (Math.random() - 0.5) * Math.PI * 1.5;
-    const dist = 80 + Math.random() * 100;
-    el.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
-    el.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
-    el.style.left = cx + 'px';
-    el.style.top  = cy + 'px';
-    el.style.animationDelay = (k * 0.06) + 's';
-    el.style.animationDuration = (1.1 + Math.random() * 0.5) + 's';
-    document.body.appendChild(el);
-    el.addEventListener('animationend', () => el.remove());
+function attachEvents() {
+  document.querySelectorAll('.like-btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      const id = btn.dataset.id;
+      if (likedSet.has(id)) {
+        likedSet.delete(id);
+        btn.textContent = '🤍';
+        btn.closest('.card').classList.remove('liked');
+      } else {
+        likedSet.add(id);
+        btn.textContent = '❤️';
+        btn.closest('.card').classList.add('liked');
+      }
+      saveLiked();
+      updateLikedSummary();
+      if (currentFilter === 'liked') render();
+    });
   });
-  // Confetti rain!
-  spawnConfetti();
-  // Inline pulse on the card itself
-  const overlay = document.createElement('div');
-  overlay.className = 'heart-burst';
-  overlay.textContent = '💖';
-  card.appendChild(overlay);
-  overlay.addEventListener('animationend', () => overlay.remove());
-}
 
-function spawnConfetti() {
-  const colors = ['#43a047','#66bb6a','#ffd700','#ff6b6b','#4fc3f7','#ce93d8','#ffb300','#26c6da'];
-  for (let i = 0; i < 60; i++) {
-    const el = document.createElement('div');
-    el.className = 'confetti-piece';
-    const w = 6 + Math.random() * 10;
-    const h = 6 + Math.random() * 10;
-    el.style.width = w + 'px';
-    el.style.height = h + 'px';
-    el.style.left = (Math.random() * 100) + 'vw';
-    el.style.top = '-30px';
-    el.style.background = colors[Math.floor(Math.random() * colors.length)];
-    el.style.borderRadius = Math.random() > 0.5 ? '50%' : '3px';
-    el.style.setProperty('--spin', (Math.random() * 1080 - 540) + 'deg');
-    el.style.setProperty('--flip', Math.random() > 0.5 ? '1' : '-1');
-    el.style.animationDelay = (Math.random() * 1.2) + 's';
-    el.style.animationDuration = (1.8 + Math.random() * 1.5) + 's';
-    document.body.appendChild(el);
-    el.addEventListener('animationend', () => el.remove());
-  }
-}
-
-// ── 3D tilt effect on cards ──
-function addTiltEffect(card) {
-  card.addEventListener('mousemove', (e) => {
-    if (window.matchMedia('(hover: none)').matches) return;
-    const rect = card.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top)  / rect.height - 0.5;
-    card.style.transform = `translateY(-6px) rotateX(${-y * 7}deg) rotateY(${x * 7}deg)`;
-    card.style.boxShadow = `${-x * 12}px ${Math.abs(y) * 6 + 12}px 36px rgba(26,95,122,0.22)`;
-  });
-  card.addEventListener('mouseleave', () => {
-    card.style.transform = '';
-    card.style.boxShadow = '';
+  document.querySelectorAll('textarea[data-id]').forEach(ta => {
+    ta.addEventListener('input', () => {
+      notes[ta.dataset.id] = ta.value;
+      saveNotes();
+    });
   });
 }
 
-// ── Animated background shapes ──
-function spawnBgShapes() {
-  const shapes = ['✈️','☀️','🌊','🌴','🏖️','⛵','🌸','🐚'];
-  for (let i = 0; i < 12; i++) {
-    const el = document.createElement('div');
-    el.className = 'bg-float';
-    el.textContent = shapes[Math.floor(Math.random() * shapes.length)];
-    el.style.left = (Math.random() * 100) + 'vw';
-    el.style.fontSize = (1.5 + Math.random() * 2.5) + 'rem';
-    const dur = 18 + Math.random() * 22;
-    el.style.animationDuration = dur + 's';
-    el.style.animationDelay = -(Math.random() * dur) + 's';
-    document.body.appendChild(el);
-  }
-}
-spawnBgShapes();
-
-// ── Audio Engine ──
-let audioCtx = null;
-let soundEnabled = true;
-
-function getAudioCtx() {
-  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  if (audioCtx.state === 'suspended') audioCtx.resume();
-  return audioCtx;
-}
-
-function toggleSound() {
-  soundEnabled = !soundEnabled;
-  const btn = document.getElementById('sound-toggle');
-  btn.textContent = soundEnabled ? '🔊 Sound on' : '🔇 Sound off';
-  btn.classList.toggle('muted', !soundEnabled);
-}
-
-function playTone(frequency, type, duration, gainVal, delay = 0) {
-  if (!soundEnabled) return;
-  const ctx = getAudioCtx();
-  const osc = ctx.createOscillator();
-  const gain = ctx.createGain();
-  osc.connect(gain);
-  gain.connect(ctx.destination);
-  osc.type = type;
-  osc.frequency.setValueAtTime(frequency, ctx.currentTime + delay);
-  gain.gain.setValueAtTime(0, ctx.currentTime + delay);
-  gain.gain.linearRampToValueAtTime(gainVal, ctx.currentTime + delay + 0.01);
-  gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + delay + duration);
-  osc.start(ctx.currentTime + delay);
-  osc.stop(ctx.currentTime + delay + duration + 0.05);
-}
-
-function soundYes() {
-  // Happy rising chime
-  playTone(440, 'sine', 0.18, 0.3);
-  playTone(554, 'sine', 0.18, 0.25, 0.10);
-  playTone(659, 'sine', 0.25, 0.2,  0.20);
-}
-
-function soundNo() {
-  // Dull descending thud
-  playTone(280, 'triangle', 0.12, 0.3);
-  playTone(200, 'triangle', 0.18, 0.25, 0.10);
-}
-
-function soundFav() {
-  // Sparkle tinkle
-  [880, 1100, 1320, 1760].forEach((f, k) => {
-    playTone(f, 'sine', 0.15, 0.2, k * 0.07);
+// filter buttons
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.dataset.filter;
+    render();
   });
-}
+});
 
-function soundStar(starNum) {
-  // Quick tick per star, pitch rises with rating
-  const freqs = [330, 392, 494, 587, 698];
-  playTone(freqs[starNum - 1] || 440, 'triangle', 0.12, 0.25);
-}
+// sort
+document.getElementById('sort-select').addEventListener('change', e => {
+  currentSort = e.target.value;
+  render();
+});
 
-function soundUnvote() {
-  playTone(320, 'sine', 0.1, 0.15);
-  playTone(260, 'sine', 0.1, 0.1, 0.08);
-}
-
-function soundMutual() {
-  // Fanfare: C major arpeggio + high shimmer
-  const fanfare = [523, 659, 784, 1047, 1319];
-  fanfare.forEach((f, k) => playTone(f, 'sine', 0.35, 0.22, k * 0.1));
-  // shimmer on top
-  [2093, 2637].forEach((f, k) => playTone(f, 'sine', 0.3, 0.12, 0.5 + k * 0.12));
-}
-
-function soundLogin() {
-  // Soft welcome ding
-  playTone(523, 'sine', 0.2, 0.2);
-  playTone(659, 'sine', 0.25, 0.18, 0.15);
-}
-
-
-
-function exportFavourites() {
-  const both = holidays.filter((h, i) => state[i] && state[i].andrius.vote === 'yes' && state[i].beatrix.vote === 'yes');
-  const text = both.map(h => `${h.hotel} (${h.dest} – ${h.area})\n${h.date}\n${h.url}`).join('\n\n');
-  navigator.clipboard.writeText(text || 'No mutual picks yet!').then(() => alert('Copied to clipboard! 🎉'));
-}
-
-// ── Init ──
-loadState();
-document.getElementById('sort-select').addEventListener('change', e => { applySort(e.target.value); updateStats(); });
-document.querySelectorAll('.filter-btn').forEach(b => b.addEventListener('click', () => applyFilter(b.dataset.dest)));
-
-// Check for remembered user
-const remembered = localStorage.getItem('holiday_remembered_user');
-if (remembered && USERS.includes(remembered)) {
-  document.getElementById('remember-me').checked = true;
-  doLogin(remembered);
-} else {
-  // Show login screen
-  document.getElementById('login-screen').classList.remove('hidden');
-}
-
+render();
 </script>
 </body>
 </html>
