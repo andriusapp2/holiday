@@ -3,794 +3,767 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Our Holiday Shortlist 🌞</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<title>Our Holiday Shortlist ☀️</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --sand: #f5ede0;
-    --ocean: #1a6b8a;
-    --ocean-light: #2a8ab0;
-    --sunset: #e8793a;
-    --sunset-light: #f4a261;
-    --leaf: #4caf7d;
-    --leaf-light: #72c49a;
-    --text: #2c2c2c;
-    --muted: #6e6e6e;
-    --card-bg: #ffffff;
-    --border: #e8ddd0;
-    --liked: #e74c3c;
-  }
+:root {
+  --page:      #f2ece3;
+  --surface:   #fdfaf5;
+  --surface2:  #f5f0e8;
+  --ink:       #1a1714;
+  --ink-2:     #3d3830;
+  --ink-3:     #7a7268;
+  --ink-4:     #b0a898;
+  --gold:      #bf8a2e;
+  --gold-lt:   #dba94e;
+  --gold-pale: #f5e8cc;
+  --rust:      #b84c30;
+  --rust-lt:   #d96e50;
+  --rust-pale: #f5ddd6;
+  --teal:      #2a7a6a;
+  --teal-lt:   #3da88e;
+  --teal-pale: #d0ede8;
+  --azure:     #2858a0;
+  --azure-lt:  #4878c8;
+  --azure-pale:#d8e4f5;
+  --plum:      #6a3878;
+  --plum-lt:   #9860b0;
+  --plum-pale: #ecdaf5;
+  --border:    rgba(26,23,20,.09);
+  --border-md: rgba(26,23,20,.14);
+  --sh-sm: 0 1px 4px rgba(26,23,20,.06),0 4px 16px rgba(26,23,20,.07);
+  --sh-md: 0 4px 12px rgba(26,23,20,.08),0 12px 40px rgba(26,23,20,.12);
+  --r: 20px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--page);color:var(--ink);min-height:100vh;font-size:14.5px}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+/* ══ HEADER ══ */
+header{position:relative;overflow:hidden;background:var(--ink);padding:4.5rem 2rem 5.5rem;text-align:center}
+header::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 70% 60% at 50% -10%,rgba(191,138,46,.4) 0%,transparent 70%),radial-gradient(ellipse 40% 40% at 12% 80%,rgba(42,122,106,.22) 0%,transparent 60%),radial-gradient(ellipse 40% 40% at 88% 80%,rgba(184,76,48,.22) 0%,transparent 60%)}
+header::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:60px;background:var(--page);clip-path:ellipse(56% 100% at 50% 100%)}
+.hdr-chip{display:inline-block;font-size:.63rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-lt);border:1px solid rgba(191,138,46,.32);padding:.28rem .9rem;border-radius:100px;margin-bottom:1.4rem;background:rgba(191,138,46,.08)}
+header h1{font-family:'Libre Baskerville',serif;font-size:clamp(2.6rem,6.5vw,4.8rem);font-weight:700;line-height:1.0;color:#fff;letter-spacing:-.03em;margin-bottom:.9rem}
+header h1 em{font-style:italic;color:var(--gold-lt);font-weight:400}
+.hdr-sub{font-size:.86rem;color:rgba(255,255,255,.45);font-weight:400}
+.hdr-line{display:flex;justify-content:center;align-items:center;gap:.6rem;margin-top:2rem}
+.hdr-line i{display:block;height:1px;width:28px;background:rgba(255,255,255,.14)}
+.hdr-line span{font-size:.62rem;color:rgba(255,255,255,.28);letter-spacing:.15em;text-transform:uppercase}
 
-  body {
-    font-family: 'Nunito', sans-serif;
-    background: var(--sand);
-    color: var(--text);
-    min-height: 100vh;
-  }
+/* ══ CONTROLS ══ */
+.ctrl-wrap{max-width:1320px;margin:0 auto;padding:2.8rem 1.8rem 0}
+.ctrl-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1rem}
+.ctrl-lbl{font-size:.6rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);flex-shrink:0}
+.pills{display:flex;gap:.4rem;overflow-x:auto;padding-bottom:.3rem;scrollbar-width:none;flex:1}
+.pills::-webkit-scrollbar{display:none}
+.pill{flex-shrink:0;white-space:nowrap;background:var(--surface);border:1.5px solid var(--border);color:var(--ink-2);padding:.42rem 1rem;border-radius:100px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.77rem;font-weight:600;cursor:pointer;transition:all .18s ease}
+.pill:hover{border-color:var(--gold);color:var(--gold);background:rgba(191,138,46,.05)}
+.pill.active{background:var(--ink);border-color:var(--ink);color:#fff}
+.pill.p-liked.active{background:var(--rust);border-color:var(--rust)}
+.pill.p-fav.active{background:var(--gold);border-color:var(--gold)}
+.sort-wrap{display:flex;align-items:center;gap:.6rem;flex-shrink:0}
+.sort-wrap label{font-size:.7rem;font-weight:600;color:var(--ink-3);letter-spacing:.04em;white-space:nowrap}
+.sort-wrap select{border:1.5px solid var(--border);border-radius:10px;padding:.38rem .5rem .38rem .75rem;font-family:'Plus Jakarta Sans',sans-serif;font-size:.77rem;font-weight:600;background:var(--surface);color:var(--ink);cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%237a7268' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .55rem center;padding-right:1.8rem}
+.results-row{max-width:1320px;margin:.8rem auto 0;padding:0 1.8rem;display:flex;align-items:center}
+.results-count{font-size:.7rem;color:var(--ink-3);font-weight:500}
 
-  /* ── HEADER ── */
-  header {
-    background: linear-gradient(135deg, var(--ocean) 0%, #0d3d54 60%, #1a5c40 100%);
-    color: white;
-    padding: 2.5rem 2rem 2rem;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  header::before {
-    content: '';
-    position: absolute;
-    bottom: -20px; left: 0; right: 0;
-    height: 40px;
-    background: var(--sand);
-    clip-path: ellipse(55% 100% at 50% 100%);
-  }
-  header h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 5vw, 3.2rem);
-    letter-spacing: -0.5px;
-    margin-bottom: 0.4rem;
-  }
-  header p {
-    opacity: 0.85;
-    font-size: 1.05rem;
-    font-weight: 600;
-  }
-  .wave-emoji { font-size: 1.5rem; vertical-align: middle; }
+/* ══ GRID ══ */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(370px,1fr));gap:1.6rem;padding:1.4rem 1.8rem 7rem;max-width:1320px;margin:0 auto}
 
-  /* ── CONTROLS ── */
-  .controls {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-    justify-content: center;
-    padding: 2rem 1.5rem 1rem;
-  }
+/* ══ CARD ══ */
+.card{background:var(--surface);border-radius:var(--r);border:1.5px solid var(--border);box-shadow:var(--sh-sm);display:flex;flex-direction:column;overflow:hidden;transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease;animation:up .45s ease both}
+.card:hover{transform:translateY(-5px);box-shadow:var(--sh-md)}
+.card.liked{border-color:rgba(184,76,48,.35)}
+.card.is-fav{border-color:rgba(191,138,46,.5);box-shadow:var(--sh-sm),0 0 0 3px rgba(191,138,46,.1)}
+.card.hidden{display:none}
+@keyframes up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.card:nth-child(2){animation-delay:.06s}.card:nth-child(3){animation-delay:.11s}.card:nth-child(4){animation-delay:.15s}.card:nth-child(n+5){animation-delay:.18s}
 
-  .filter-btn {
-    background: white;
-    border: 2px solid var(--border);
-    color: var(--text);
-    padding: 0.45rem 1.1rem;
-    border-radius: 50px;
-    font-family: 'Nunito', sans-serif;
-    font-size: 0.88rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .filter-btn:hover { border-color: var(--ocean); color: var(--ocean); }
-  .filter-btn.active {
-    background: var(--ocean);
-    border-color: var(--ocean);
-    color: white;
-  }
-  .filter-btn.liked-filter.active {
-    background: var(--liked);
-    border-color: var(--liked);
-  }
+/* ── HERO ── */
+.card-hero{height:190px;position:relative;overflow:hidden;flex-shrink:0}
+.card-hero svg{position:absolute;inset:0;width:100%;height:100%}
+.card-hero .hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .6s ease;opacity:0}
+.card-hero .hero-img.loaded{opacity:1}
+.photo-src{position:absolute;bottom:.45rem;right:.65rem;font-size:.5rem;color:rgba(255,255,255,.45);letter-spacing:.05em;text-shadow:0 1px 3px rgba(0,0,0,.5);pointer-events:none;z-index:3}
+.hero-fade{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 45%,var(--surface) 100%);pointer-events:none}
+.hero-label{position:absolute;bottom:.75rem;left:1rem;font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.9);text-shadow:0 1px 6px rgba(0,0,0,.5);pointer-events:none}
+.hero-like{position:absolute;top:.7rem;right:.7rem;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.22);backdrop-filter:blur(10px);border:2px solid rgba(255,255,255,.4);display:flex;align-items:center;justify-content:center;font-size:1.3rem;cursor:pointer;transition:all .22s cubic-bezier(.34,1.5,.64,1);color:#fff;z-index:2;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.hero-like:hover{background:rgba(255,255,255,.38);transform:scale(1.15)}
+.hero-like.is-liked{background:var(--rust);border-color:var(--rust);color:#fff;box-shadow:0 4px 16px rgba(184,76,48,.5);transform:scale(1.08)}
 
-  .sort-row {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.6rem;
-    padding: 0 1.5rem 0.5rem;
-    font-size: 0.88rem;
-    font-weight: 700;
-    color: var(--muted);
-  }
-  .sort-row select {
-    border: 2px solid var(--border);
-    border-radius: 8px;
-    padding: 0.3rem 0.7rem;
-    font-family: 'Nunito', sans-serif;
-    font-size: 0.88rem;
-    background: white;
-    color: var(--text);
-    cursor: pointer;
-  }
+/* ── BODY ── */
+.card-body{padding:1.1rem 1.4rem .9rem;flex:1;display:flex;flex-direction:column;gap:.85rem}
+.name-row{display:flex;flex-direction:column;gap:.15rem}
+.card-title{font-family:'Libre Baskerville',serif;font-size:1.13rem;font-weight:700;line-height:1.22;color:var(--ink)}
+.hotel-stars{color:var(--gold);font-size:.7rem;letter-spacing:2px}
+.meta-row{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.dest-chip{font-size:.59rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.2rem .55rem;border-radius:100px}
+.dc-capeverde{background:var(--teal-pale);color:#1a5a48;border:1px solid rgba(42,122,106,.2)}
+.dc-rhodes   {background:var(--rust-pale);color:#8a2c18;border:1px solid rgba(184,76,48,.2)}
+.dc-crete    {background:var(--azure-pale);color:#1a3870;border:1px solid rgba(40,88,160,.2)}
+.dc-zakynthos{background:var(--plum-pale);color:#4a2058;border:1px solid rgba(106,56,120,.2)}
+.dc-kos      {background:var(--gold-pale);color:#7a5010;border:1px solid rgba(191,138,46,.2)}
+.dc-corfu    {background:var(--teal-pale);color:#103828;border:1px solid rgba(26,90,72,.25)}
+.fav-btn{display:inline-flex;align-items:center;gap:.3rem;background:var(--surface);border:2px solid var(--border);border-radius:10px;padding:.38rem .85rem;font-family:'Plus Jakarta Sans',sans-serif;font-size:.8rem;font-weight:700;cursor:pointer;color:var(--ink-2);transition:all .2s cubic-bezier(.34,1.4,.64,1);box-shadow:0 1px 3px rgba(26,23,20,.06)}
+.fav-btn .fi{font-size:1rem;transition:transform .28s cubic-bezier(.34,1.7,.64,1)}
+.fav-btn:hover{border-color:var(--gold);color:var(--gold);background:rgba(191,138,46,.06);transform:translateY(-1px);box-shadow:0 3px 10px rgba(191,138,46,.2)}
+.fav-btn:hover .fi{transform:scale(1.4) rotate(15deg)}
+.fav-btn.active{background:var(--gold);border-color:var(--gold);color:#fff;box-shadow:0 4px 14px rgba(191,138,46,.4)}
+.fav-btn.active .fi{transform:scale(1.15)}
 
-  /* ── GRID ── */
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    gap: 1.5rem;
-    padding: 1rem 1.5rem 3rem;
-    max-width: 1400px;
-    margin: 0 auto;
-  }
+/* ── RATING STRIP ── */
+.rating-strip{display:flex;gap:.8rem;background:var(--surface2);border-radius:12px;padding:.7rem 1rem}
+.rs-item{flex:1;display:flex;flex-direction:column;gap:.3rem}
+.rs-lbl{font-size:.57rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.rs-bar{display:flex;align-items:center;gap:.5rem}
+.rs-track{flex:1;background:rgba(26,23,20,.09);border-radius:100px;height:5px;overflow:hidden}
+.rs-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--azure-lt),var(--teal-lt));transition:width .7s ease}
+.rs-fill.rf-rev{background:linear-gradient(90deg,var(--gold),var(--rust-lt))}
+.rs-val{font-size:.73rem;font-weight:700;color:var(--ink);white-space:nowrap}
 
-  /* ── CARD ── */
-  .card {
-    background: var(--card-bg);
-    border-radius: 18px;
-    overflow: hidden;
-    box-shadow: 0 3px 18px rgba(0,0,0,0.08);
-    transition: transform 0.25s, box-shadow 0.25s;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    border: 2px solid transparent;
-  }
-  .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 35px rgba(0,0,0,0.13);
-  }
-  .card.liked {
-    border-color: var(--liked);
-  }
+/* ── SUMMARY ── */
+.summary{font-size:.82rem;line-height:1.7;color:var(--ink-2)}
 
-  /* hidden when filtered */
-  .card.hidden { display: none; }
+/* ── PROS/CONS ── */
+.pc-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.pc-box{border-radius:12px;padding:.65rem .8rem}
+.pc-pro{background:rgba(42,122,106,.07);border:1px solid rgba(42,122,106,.18)}
+.pc-con{background:rgba(191,138,46,.07);border:1px solid rgba(191,138,46,.18)}
+.pc-hd{font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.4rem}
+.pc-pro .pc-hd{color:var(--teal)}.pc-con .pc-hd{color:var(--gold)}
+.pc-ul{list-style:none;display:flex;flex-direction:column;gap:.22rem}
+.pc-ul li{font-size:.73rem;color:var(--ink-2);line-height:1.42;padding-left:.9rem;position:relative}
+.pc-pro li::before{content:'✓';position:absolute;left:0;color:var(--teal);font-weight:700;font-size:.68rem}
+.pc-con li::before{content:'–';position:absolute;left:0;color:var(--gold);font-weight:700}
 
-  /* ── CARD HEADER BAND ── */
-  .card-band {
-    height: 10px;
-  }
-  .band-capeverde { background: linear-gradient(90deg, #27ae60, #1abc9c); }
-  .band-rhodes    { background: linear-gradient(90deg, #e67e22, #f39c12); }
-  .band-crete     { background: linear-gradient(90deg, #3498db, #2980b9); }
-  .band-zakynthos { background: linear-gradient(90deg, #9b59b6, #8e44ad); }
-  .band-kos       { background: linear-gradient(90deg, #e74c3c, #c0392b); }
-  .band-corfu     { background: linear-gradient(90deg, #1a6b8a, #0d3d54); }
+/* ── TAGS ── */
+.tags{display:flex;flex-wrap:wrap;gap:.3rem}
+.tag{font-size:.62rem;font-weight:600;padding:.18rem .55rem;border-radius:100px;background:var(--surface2);color:var(--ink-2);border:1px solid var(--border);letter-spacing:.02em}
+.tag.t-adults{background:var(--rust-pale);color:var(--rust);border-color:rgba(184,76,48,.2)}
+.tag.t-ai    {background:var(--teal-pale);color:var(--teal);border-color:rgba(42,122,106,.2)}
+.tag.t-beach {background:var(--azure-pale);color:var(--azure);border-color:rgba(40,88,160,.2)}
+.tag.t-spa   {background:var(--plum-pale);color:var(--plum);border-color:rgba(106,56,120,.2)}
 
-  /* ── CARD BODY ── */
-  .card-body { padding: 1.2rem 1.3rem; flex: 1; }
+/* ── REACTION BAR ── */
+.reaction-bar{background:var(--surface2);border-radius:14px;padding:1rem 1.1rem;display:flex;flex-direction:column;gap:.9rem;border:1.5px solid var(--border)}
+.rb-row{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
+.rb-lbl{font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);width:52px;flex-shrink:0}
+.thumb{display:inline-flex;align-items:center;gap:.45rem;border-radius:12px;padding:.55rem 1.1rem;font-family:'Plus Jakarta Sans',sans-serif;font-size:.85rem;font-weight:700;cursor:pointer;transition:all .18s cubic-bezier(.34,1.4,.64,1);border:2px solid var(--border);background:var(--surface);color:var(--ink-2);box-shadow:0 1px 3px rgba(26,23,20,.06)}
+.thumb .ti{font-size:1.15rem;line-height:1;transition:transform .22s cubic-bezier(.34,1.6,.64,1);display:block}
+.thumb .tc{font-size:.75rem;font-weight:800}
+.thumb:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(26,23,20,.12)}
+.thumb.up:hover{border-color:var(--teal);color:var(--teal);background:rgba(42,122,106,.06)}
+.thumb.up:hover .ti{transform:scale(1.3) rotate(-10deg)}
+.thumb.dn:hover{border-color:var(--rust);color:var(--rust);background:rgba(184,76,48,.06)}
+.thumb.dn:hover .ti{transform:scale(1.3) rotate(10deg)}
+.thumb.up.active{background:var(--teal);border-color:var(--teal);color:#fff;box-shadow:0 4px 14px rgba(42,122,106,.35)}
+.thumb.up.active .ti{transform:scale(1.2) rotate(-8deg)}
+.thumb.dn.active{background:var(--rust);border-color:var(--rust);color:#fff;box-shadow:0 4px 14px rgba(184,76,48,.35)}
+.thumb.dn.active .ti{transform:scale(1.2) rotate(8deg)}
+.rb-sep{width:1px;height:20px;background:var(--border)}
+.star-picker{display:flex;gap:.1rem}
+.sp{background:none;border:none;cursor:pointer;font-size:1.5rem;color:var(--ink-4);padding:0 .06rem;line-height:1;transition:color .1s,transform .15s cubic-bezier(.34,1.6,.64,1)}
+.sp:hover,.sp.hover-on{color:var(--gold-lt);transform:scale(1.3)}
+.sp.filled{color:var(--gold);filter:drop-shadow(0 1px 3px rgba(191,138,46,.4))}
+.rb-score{font-size:.85rem;font-weight:800;color:var(--gold);min-width:30px}
 
-  .card-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 0.5rem;
-  }
+/* ── NOTES ── */
+.notes-area{display:flex;flex-direction:column;gap:.28rem}
+.notes-lbl{font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.notes-area textarea{width:100%;border:1.5px solid var(--border);border-radius:10px;padding:.5rem .7rem;font-family:'Plus Jakarta Sans',sans-serif;font-size:.79rem;color:var(--ink);resize:vertical;min-height:50px;background:var(--surface2);transition:border-color .2s;line-height:1.55}
+.notes-area textarea:focus{outline:none;border-color:var(--gold);background:var(--surface)}
+.notes-area textarea::placeholder{color:var(--ink-4)}
 
-  .destination-tag {
-    font-size: 0.72rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    padding: 0.2rem 0.6rem;
-    border-radius: 20px;
-    margin-bottom: 0.4rem;
-    display: inline-block;
-  }
-  .tag-capeverde  { background: #d5f5e3; color: #1a7a4a; }
-  .tag-rhodes     { background: #fdebd0; color: #a84300; }
-  .tag-crete      { background: #d6eaf8; color: #1a5276; }
-  .tag-zakynthos  { background: #e8daef; color: #6c3483; }
-  .tag-kos        { background: #fde8e8; color: #922b21; }
-  .tag-corfu      { background: #d0e8f0; color: #0d3d54; }
+/* ── FOOTER ── */
+.card-footer{display:flex;gap:.55rem;padding:.9rem 1.4rem;border-top:1px solid var(--border);background:var(--surface2)}
+.btn{flex:1;text-align:center;padding:.55rem .5rem;border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.74rem;font-weight:700;text-decoration:none;transition:all .18s ease;cursor:pointer;display:block;letter-spacing:.02em}
+.btn-ta{background:var(--surface);border:1.5px solid var(--border);color:var(--ink-2)}
+.btn-ta:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+.btn-search{background:var(--surface);border:1.5px dashed var(--border-md);color:var(--ink-3)}
+.btn-search:hover{border-color:var(--gold);color:var(--gold);background:rgba(191,138,46,.04)}
 
-  .card-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.18rem;
-    font-weight: 700;
-    line-height: 1.25;
-    color: var(--text);
-    margin-bottom: 0.25rem;
-  }
+/* ══ LIKED BAR ══ */
+.liked-bar{position:fixed;bottom:0;left:0;right:0;z-index:200;background:var(--ink);color:#fff;padding:.85rem 2rem;display:flex;align-items:center;justify-content:center;gap:.8rem;font-size:.83rem;font-weight:500;transform:translateY(100%);transition:transform .38s cubic-bezier(.34,1.15,.64,1)}
+.liked-bar.show{transform:translateY(0)}
+.lb-badge{background:var(--rust);color:#fff;width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700}
+.lb-btn{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#fff;padding:.28rem .8rem;border-radius:100px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.72rem;font-weight:700;cursor:pointer;transition:background .18s}
+.lb-btn:hover{background:rgba(255,255,255,.22)}
 
-  .stars {
-    color: #f0a500;
-    font-size: 0.85rem;
-    letter-spacing: 1px;
-  }
+/* ══ EMPTY ══ */
+.empty{grid-column:1/-1;text-align:center;padding:5rem 2rem}
+.empty-icon{font-size:2.5rem;opacity:.3;margin-bottom:.8rem}
+.empty p{font-family:'Libre Baskerville',serif;font-style:italic;font-size:1.1rem;color:var(--ink-3)}
 
-  /* like button */
-  .like-btn {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    line-height: 1;
-    transition: transform 0.15s;
-    flex-shrink: 0;
-    margin-left: 0.5rem;
-  }
-  .like-btn:hover { transform: scale(1.2); }
+/* ══ PRESS ANIMATIONS ══ */
+@keyframes btn-press{0%{transform:scale(1)}40%{transform:scale(.92)}100%{transform:scale(1)}}
+@keyframes ripple{0%{transform:scale(0);opacity:.45}100%{transform:scale(4);opacity:0}}
 
-  /* rating bar */
-  .rating-row {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin: 0.6rem 0;
-  }
-  .rating-label {
-    font-size: 0.78rem;
-    font-weight: 700;
-    color: var(--muted);
-    width: 80px;
-    flex-shrink: 0;
-  }
-  .rating-track {
-    flex: 1;
-    background: #f0e9de;
-    border-radius: 10px;
-    height: 8px;
-    overflow: hidden;
-  }
-  .rating-fill {
-    height: 100%;
-    border-radius: 10px;
-    background: linear-gradient(90deg, var(--ocean-light), var(--leaf));
-    transition: width 0.6s ease;
-  }
-  .rating-num {
-    font-size: 0.82rem;
-    font-weight: 700;
-    color: var(--ocean);
-    width: 30px;
-    text-align: right;
-  }
+.btn:active,.pill:active,.thumb:active,.fav-btn:active,.lb-btn:active,.hero-like:active{
+  animation:btn-press .22s cubic-bezier(.34,1.4,.64,1) both
+}
+/* override card hover lift so press feels grounded */
+.btn:active{transform:scale(.94)!important;box-shadow:none!important}
+.pill:active{transform:scale(.91)!important}
+.thumb:active{transform:scale(.9) translateY(0)!important}
+.fav-btn:active{transform:scale(.91) translateY(0)!important}
+.hero-like:active{transform:scale(.9)!important}
 
-  /* summary text */
-  .summary {
-    font-size: 0.88rem;
-    color: #555;
-    line-height: 1.5;
-    margin: 0.6rem 0;
-  }
+/* ripple layer */
+.ripple-host{position:relative;overflow:hidden}
+.ripple-dot{position:absolute;border-radius:50%;background:rgba(255,255,255,.55);pointer-events:none;transform:scale(0);animation:ripple .52s ease-out forwards}
 
-  /* pros/cons */
-  .pros-cons {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.4rem;
-    margin: 0.7rem 0;
-  }
-  .pros, .cons {
-    background: #f9f5ef;
-    border-radius: 10px;
-    padding: 0.5rem 0.6rem;
-  }
-  .pros { border-left: 3px solid var(--leaf); }
-  .cons { border-left: 3px solid var(--sunset); }
-  .pros h4, .cons h4 {
-    font-size: 0.72rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    margin-bottom: 0.3rem;
-  }
-  .pros h4 { color: var(--leaf); }
-  .cons h4 { color: var(--sunset); }
-  .pros ul, .cons ul {
-    list-style: none;
-    padding: 0;
-  }
-  .pros ul li::before { content: '✓ '; color: var(--leaf); font-weight: 700; }
-  .cons ul li::before { content: '✗ '; color: var(--sunset); font-weight: 700; }
-  .pros ul li, .cons ul li {
-    font-size: 0.78rem;
-    color: #555;
-    line-height: 1.4;
-    margin-bottom: 0.15rem;
-  }
-
-  /* tags row */
-  .badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.3rem;
-    margin-top: 0.7rem;
-  }
-  .badge {
-    font-size: 0.7rem;
-    font-weight: 700;
-    padding: 0.18rem 0.55rem;
-    border-radius: 20px;
-    background: #eef4fa;
-    color: var(--ocean);
-    border: 1px solid #c5d9e8;
-  }
-  .badge.adults { background: #fdebd0; color: #a84300; border-color: #f0c090; }
-  .badge.ai     { background: #d5f5e3; color: #1a7a4a; border-color: #a0dbb8; }
-  .badge.beach  { background: #d6eaf8; color: #1a5276; border-color: #a0c8e0; }
-  .badge.spa    { background: #e8daef; color: #6c3483; border-color: #c8a8d8; }
-
-  /* ── CARD FOOTER ── */
-  .card-footer {
-    display: flex;
-    gap: 0.6rem;
-    padding: 0.9rem 1.3rem;
-    border-top: 1px solid var(--border);
-    background: #fdf9f4;
-  }
-  .btn-ta, .btn-book {
-    flex: 1;
-    text-align: center;
-    padding: 0.5rem 0;
-    border-radius: 10px;
-    font-family: 'Nunito', sans-serif;
-    font-size: 0.82rem;
-    font-weight: 700;
-    text-decoration: none;
-    transition: all 0.2s;
-  }
-  .btn-ta {
-    background: white;
-    border: 2px solid var(--ocean);
-    color: var(--ocean);
-  }
-  .btn-ta:hover { background: var(--ocean); color: white; }
-  .btn-book {
-    background: var(--sunset);
-    border: 2px solid var(--sunset);
-    color: white;
-  }
-  .btn-book:hover { background: #c9622e; border-color: #c9622e; }
-
-  /* no book button placeholder */
-  .btn-nobook {
-    flex: 1;
-    text-align: center;
-    padding: 0.5rem 0;
-    border-radius: 10px;
-    font-size: 0.82rem;
-    font-weight: 700;
-    background: #eee;
-    color: #999;
-    border: 2px dashed #ddd;
-  }
-
-  /* notes area */
-  .notes-area {
-    margin: 0.6rem 0 0;
-  }
-  .notes-area textarea {
-    width: 100%;
-    border: 1.5px solid var(--border);
-    border-radius: 10px;
-    padding: 0.5rem 0.7rem;
-    font-family: 'Nunito', sans-serif;
-    font-size: 0.82rem;
-    color: var(--text);
-    resize: vertical;
-    min-height: 55px;
-    background: #fdf9f4;
-    transition: border-color 0.2s;
-  }
-  .notes-area textarea:focus {
-    outline: none;
-    border-color: var(--ocean);
-  }
-  .notes-area label {
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: var(--muted);
-    display: block;
-    margin-bottom: 0.2rem;
-  }
-
-  /* ── SUMMARY BAR ── */
-  .liked-summary {
-    position: sticky;
-    bottom: 0;
-    background: var(--ocean);
-    color: white;
-    text-align: center;
-    padding: 0.75rem 1rem;
-    font-weight: 700;
-    font-size: 0.95rem;
-    z-index: 100;
-    transition: all 0.3s;
-  }
-  .liked-summary span { color: var(--sunset-light); }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 500px) {
-    .pros-cons { grid-template-columns: 1fr; }
-    .grid { grid-template-columns: 1fr; padding: 1rem; }
-  }
+/* ══ RESPONSIVE ══ */
+@media(max-width:600px){
+  header{padding:3.5rem 1.2rem 4rem}
+  .grid{grid-template-columns:1fr;padding:1rem 1rem 7rem}
+  .pc-grid{grid-template-columns:1fr}
+  .ctrl-wrap{padding:2rem 1rem 0}
+  .results-row{padding:0 1rem}
+}
 </style>
 </head>
 <body>
 
 <header>
-  <h1><span class="wave-emoji">☀️</span> Our Holiday Shortlist <span class="wave-emoji">🌊</span></h1>
-  <p>12 options — click the hearts to shortlist your favourites!</p>
+  <div class="hdr-chip">Summer 2026 · Mediterranean</div>
+  <h1>Our Holiday<br><em>Shortlist</em></h1>
+  <p class="hdr-sub">12 options — heart, star &amp; rate to find your perfect match</p>
+  <div class="hdr-line">
+    <i></i><span>12 hotels · 6 destinations</span><i></i>
+  </div>
 </header>
 
-<div class="controls">
-  <button class="filter-btn active" data-filter="all">All (12)</button>
-  <button class="filter-btn" data-filter="capeverde">🌴 Cape Verde</button>
-  <button class="filter-btn" data-filter="rhodes">🏛 Rhodes</button>
-  <button class="filter-btn" data-filter="crete">🫒 Crete</button>
-  <button class="filter-btn" data-filter="zakynthos">🐢 Zakynthos</button>
-  <button class="filter-btn" data-filter="kos">🌺 Kos</button>
-  <button class="filter-btn" data-filter="corfu">🏔 Corfu</button>
-  <button class="filter-btn liked-filter" data-filter="liked">❤️ Liked</button>
+<div class="ctrl-wrap">
+  <div class="ctrl-top">
+    <div style="display:flex;align-items:center;gap:.9rem;flex:1;flex-wrap:wrap">
+      <span class="ctrl-lbl">Destination</span>
+      <div class="pills">
+        <button class="pill active" data-filter="all">All</button>
+        <button class="pill" data-filter="capeverde">🌴 Cape Verde</button>
+        <button class="pill" data-filter="rhodes">🏛 Rhodes</button>
+        <button class="pill" data-filter="crete">🫒 Crete</button>
+        <button class="pill" data-filter="zakynthos">🐢 Zakynthos</button>
+        <button class="pill" data-filter="kos">🌺 Kos</button>
+        <button class="pill" data-filter="corfu">🏔 Corfu</button>
+        <button class="pill p-liked" data-filter="liked">♥ Liked</button>
+        <button class="pill p-fav"   data-filter="fav">★ Favourites</button>
+      </div>
+    </div>
+    <div class="sort-wrap">
+      <label>Sort</label>
+      <select id="sort-sel">
+        <option value="default">Default</option>
+        <option value="rating-hi">Rating ↓</option>
+        <option value="rating-lo">Rating ↑</option>
+        <option value="reviews-hi">Most reviewed</option>
+        <option value="my-rating">My rating ↓</option>
+      </select>
+    </div>
+  </div>
 </div>
 
-<div class="sort-row">
-  Sort by:
-  <select id="sort-select">
-    <option value="default">Default order</option>
-    <option value="rating-hi">Rating: High → Low</option>
-    <option value="rating-lo">Rating: Low → High</option>
-  </select>
-</div>
+<div class="results-row"><span class="results-count" id="results-lbl"></span></div>
 
 <div class="grid" id="grid"></div>
 
-<div class="liked-summary" id="liked-summary">
-  ❤️ You've liked <span id="liked-count">0</span> hotel(s) — scroll up to see them!
+<div class="liked-bar" id="liked-bar">
+  ♥ <span class="lb-badge" id="liked-count">0</span>
+  <span>hotel<span id="liked-pl">s</span> shortlisted</span>
+  <button class="lb-btn" onclick="document.querySelector('[data-filter=liked]').click()">View →</button>
 </div>
 
 <script>
-const hotels = [
-  {
-    id: "melia-llana",
-    name: "Meliá Llana Beach Resort & Spa",
-    dest: "capeverde",
-    destLabel: "Cape Verde, Sal",
-    stars: 5,
-    rating: 4.1,
-    reviews: 3200,
-    tags: ["Adults Only", "All-Inclusive", "Beachfront", "Spa", "3 Pools"],
-    badges: ["adults","ai","beach","spa"],
-    summary: "Adults-only, all-inclusive beachfront retreat on Sal island. Stunning private beach, spacious rooms, YHI Spa and 9 restaurants/bars. Feels remote from Santa Maria town but ideal for those who want to just unwind on the beach.",
-    pros: ["Beachfront location", "Lovely staff overall", "Spacious rooms & pools", "Good food variety"],
-    cons: ["Remote from town", "Inconsistent service", "Extras add up quickly", "WiFi patchy in rooms"],
-    taLink: "https://www.tripadvisor.co.uk/Hotel_Review-g482848-d10678936-Reviews-Melia_Llana_Beach_Resort_Spa_All_Inclusive_Adults_only-Santa_Maria_Ilha_do_Sal.html",
-    bookLink: "https://www.easyjet.com/en/holidays/cape-verde/sal/santa-maria/melia-llana?ibf=true&to=05-06-2026&from=29-05-2026",
-  },
-  {
-    id: "sol-cosmopolitan",
-    name: "Sol Cosmopolitan Rhodes",
-    dest: "rhodes",
-    destLabel: "Rhodes Town",
-    stars: 4,
-    rating: 4.2,
-    reviews: 4100,
-    tags: ["All-Inclusive", "Beachfront", "Pools", "Spa", "Kids Club"],
-    badges: ["ai","beach","spa"],
-    summary: "Amphitheatrically built 4-star resort on the coast of Ixia, 14km from the airport and minutes from Rhodes Old Town. Consistently praised for cleanliness and friendly staff. Beach is across the road. Great family or couples hotel.",
-    pros: ["Very clean throughout", "Friendly attentive staff", "Great location for Old Town", "Sunset sea views"],
-    cons: ["Beach is pebble/stony", "Can get very noisy", "Sunbeds run out at peak", "Pool bar queues"],
-    taLink: "https://www.tripadvisor.co.uk/Hotel_Review-g635613-d316715-Reviews-Sol_Cosmopolitan_Rhodes-Rhodes_Town_Rhodes_Dodecanese_South_Aegean.html",
-    bookLink: null,
-  },
-  {
-    id: "canvas-petit-palais",
-    name: "Canvas by Mitsis Petit Palais",
-    dest: "rhodes",
-    destLabel: "Rhodes Town",
-    stars: 4,
-    rating: 4.2,
-    reviews: 3148,
-    tags: ["All-Inclusive", "Beach Nearby", "Old Town Walking", "Pool"],
-    badges: ["ai","beach"],
-    summary: "The only all-inclusive 4-star hotel in central Rhodes Town. 700m from the Old Town, 100m from the beach, 500m from Mandraki Port. Superb location for exploring. Friendly staff are its standout feature. Small pool — not a resort pool.",
-    pros: ["Unbeatable central location", "Exceptional staff", "Excellent varied food", "Walk to Old Town & beach"],
-    cons: ["Small pool", "Nearby construction noise", "Thin walls in rooms", "Not a big resort feel"],
-    taLink: "https://www.tripadvisor.co.uk/Hotel_Review-g635613-d500438-Reviews-Canvas_by_Mitsis_Petit_Palais-Rhodes_Town_Rhodes_Dodecanese_South_Aegean.html",
-    bookLink: null,
-  },
-  {
-    id: "silva-beach",
-    name: "Silva Beach",
-    dest: "crete",
-    destLabel: "Hersonissos, Crete",
-    stars: 4,
-    rating: 4.0,
-    reviews: 3136,
-    tags: ["All-Inclusive", "Cretan Village Style", "Beach", "2 Pools"],
-    badges: ["ai","beach"],
-    summary: "Charming Cretan-village-style resort at the edge of Hersonissos. Beautiful gardens, two pools (freshwater & saltwater), direct beach access and within walking distance of the lively town. Great for couples and families.",
-    pros: ["Village-style setting & gardens", "Two pools, easy sunbeds", "Direct beach access", "Close to Hersonissos nightlife"],
-    cons: ["Cocktails not made with real juice", "Food repetitive after a week", "Average entertainment"],
-    taLink: "https://www.tripadvisor.co.uk/Hotel_Review-g503710-d250616-Reviews-Silva_Beach-Hersonissos_Crete.html",
-    bookLink: null,
-  },
-  {
-    id: "golden-sun",
-    name: "Golden Sun Resort & Spa",
-    dest: "zakynthos",
-    destLabel: "Kalamaki, Zakynthos",
-    stars: 4,
-    rating: 4.0,
-    reviews: 1573,
-    tags: ["All-Inclusive", "150m from Beach", "Quiet Area", "Pool"],
-    badges: ["ai","beach","spa"],
-    summary: "Modern resort 150m from Kalamaki's sandy beach, surrounded by greenery and only 6km from Zakynthos Town. Quiet, relaxed setting ideal for couples seeking peace. Incredible pool praised by guests. Good value for money.",
-    pros: ["Massive peaceful pool", "Friendly helpful staff", "Great beach nearby", "Good value all-inclusive"],
-    cons: ["Restaurant can feel small", "Limited choice at peak times", "Drinks not top-shelf"],
-    taLink: "https://www.tripadvisor.co.uk/Hotel_Review-g659629-d496247-Reviews-Golden_Sun_Resort_Spa-Kalamaki_Zakynthos_Ionian_Islands.html",
-    bookLink: null,
-  },
-  {
-    id: "blue-bay-crete",
-    name: "Blue Bay Resort Hotel",
-    dest: "crete",
-    destLabel: "Mononaftis, Crete",
-    stars: 4,
-    rating: 4.0,
-    reviews: 2158,
-    tags: ["All-Inclusive", "Sea Views", "6 Pools", "Hillside"],
-    badges: ["ai","beach","spa"],
-    summary: "Hillside resort perched above Mononaftis Bay with breathtaking Cretan Sea views. 6 pools including kids' pools with slides. Free shuttle to the beach below. Ideal for a quiet relaxing break. Note: steep slopes throughout the property.",
-    pros: ["Stunning sea views from all rooms", "6 pools with great variety", "Warm friendly staff", "Good evening entertainment"],
-    cons: ["Very hilly — hard for mobility issues", "Food can be repetitive", "Remote from town (22km Heraklion)", "WiFi weak in rooms"],
-    taLink: "https://www.tripadvisor.co.uk/Hotel_Review-g8242451-d595581-Reviews-Blue_Bay_Resort_Hotel-Mononaftis_Crete.html",
-    bookLink: null,
-  },
-  {
-    id: "grand-holiday",
-    name: "Grand Hotel Holiday Resort",
-    dest: "crete",
-    destLabel: "Hersonissos, Crete",
-    stars: 4,
-    rating: 4.0,
-    reviews: 2073,
-    tags: ["All-Inclusive", "Water Park", "3 Pools", "5 min from Hersonissos"],
-    badges: ["ai","beach"],
-    summary: "Large bungalow-style resort between Hersonissos and Stalis with sea views. Features an aqua park, indoor pool, multiple restaurants and tennis courts. Only 5 minutes from Hersonissos town by taxi. Great for active families.",
-    pros: ["Aqua park & multiple pools", "Excellent food variety", "Lovely attentive staff", "5 min to Hersonissos"],
-    cons: ["Very hilly & steep internally", "Drinks quality mixed (wine/cocktails)", "Bathroom cleaning inconsistent"],
-    taLink: "https://www.tripadvisor.co.uk/Hotel_Review-g503710-d500649-Reviews-Grand_Hotel_Holiday_Resort-Hersonissos_Crete.html",
-    bookLink: null,
-  },
-  {
-    id: "blue-bay-rhodes",
-    name: "Blue Bay Beach Resort",
-    dest: "rhodes",
-    destLabel: "Ialysos, Rhodes",
-    stars: 4,
-    rating: 4.0,
-    reviews: 4792,
-    tags: ["All-Inclusive", "Private Beach", "Water Park", "Kids Club"],
-    badges: ["ai","beach"],
-    summary: "Popular all-inclusive resort on the Ialysos coast of Rhodes with private beach, water park and kids' club. 3km from the airport and close to Rhodes Town. Good family resort with lots of activities. One of the most reviewed hotels on the list.",
-    pros: ["Private beach & water park", "Lots of activities & kids club", "Close to airport & Rhodes Town", "Good family facilities"],
-    cons: ["Can feel busy/crowded", "Standard resort atmosphere"],
-    taLink: "https://www.tripadvisor.co.uk/Hotel_Review-g635614-d289547-Reviews-Blue_Bay_Beach_Resort-Ialysos_Rhodes_Dodecanese_South_Aegean.html",
-    bookLink: null,
-  },
-  {
-    id: "kalyves-beach",
-    name: "Kalyves Beach Hotel",
-    dest: "crete",
-    destLabel: "Kalyves, Chania, Crete",
-    stars: 4,
-    rating: 4.2,
-    reviews: 2447,
-    tags: ["All-Inclusive", "Blue Flag Beach", "Village Setting", "3 Pools", "Spa"],
-    badges: ["ai","beach","spa"],
-    summary: "Award-winning boutique hotel in the charming village of Kalyves, next to a Blue Flag beach with a river alongside. 30 minutes from Chania. Smaller and more personal than big resorts. Praised heavily for staff warmth and a beautiful authentic setting.",
-    pros: ["Unique riverside & beach setting", "Exceptionally warm staff", "Charming village location", "Good authentic Cretan food"],
-    cons: ["Smaller hotel — less choice", "Bathrooms a bit dated/small", "Limited entertainment", "Smaller pool area"],
-    taLink: "https://www.tripadvisor.co.uk/Hotel_Review-g1191167-d549385-Reviews-Kalyves_Beach_Hotel-Kalyves_Apokoronas_Chania_Prefecture_Crete.html",
-    bookLink: null,
-  },
-  {
-    id: "blue-sea-island",
-    name: "Blue Sea Island",
-    dest: "rhodes",
-    destLabel: "Kolimbia, Rhodes",
-    stars: 4,
-    rating: 4.1,
-    reviews: 1185,
-    tags: ["All-Inclusive", "Private Beach", "3 Pools", "Quiet Area", "Spa"],
-    badges: ["ai","beach","spa"],
-    summary: "All-inclusive resort in the quiet village of Kolimbia on eastern Rhodes. Private beach, 3 pools, indoor jacuzzi and spa. Praised for exceptional staff and cleanliness. Easy bus access to Lindos and Rhodes Town.",
-    pros: ["Spotlessly clean", "Outstanding staff warmth", "Lovely spa & indoor pool", "Great bus links to Lindos & Rhodes"],
-    cons: ["Quiet area — limited outside options", "Cocktails weak", "Some mixed reviews on service consistency"],
-    taLink: "https://www.tripadvisor.co.uk/Hotel_Review-g635615-d23909093-Reviews-Blue_Sea_Island-Kolimbia_Rhodes_Dodecanese_South_Aegean.html",
-    bookLink: null,
-  },
-  {
-    id: "canvas-family-village",
-    name: "Canvas by Mitsis Family Village",
-    dest: "kos",
-    destLabel: "Kardamena, Kos",
-    stars: 4,
-    rating: 4.2,
-    reviews: 2800,
-    tags: ["All-Inclusive", "Beach", "Multiple Pools", "Kids Club", "Family"],
-    badges: ["ai","beach"],
-    summary: "Large family-focused all-inclusive resort near Kardamena on Kos. Multiple pools, direct beach, kids' club and entertainment programme. Spotlessly clean rooms, great staff. Couples welcome but very family orientated. Bus to Kardamena village nearby.",
-    pros: ["Excellent for families with kids", "Spotless rooms (minibar topped up)", "Multiple pools & great beach", "Outstanding staff"],
-    cons: ["Very family-focused — less peaceful", "Can feel crowded in peak season", "Limited local dining feeling"],
-    taLink: "https://www.tripadvisor.co.uk/Hotel_Review-g659630-d576480-Reviews-Canvas_by_Mitsis_Family_Village-Kardamena_Kos_Dodecanese_South_Aegean.html",
-    bookLink: null,
-  },
-  {
-    id: "mythos-palace",
-    name: "Mythos Palace Resort (Adults Only)",
-    dest: "corfu",
-    destLabel: "Chlomos, Corfu",
-    stars: 5,
-    rating: 4.0,
-    reviews: 2096,
-    tags: ["Adults Only", "All-Inclusive", "5-Star", "Ionian Sea Views", "4 Pools", "Spa"],
-    badges: ["adults","ai","beach","spa"],
-    summary: "Adults-only 5-star resort on the quiet south-east coast of Corfu with breathtaking Ionian Sea views. 4 pools, rooftop bar, spa, and themed restaurant nights. Very peaceful and romantic — ideal for couples. Remote location: car/taxi needed to explore.",
-    pros: ["Stunning Ionian sea views", "Rooftop bar & sunset views", "Adults-only — very peaceful", "Excellent food with themed nights"],
-    cons: ["Very remote — need a car/taxi", "Steep slopes on site", "Some rooms need refurbishment", "45 min from Corfu Airport"],
-    taLink: "https://www.tripadvisor.co.uk/Hotel_Review-g2290791-d20142612-Reviews-Mythos_Palace_Resort_Adults_Only-Chlomos_Corfu_Ionian_Islands.html",
-    bookLink: null,
-  },
+/* ── PHOTO CACHE (declared first so all functions can access it) ── */
+const photoCache = JSON.parse(localStorage.getItem('hotelPhotos')||'{}');
+Object.keys(photoCache).forEach(k => {
+  if (photoCache[k]?.url && !photoCache[k].url.includes('wsrv.nl')) delete photoCache[k];
+});
+
+/* ── ILLUSTRATED HEROES ── */
+const DEST = {
+  capeverde:{sky1:'#1a7858',sky2:'#40b080',sea1:'#155848',sea2:'#2a8868',sand:'#c8b060',sun:'#f0d030'},
+  rhodes:   {sky1:'#c05030',sky2:'#e07858',sea1:'#204888',sea2:'#3868b8',sand:'#c0a060',sun:'#f0d030'},
+  crete:    {sky1:'#2860b0',sky2:'#5898d8',sea1:'#183878',sea2:'#2858a8',sand:'#c8b870',sun:'#f0e050'},
+  zakynthos:{sky1:'#583088',sky2:'#8858b8',sea1:'#204888',sea2:'#3868b8',sand:'#c8c080',sun:'#f0e040'},
+  kos:      {sky1:'#b86020',sky2:'#d89040',sea1:'#205890',sea2:'#3878b8',sand:'#c8a858',sun:'#f0c020'},
+  corfu:    {sky1:'#155838',sky2:'#288858',sea1:'#153868',sea2:'#286090',sand:'#b8b070',sun:'#f0d830'},
+};
+
+function heroSVG(dest){
+  const c=DEST[dest]||DEST.crete;
+  return `<svg viewBox="0 0 400 128" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="G1${dest}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${c.sky1}"/><stop offset="100%" stop-color="${c.sky2}"/></linearGradient>
+    <linearGradient id="G2${dest}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${c.sea1}"/><stop offset="100%" stop-color="${c.sea2}"/></linearGradient>
+  </defs>
+  <rect width="400" height="128" fill="url(#G1${dest})"/>
+  <!-- sun glow -->
+  <circle cx="328" cy="32" r="28" fill="${c.sun}" opacity=".15"/>
+  <circle cx="328" cy="32" r="18" fill="${c.sun}" opacity=".9"/>
+  <!-- clouds -->
+  <ellipse cx="80" cy="28" rx="38" ry="12" fill="rgba(255,255,255,.12)"/>
+  <ellipse cx="96" cy="24" rx="28" ry="10" fill="rgba(255,255,255,.1)"/>
+  <ellipse cx="220" cy="38" rx="28" ry="9" fill="rgba(255,255,255,.08)"/>
+  <!-- far hill -->
+  <ellipse cx="200" cy="88" rx="260" ry="50" fill="${c.sky1}" opacity=".4"/>
+  <!-- sea -->
+  <path d="M0 80 Q100 73 200 79 Q300 85 400 77 L400 128 L0 128Z" fill="url(#G2${dest})"/>
+  <!-- wave shimmer -->
+  <path d="M0 89 Q50 85 100 89 Q150 93 200 89 Q250 85 300 89 Q350 93 400 89" stroke="rgba(255,255,255,.2)" stroke-width="1.5" fill="none"/>
+  <path d="M0 98 Q60 94 120 98 Q180 102 240 98 Q300 94 360 98 Q380 100 400 98" stroke="rgba(255,255,255,.12)" stroke-width="1" fill="none"/>
+  <!-- sand -->
+  <path d="M0 110 Q100 104 200 108 Q300 112 400 106 L400 128 L0 128Z" fill="${c.sand}" opacity=".75"/>
+  <!-- building -->
+  <rect x="168" y="70" width="20" height="16" rx="2" fill="rgba(255,255,255,.5)"/>
+  <polygon points="160,70 196,70 178,56" fill="rgba(255,255,255,.4)"/>
+  <rect x="175" y="76" width="5" height="10" rx="1" fill="rgba(0,0,0,.18)"/>
+  <rect x="168" y="73" width="6" height="5" rx="1" fill="rgba(180,220,255,.4)"/>
+  <rect x="182" y="73" width="6" height="5" rx="1" fill="rgba(180,220,255,.4)"/>
+  <!-- palm -->
+  <line x1="58" y1="110" x2="54" y2="66" stroke="${c.sky1}" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+  <ellipse cx="52" cy="64" rx="15" ry="7" fill="${c.sky1}" opacity=".7" transform="rotate(-18 52 64)"/>
+  <ellipse cx="42" cy="69" rx="11" ry="5" fill="${c.sky2}" opacity=".55" transform="rotate(20 42 69)"/>
+  <ellipse cx="60" cy="62" rx="13" ry="6" fill="${c.sky2}" opacity=".6" transform="rotate(-35 60 62)"/>
+  <!-- second tree far right -->
+  <line x1="358" y1="110" x2="355" y2="72" stroke="${c.sky1}" stroke-width="2.5" stroke-linecap="round" opacity=".6"/>
+  <ellipse cx="353" cy="70" rx="12" ry="6" fill="${c.sky1}" opacity=".55" transform="rotate(-15 353 70)"/>
+  <ellipse cx="345" cy="75" rx="9" ry="4" fill="${c.sky2}" opacity=".45" transform="rotate(18 345 75)"/>
+  </svg>`;
+}
+
+/* ── DATA ── */
+const hotels=[
+  {id:"melia-llana",name:"Meliá Llana Beach Resort & Spa",dest:"capeverde",destLabel:"Cape Verde, Sal",stars:5,rating:4.1,reviews:3200,tags:["Adults Only","All-Inclusive","Beachfront","Spa","3 Pools"],badges:["adults","ai","beach","spa"],summary:"Adults-only, all-inclusive beachfront retreat on Sal island. Stunning private beach, spacious rooms, YHI Spa and 9 restaurants/bars. Feels remote from Santa Maria town but ideal for those who want to just unwind on the beach.",pros:["Beachfront location","Lovely staff overall","Spacious rooms & pools","Good food variety"],cons:["Remote from town","Inconsistent service","Extras add up quickly","WiFi patchy in rooms"],taLink:"https://www.tripadvisor.co.uk/Hotel_Review-g482848-d10678936-Reviews-Melia_Llana_Beach_Resort_Spa_All_Inclusive_Adults_only-Santa_Maria_Ilha_do_Sal.html",bookLink:"https://www.easyjet.com/en/holidays/cape-verde/sal/santa-maria/melia-llana?ibf=true&to=05-06-2026&from=29-05-2026"},
+  {id:"sol-cosmopolitan",name:"Sol Cosmopolitan Rhodes",dest:"rhodes",destLabel:"Rhodes Town",stars:4,rating:4.2,reviews:4100,tags:["All-Inclusive","Beachfront","Pools","Spa","Kids Club"],badges:["ai","beach","spa"],summary:"Amphitheatrically built 4-star resort on the coast of Ixia, 14km from the airport and minutes from Rhodes Old Town. Consistently praised for cleanliness and friendly staff. Beach is across the road. Great family or couples hotel.",pros:["Very clean throughout","Friendly attentive staff","Great location for Old Town","Sunset sea views"],cons:["Beach is pebble/stony","Can get very noisy","Sunbeds run out at peak","Pool bar queues"],taLink:"https://www.tripadvisor.co.uk/Hotel_Review-g635613-d316715-Reviews-Sol_Cosmopolitan_Rhodes-Rhodes_Town_Rhodes_Dodecanese_South_Aegean.html",bookLink:null},
+  {id:"canvas-petit-palais",name:"Canvas by Mitsis Petit Palais",dest:"rhodes",destLabel:"Rhodes Town",stars:4,rating:4.2,reviews:3148,tags:["All-Inclusive","Beach Nearby","Old Town Walking","Pool"],badges:["ai","beach"],summary:"The only all-inclusive 4-star hotel in central Rhodes Town. 700m from the Old Town, 100m from the beach, 500m from Mandraki Port. Superb location for exploring. Friendly staff are its standout feature. Small pool — not a resort pool.",pros:["Unbeatable central location","Exceptional staff","Excellent varied food","Walk to Old Town & beach"],cons:["Small pool","Nearby construction noise","Thin walls in rooms","Not a big resort feel"],taLink:"https://www.tripadvisor.co.uk/Hotel_Review-g635613-d500438-Reviews-Canvas_by_Mitsis_Petit_Palais-Rhodes_Town_Rhodes_Dodecanese_South_Aegean.html",bookLink:null},
+  {id:"silva-beach",name:"Silva Beach",dest:"crete",destLabel:"Hersonissos, Crete",stars:4,rating:4.0,reviews:3136,tags:["All-Inclusive","Cretan Village Style","Beach","2 Pools"],badges:["ai","beach"],summary:"Charming Cretan-village-style resort at the edge of Hersonissos. Beautiful gardens, two pools (freshwater & saltwater), direct beach access and within walking distance of the lively town. Great for couples and families.",pros:["Village-style setting & gardens","Two pools, easy sunbeds","Direct beach access","Close to Hersonissos nightlife"],cons:["Cocktails not made with real juice","Food repetitive after a week","Average entertainment"],taLink:"https://www.tripadvisor.co.uk/Hotel_Review-g503710-d250616-Reviews-Silva_Beach-Hersonissos_Crete.html",bookLink:null},
+  {id:"golden-sun",name:"Golden Sun Resort & Spa",dest:"zakynthos",destLabel:"Kalamaki, Zakynthos",stars:4,rating:4.0,reviews:1573,tags:["All-Inclusive","150m from Beach","Quiet Area","Pool"],badges:["ai","beach","spa"],summary:"Modern resort 150m from Kalamaki's sandy beach, surrounded by greenery and only 6km from Zakynthos Town. Quiet, relaxed setting ideal for couples seeking peace. Incredible pool praised by guests. Good value for money.",pros:["Massive peaceful pool","Friendly helpful staff","Great beach nearby","Good value all-inclusive"],cons:["Restaurant can feel small","Limited choice at peak times","Drinks not top-shelf"],taLink:"https://www.tripadvisor.co.uk/Hotel_Review-g659629-d496247-Reviews-Golden_Sun_Resort_Spa-Kalamaki_Zakynthos_Ionian_Islands.html",bookLink:null},
+  {id:"blue-bay-crete",name:"Blue Bay Resort Hotel",dest:"crete",destLabel:"Mononaftis, Crete",stars:4,rating:4.0,reviews:2158,tags:["All-Inclusive","Sea Views","6 Pools","Hillside"],badges:["ai","beach","spa"],summary:"Hillside resort perched above Mononaftis Bay with breathtaking Cretan Sea views. 6 pools including kids' pools with slides. Free shuttle to the beach below. Ideal for a quiet relaxing break. Note: steep slopes throughout the property.",pros:["Stunning sea views from all rooms","6 pools with great variety","Warm friendly staff","Good evening entertainment"],cons:["Very hilly — hard for mobility issues","Food can be repetitive","Remote from town (22km Heraklion)","WiFi weak in rooms"],taLink:"https://www.tripadvisor.co.uk/Hotel_Review-g8242451-d595581-Reviews-Blue_Bay_Resort_Hotel-Mononaftis_Crete.html",bookLink:null},
+  {id:"grand-holiday",name:"Grand Hotel Holiday Resort",dest:"crete",destLabel:"Hersonissos, Crete",stars:4,rating:4.0,reviews:2073,tags:["All-Inclusive","Water Park","3 Pools","5 min from Hersonissos"],badges:["ai","beach"],summary:"Large bungalow-style resort between Hersonissos and Stalis with sea views. Features an aqua park, indoor pool, multiple restaurants and tennis courts. Only 5 minutes from Hersonissos town by taxi. Great for active families.",pros:["Aqua park & multiple pools","Excellent food variety","Lovely attentive staff","5 min to Hersonissos"],cons:["Very hilly & steep internally","Drinks quality mixed (wine/cocktails)","Bathroom cleaning inconsistent"],taLink:"https://www.tripadvisor.co.uk/Hotel_Review-g503710-d500649-Reviews-Grand_Hotel_Holiday_Resort-Hersonissos_Crete.html",bookLink:null},
+  {id:"blue-bay-rhodes",name:"Blue Bay Beach Resort",dest:"rhodes",destLabel:"Ialysos, Rhodes",stars:4,rating:4.0,reviews:4792,tags:["All-Inclusive","Private Beach","Water Park","Kids Club"],badges:["ai","beach"],summary:"Popular all-inclusive resort on the Ialysos coast of Rhodes with private beach, water park and kids' club. 3km from the airport and close to Rhodes Town. Good family resort with lots of activities. One of the most reviewed hotels on the list.",pros:["Private beach & water park","Lots of activities & kids club","Close to airport & Rhodes Town","Good family facilities"],cons:["Can feel busy/crowded","Standard resort atmosphere"],taLink:"https://www.tripadvisor.co.uk/Hotel_Review-g635614-d289547-Reviews-Blue_Bay_Beach_Resort-Ialysos_Rhodes_Dodecanese_South_Aegean.html",bookLink:null},
+  {id:"kalyves-beach",name:"Kalyves Beach Hotel",dest:"crete",destLabel:"Kalyves, Chania, Crete",stars:4,rating:4.2,reviews:2447,tags:["All-Inclusive","Blue Flag Beach","Village Setting","3 Pools","Spa"],badges:["ai","beach","spa"],summary:"Award-winning boutique hotel in the charming village of Kalyves, next to a Blue Flag beach with a river alongside. 30 minutes from Chania. Smaller and more personal than big resorts. Praised heavily for staff warmth and a beautiful authentic setting.",pros:["Unique riverside & beach setting","Exceptionally warm staff","Charming village location","Good authentic Cretan food"],cons:["Smaller hotel — less choice","Bathrooms a bit dated/small","Limited entertainment","Smaller pool area"],taLink:"https://www.tripadvisor.co.uk/Hotel_Review-g1191167-d549385-Reviews-Kalyves_Beach_Hotel-Kalyves_Apokoronas_Chania_Prefecture_Crete.html",bookLink:null},
+  {id:"blue-sea-island",name:"Blue Sea Island",dest:"rhodes",destLabel:"Kolimbia, Rhodes",stars:4,rating:4.1,reviews:1185,tags:["All-Inclusive","Private Beach","3 Pools","Quiet Area","Spa"],badges:["ai","beach","spa"],summary:"All-inclusive resort in the quiet village of Kolimbia on eastern Rhodes. Private beach, 3 pools, indoor jacuzzi and spa. Praised for exceptional staff and cleanliness. Easy bus access to Lindos and Rhodes Town.",pros:["Spotlessly clean","Outstanding staff warmth","Lovely spa & indoor pool","Great bus links to Lindos & Rhodes"],cons:["Quiet area — limited outside options","Cocktails weak","Some mixed reviews on service consistency"],taLink:"https://www.tripadvisor.co.uk/Hotel_Review-g635615-d23909093-Reviews-Blue_Sea_Island-Kolimbia_Rhodes_Dodecanese_South_Aegean.html",bookLink:null},
+  {id:"canvas-family-village",name:"Canvas by Mitsis Family Village",dest:"kos",destLabel:"Kardamena, Kos",stars:4,rating:4.2,reviews:2800,tags:["All-Inclusive","Beach","Multiple Pools","Kids Club","Family"],badges:["ai","beach"],summary:"Large family-focused all-inclusive resort near Kardamena on Kos. Multiple pools, direct beach, kids' club and entertainment programme. Spotlessly clean rooms, great staff. Couples welcome but very family orientated. Bus to Kardamena village nearby.",pros:["Excellent for families with kids","Spotless rooms (minibar topped up)","Multiple pools & great beach","Outstanding staff"],cons:["Very family-focused — less peaceful","Can feel crowded in peak season","Limited local dining feeling"],taLink:"https://www.tripadvisor.co.uk/Hotel_Review-g659630-d576480-Reviews-Canvas_by_Mitsis_Family_Village-Kardamena_Kos_Dodecanese_South_Aegean.html",bookLink:null},
+  {id:"mythos-palace",name:"Mythos Palace Resort (Adults Only)",dest:"corfu",destLabel:"Chlomos, Corfu",stars:5,rating:4.0,reviews:2096,tags:["Adults Only","All-Inclusive","5-Star","Ionian Sea Views","4 Pools","Spa"],badges:["adults","ai","beach","spa"],summary:"Adults-only 5-star resort on the quiet south-east coast of Corfu with breathtaking Ionian Sea views. 4 pools, rooftop bar, spa, and themed restaurant nights. Very peaceful and romantic — ideal for couples. Remote location: car/taxi needed to explore.",pros:["Stunning Ionian sea views","Rooftop bar & sunset views","Adults-only — very peaceful","Excellent food with themed nights"],cons:["Very remote — need a car/taxi","Steep slopes on site","Some rooms need refurbishment","45 min from Corfu Airport"],taLink:"https://www.tripadvisor.co.uk/Hotel_Review-g2290791-d20142612-Reviews-Mythos_Palace_Resort_Adults_Only-Chlomos_Corfu_Ionian_Islands.html",bookLink:null},
 ];
 
-const likedSet = new Set(JSON.parse(localStorage.getItem('likedHotels') || '[]'));
-const notes = JSON.parse(localStorage.getItem('hotelNotes') || '{}');
+/* ── STATE ── */
+const likedSet  = new Set(JSON.parse(localStorage.getItem('likedHotels')||'[]'));
+const favSet    = new Set(JSON.parse(localStorage.getItem('favHotels')  ||'[]'));
+const thumbsUp  = new Set(JSON.parse(localStorage.getItem('thumbsUp')   ||'[]'));
+const thumbsDn  = new Set(JSON.parse(localStorage.getItem('thumbsDn')   ||'[]'));
+const myRatings = JSON.parse(localStorage.getItem('myRatings') ||'{}');
+const notes     = JSON.parse(localStorage.getItem('hotelNotes')||'{}');
+const save={
+  liked:()=>localStorage.setItem('likedHotels',JSON.stringify([...likedSet])),
+  fav:  ()=>localStorage.setItem('favHotels',  JSON.stringify([...favSet])),
+  up:   ()=>localStorage.setItem('thumbsUp',   JSON.stringify([...thumbsUp])),
+  dn:   ()=>localStorage.setItem('thumbsDn',   JSON.stringify([...thumbsDn])),
+  rate: ()=>localStorage.setItem('myRatings',  JSON.stringify(myRatings)),
+  note: ()=>localStorage.setItem('hotelNotes', JSON.stringify(notes)),
+};
 
-function saveLiked() {
-  localStorage.setItem('likedHotels', JSON.stringify([...likedSet]));
-}
-function saveNotes() {
-  localStorage.setItem('hotelNotes', JSON.stringify(notes));
-}
+function hStars(n){return'★'.repeat(n)+'☆'.repeat(5-n)}
+function badgeOf(tag,badges){const t=tag.toLowerCase().replace(/[^a-z]/g,'');for(const b of badges)if(t.includes(b)||b.includes(t.slice(0,4)))return b;return null}
+function spHTML(id,r){return[1,2,3,4,5].map(n=>`<button class="sp ${n<=r?'filled':''}" data-id="${id}" data-v="${n}">★</button>`).join('')}
 
-function renderStars(n) {
-  return '★'.repeat(n) + '☆'.repeat(5 - n);
-}
-
-function renderCard(h) {
-  const liked = likedSet.has(h.id);
-  const noteVal = notes[h.id] || '';
-  return `
-  <div class="card ${liked ? 'liked' : ''}" data-id="${h.id}" data-dest="${h.dest}" data-rating="${h.rating}">
-    <div class="card-band band-${h.dest}"></div>
-    <div class="card-body">
-      <div>
-        <span class="destination-tag tag-${h.dest}">${h.destLabel}</span>
+function renderCard(h){
+  const liked=likedSet.has(h.id),faved=favSet.has(h.id),up=thumbsUp.has(h.id),dn=thumbsDn.has(h.id),myR=myRatings[h.id]||0;
+  const cls=['card',liked?'liked':'',faved?'is-fav':''].filter(Boolean).join(' ');
+  const searchUrl=`https://www.google.com/travel/hotels?q=${encodeURIComponent(h.name)}`;
+  return `<div class="${cls}" data-id="${h.id}" data-dest="${h.dest}">
+  <div class="card-hero" data-id="${h.id}">
+    ${heroSVG(h.dest)}
+    <div class="hero-fade"></div>
+    <div class="hero-label">${h.destLabel}</div>
+    <span class="photo-src" id="psrc-${h.id}"></span>
+    <button class="hero-like ${liked?'is-liked':''}" data-id="${h.id}">${liked?'♥':'♡'}</button>
+  </div>
+  <div class="card-body">
+    <div class="name-row">
+      <div class="card-title">${h.name}</div>
+      <div class="hotel-stars">${hStars(h.stars)}</div>
+    </div>
+    <div class="meta-row">
+      <span class="dest-chip dc-${h.dest}">${h.destLabel}</span>
+      <button class="fav-btn ${faved?'active':''}" data-id="${h.id}"><span class="fi">${faved?'★':'☆'}</span>${faved?'Saved':'Save'}</button>
+    </div>
+    <div class="rating-strip">
+      <div class="rs-item">
+        <div class="rs-lbl">TA Score</div>
+        <div class="rs-bar"><div class="rs-track"><div class="rs-fill" style="width:${(h.rating/5)*100}%"></div></div><span class="rs-val">${h.rating.toFixed(1)}</span></div>
       </div>
-      <div class="card-top">
-        <div>
-          <div class="card-title">${h.name}</div>
-          <div class="stars">${renderStars(h.stars)}</div>
-        </div>
-        <button class="like-btn" data-id="${h.id}" title="Like this hotel">${liked ? '❤️' : '🤍'}</button>
-      </div>
-
-      <div class="rating-row">
-        <span class="rating-label">TA Rating</span>
-        <div class="rating-track"><div class="rating-fill" style="width:${(h.rating/5)*100}%"></div></div>
-        <span class="rating-num">${h.rating.toFixed(1)}</span>
-      </div>
-      <div class="rating-row">
-        <span class="rating-label">Reviews</span>
-        <div class="rating-track"><div class="rating-fill" style="width:${Math.min((h.reviews/5000)*100,100)}%;background:linear-gradient(90deg,#e8793a,#f4a261)"></div></div>
-        <span class="rating-num" style="font-size:0.72rem;color:var(--sunset)">${h.reviews.toLocaleString()}</span>
-      </div>
-
-      <p class="summary">${h.summary}</p>
-
-      <div class="pros-cons">
-        <div class="pros">
-          <h4>✅ Pros</h4>
-          <ul>${h.pros.map(p => `<li>${p}</li>`).join('')}</ul>
-        </div>
-        <div class="cons">
-          <h4>⚠️ Watch out</h4>
-          <ul>${h.cons.map(c => `<li>${c}</li>`).join('')}</ul>
-        </div>
-      </div>
-
-      <div class="badges">
-        ${h.tags.map(t => {
-          const b = t.toLowerCase().replace(/[^a-z]/g,'');
-          const cls = h.badges.find(x => b.includes(x)) || '';
-          return `<span class="badge ${cls}">${t}</span>`;
-        }).join('')}
-      </div>
-
-      <div class="notes-area">
-        <label>📝 Your notes</label>
-        <textarea data-id="${h.id}" placeholder="Add your thoughts here…">${noteVal}</textarea>
+      <div class="rs-item">
+        <div class="rs-lbl">Reviews</div>
+        <div class="rs-bar"><div class="rs-track"><div class="rs-fill rf-rev" style="width:${Math.min((h.reviews/5000)*100,100)}%"></div></div><span class="rs-val">${h.reviews.toLocaleString()}</span></div>
       </div>
     </div>
-
-    <div class="card-footer">
-      <a class="btn-ta" href="${h.taLink}" target="_blank">🔍 TripAdvisor</a>
-      ${h.bookLink
-        ? `<a class="btn-book" href="${h.bookLink}" target="_blank">✈️ Book Now</a>`
-        : `<span class="btn-nobook">Search to Book</span>`}
+    <p class="summary">${h.summary}</p>
+    <div class="pc-grid">
+      <div class="pc-box pc-pro"><div class="pc-hd">✓ Pros</div><ul class="pc-ul">${h.pros.map(p=>`<li>${p}</li>`).join('')}</ul></div>
+      <div class="pc-box pc-con"><div class="pc-hd">– Watch out</div><ul class="pc-ul">${h.cons.map(c=>`<li>${c}</li>`).join('')}</ul></div>
     </div>
-  </div>`;
+    <div class="tags">${h.tags.map(t=>{const b=badgeOf(t,h.badges);return`<span class="tag ${b?'t-'+b:''}">${t}</span>`}).join('')}</div>
+    <div class="reaction-bar">
+      <div class="rb-row">
+        <span class="rb-lbl">Your take</span>
+        <button class="thumb up ${up?'active':''}" data-id="${h.id}"><span class="ti">👍</span><span class="tc">${up?'✓':''}</span></button>
+        <button class="thumb dn ${dn?'active':''}" data-id="${h.id}"><span class="ti">👎</span><span class="tc">${dn?'✓':''}</span></button>
+      </div>
+      <div class="rb-row">
+        <span class="rb-lbl">Rate it</span>
+        <div class="star-picker" data-id="${h.id}">${spHTML(h.id,myR)}</div>
+        <span class="rb-score">${myR?myR+'/5':''}</span>
+      </div>
+    </div>
+    <div class="notes-area">
+      <div class="notes-lbl">📝 Notes</div>
+      <textarea data-id="${h.id}" placeholder="Your thoughts…">${notes[h.id]||''}</textarea>
+    </div>
+  </div>
+  <div class="card-footer">
+    <a class="btn btn-ta" href="${h.taLink}" target="_blank">TripAdvisor →</a>
+    <a class="btn btn-search" href="${searchUrl}" target="_blank">Search to book</a>
+  </div>
+</div>`;
 }
 
-let currentFilter = 'all';
-let currentSort = 'default';
+let curFilter='all',curSort='default';
+function getList(){
+  let l=[...hotels];
+  if(curFilter==='liked')l=l.filter(h=>likedSet.has(h.id));
+  else if(curFilter==='fav')l=l.filter(h=>favSet.has(h.id));
+  else if(curFilter!=='all')l=l.filter(h=>h.dest===curFilter);
+  if(curSort==='rating-hi') l.sort((a,b)=>b.rating-a.rating);
+  if(curSort==='rating-lo') l.sort((a,b)=>a.rating-b.rating);
+  if(curSort==='reviews-hi')l.sort((a,b)=>b.reviews-a.reviews);
+  if(curSort==='my-rating') l.sort((a,b)=>(myRatings[b.id]||0)-(myRatings[a.id]||0));
+  return l;
+}
 
-function getFiltered() {
-  let list = [...hotels];
-  if (currentFilter === 'liked') {
-    list = list.filter(h => likedSet.has(h.id));
-  } else if (currentFilter !== 'all') {
-    list = list.filter(h => h.dest === currentFilter);
+function render(){
+  const grid=document.getElementById('grid'),list=getList();
+  const msg=curFilter==='fav'?'No favourites yet — star some hotels!':curFilter==='liked'?'No liked hotels yet — tap a heart!':'No hotels found.';
+  grid.innerHTML=list.length?list.map(renderCard).join(''):`<div class="empty"><div class="empty-icon">☆</div><p>${msg}</p></div>`;
+  document.getElementById('results-lbl').textContent=`${list.length} hotel${list.length===1?'':'s'}`;
+  updateBar();attach();
+  if (typeof photoCache !== 'undefined') {
+    for (const h of list) { if (photoCache[h.id]) applyPhoto(h, photoCache[h.id]); }
   }
-  if (currentSort === 'rating-hi') list.sort((a,b) => b.rating - a.rating);
-  if (currentSort === 'rating-lo') list.sort((a,b) => a.rating - b.rating);
-  return list;
 }
 
-function render() {
-  const grid = document.getElementById('grid');
-  const list = getFiltered();
-  if (list.length === 0) {
-    grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--muted);font-size:1.1rem;">No hotels match this filter yet. Like some hotels first! 💛</p>';
-  } else {
-    grid.innerHTML = list.map(renderCard).join('');
-  }
-  updateLikedSummary();
-  attachEvents();
+function updateBar(){
+  const n=likedSet.size;
+  document.getElementById('liked-count').textContent=n;
+  document.getElementById('liked-pl').textContent=n===1?'':'s';
+  document.getElementById('liked-bar').classList.toggle('show',n>0);
 }
 
-function updateLikedSummary() {
-  document.getElementById('liked-count').textContent = likedSet.size;
-}
-
-function attachEvents() {
-  document.querySelectorAll('.like-btn').forEach(btn => {
-    btn.addEventListener('click', e => {
-      const id = btn.dataset.id;
-      if (likedSet.has(id)) {
-        likedSet.delete(id);
-        btn.textContent = '🤍';
-        btn.closest('.card').classList.remove('liked');
-      } else {
-        likedSet.add(id);
-        btn.textContent = '❤️';
-        btn.closest('.card').classList.add('liked');
-      }
-      saveLiked();
-      updateLikedSummary();
-      if (currentFilter === 'liked') render();
+function attach(){
+  document.querySelectorAll('.hero-like').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const id=b.dataset.id;
+      if(likedSet.has(id)){likedSet.delete(id);b.textContent='♡';b.classList.remove('is-liked');b.closest('.card').classList.remove('liked');sfx.unlike()}
+      else{likedSet.add(id);b.textContent='♥';b.classList.add('is-liked');b.closest('.card').classList.add('liked');sfx.like()}
+      save.liked();updateBar();if(curFilter==='liked')render();
     });
   });
-
-  document.querySelectorAll('textarea[data-id]').forEach(ta => {
-    ta.addEventListener('input', () => {
-      notes[ta.dataset.id] = ta.value;
-      saveNotes();
+  document.querySelectorAll('.thumb.up').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const id=b.dataset.id,tc=b.querySelector('.tc');
+      if(thumbsUp.has(id)){thumbsUp.delete(id);b.classList.remove('active');tc.textContent='';sfx.thumbDn()}
+      else{thumbsUp.add(id);b.classList.add('active');tc.textContent='✓';sfx.thumbUp();
+        if(thumbsDn.has(id)){thumbsDn.delete(id);save.dn();const db=b.closest('.card').querySelector('.thumb.dn');if(db){db.classList.remove('active');db.querySelector('.tc').textContent=''}}}
+      save.up();
     });
+  });
+  document.querySelectorAll('.thumb.dn').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const id=b.dataset.id,tc=b.querySelector('.tc');
+      if(thumbsDn.has(id)){thumbsDn.delete(id);b.classList.remove('active');tc.textContent='';sfx.thumbUp()}
+      else{thumbsDn.add(id);b.classList.add('active');tc.textContent='✓';sfx.thumbDn();
+        if(thumbsUp.has(id)){thumbsUp.delete(id);save.up();const ub=b.closest('.card').querySelector('.thumb.up');if(ub){ub.classList.remove('active');ub.querySelector('.tc').textContent=''}}}
+      save.dn();
+    });
+  });
+  document.querySelectorAll('.fav-btn').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const id=b.dataset.id;
+      if(favSet.has(id)){favSet.delete(id);b.classList.remove('active');b.querySelector('.fi').textContent='☆';b.lastChild.textContent='Save';b.closest('.card').classList.remove('is-fav');sfx.unfav()}
+      else{favSet.add(id);b.classList.add('active');b.querySelector('.fi').textContent='★';b.lastChild.textContent='Saved';b.closest('.card').classList.add('is-fav');sfx.fav()}
+      save.fav();if(curFilter==='fav')render();
+    });
+  });
+  document.querySelectorAll('.star-picker').forEach(picker=>{
+    const id=picker.dataset.id,sbs=picker.querySelectorAll('.sp');
+    sbs.forEach(sb=>{
+      sb.addEventListener('mouseenter',()=>{const v=+sb.dataset.v;sbs.forEach(s=>{s.classList.toggle('hover-on',+s.dataset.v<=v);s.classList.remove('filled')})});
+      sb.addEventListener('mouseleave',()=>{const sv=myRatings[id]||0;sbs.forEach(s=>{s.classList.remove('hover-on');s.classList.toggle('filled',+s.dataset.v<=sv)})});
+      sb.addEventListener('click',()=>{
+        const v=+sb.dataset.v;
+        if(myRatings[id]===v){delete myRatings[id];sbs.forEach(s=>s.classList.remove('filled'))}
+        else{myRatings[id]=v;sbs.forEach(s=>s.classList.toggle('filled',+s.dataset.v<=v));sfx.star(v);}
+        const sc=picker.closest('.reaction-bar').querySelector('.rb-score');
+        if(sc)sc.textContent=myRatings[id]?myRatings[id]+'/5':'';
+        save.rate();if(curSort==='my-rating')render();
+      });
+    });
+  });
+  document.querySelectorAll('textarea[data-id]').forEach(ta=>{
+    ta.addEventListener('input',()=>{notes[ta.dataset.id]=ta.value;save.note()});
   });
 }
 
-// filter buttons
-document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    currentFilter = btn.dataset.filter;
-    render();
-  });
+document.querySelectorAll('.pill').forEach(b=>{
+  b.addEventListener('click',()=>{document.querySelectorAll('.pill').forEach(x=>x.classList.remove('active'));b.classList.add('active');curFilter=b.dataset.filter;render()});
 });
-
-// sort
-document.getElementById('sort-select').addEventListener('change', e => {
-  currentSort = e.target.value;
-  render();
-});
-
+document.getElementById('sort-sel').addEventListener('change',e=>{curSort=e.value;render()});
 render();
+
+/* ══ SOUND EFFECTS ══ */
+const _ac=(()=>{let ctx;return()=>{if(!ctx){ctx=new(window.AudioContext||window.webkitAudioContext)();}if(ctx.state==='suspended')ctx.resume();return ctx}})();
+
+/* master limiter to prevent clipping */
+const _master=(()=>{let m;return()=>{if(!m){const ctx=_ac();const c=ctx.createDynamicsCompressor();c.threshold.value=-6;c.knee.value=6;c.ratio.value=4;c.attack.value=0.003;c.release.value=0.1;c.connect(ctx.destination);m=c;}return m;}})();
+
+function _osc({type='sine',freq=440,freq2=null,freqTime=0.3,vol=0.2,attack=0.004,hold=0,decay=0.25,start=null,detune=0}={}){
+  const ctx=_ac(),t=start??ctx.currentTime,dst=_master();
+  const o=ctx.createOscillator(),g=ctx.createGain();
+  o.connect(g);g.connect(dst);
+  o.type=type;o.frequency.setValueAtTime(freq,t);o.detune.setValueAtTime(detune,t);
+  if(freq2!=null)o.frequency.exponentialRampToValueAtTime(Math.max(freq2,10),t+freqTime);
+  g.gain.setValueAtTime(0.0001,t);
+  g.gain.linearRampToValueAtTime(vol,t+attack);
+  if(hold>0)g.gain.setValueAtTime(vol,t+attack+hold);
+  g.gain.exponentialRampToValueAtTime(0.0001,t+attack+hold+decay);
+  o.start(t);o.stop(t+attack+hold+decay+0.05);
+}
+
+function _noise({vol=0.07,attack=0.003,decay=0.12,hipass=800,start=null}={}){
+  const ctx=_ac(),t=start??ctx.currentTime,dst=_master();
+  const len=Math.ceil(ctx.sampleRate*(attack+decay+0.05));
+  const buf=ctx.createBuffer(1,len,ctx.sampleRate);
+  const d=buf.getChannelData(0);for(let i=0;i<len;i++)d[i]=(Math.random()*2-1);
+  const src=ctx.createBufferSource();src.buffer=buf;
+  const hp=ctx.createBiquadFilter();hp.type='highpass';hp.frequency.value=hipass;
+  const g=ctx.createGain();
+  src.connect(hp);hp.connect(g);g.connect(dst);
+  g.gain.setValueAtTime(0.0001,t);
+  g.gain.linearRampToValueAtTime(vol,t+attack);
+  g.gain.exponentialRampToValueAtTime(0.0001,t+attack+decay);
+  src.start(t);src.stop(t+attack+decay+0.05);
+}
+
+function _chord(freqs,opts={}){
+  const ctx=_ac(),t=ctx.currentTime;
+  freqs.forEach((f,i)=>_osc({...opts,freq:f,start:t+(opts.arp||0)*i}));
+}
+
+const sfx={
+  /* ❤️ Like — warm heartbeat thump + rising shimmer */
+  like:()=>{
+    const ctx=_ac(),t=ctx.currentTime;
+    // thump (sub kick feel)
+    _osc({type:'sine',freq:180,freq2:55,freqTime:0.12,vol:0.28,attack:0.002,decay:0.15,start:t});
+    // body click
+    _noise({vol:0.06,attack:0.002,decay:0.06,hipass:300,start:t});
+    // rising shimmer arpegio: C5 E5 G5 C6
+    [523,659,784,1047].forEach((f,i)=>_osc({type:'sine',freq:f,freq2:f*1.03,vol:0.09,attack:0.005,decay:0.22,start:t+0.04+i*0.055}));
+  },
+
+  /* 💔 Unlike — soft descending deflate */
+  unlike:()=>{
+    const ctx=_ac(),t=ctx.currentTime;
+    _osc({type:'sine',freq:480,freq2:200,freqTime:0.28,vol:0.13,attack:0.006,decay:0.28,start:t});
+    _osc({type:'sine',freq:360,freq2:160,freqTime:0.22,vol:0.07,attack:0.008,decay:0.22,start:t+0.03});
+    _noise({vol:0.025,attack:0.005,decay:0.15,hipass:2000,start:t});
+  },
+
+  /* ⭐ Favourite — magical sparkle cascade */
+  fav:()=>{
+    const ctx=_ac(),t=ctx.currentTime;
+    // bell-like base chord
+    [523,659,784].forEach((f,i)=>_osc({type:'triangle',freq:f,freq2:f*1.008,vol:0.13,attack:0.004,hold:0.04,decay:0.45,start:t+i*0.055}));
+    // high shimmer
+    [1047,1319,1568,2093].forEach((f,i)=>_osc({type:'sine',freq:f,vol:0.055,attack:0.003,decay:0.3,start:t+0.1+i*0.065}));
+    // sparkle noise burst
+    _noise({vol:0.04,attack:0.002,decay:0.08,hipass:5000,start:t+0.05});
+    _noise({vol:0.03,attack:0.002,decay:0.06,hipass:6000,start:t+0.18});
+  },
+
+  /* ☆ Unfavourite — gentle wind-down */
+  unfav:()=>{
+    const ctx=_ac(),t=ctx.currentTime;
+    [784,659,523].forEach((f,i)=>_osc({type:'triangle',freq:f,freq2:f*0.6,freqTime:0.3,vol:0.1,attack:0.005,decay:0.3,start:t+i*0.07}));
+    _noise({vol:0.02,attack:0.005,decay:0.2,hipass:3000,start:t});
+  },
+
+  /* 👍 Thumbs up — satisfying pop + upward bounce */
+  thumbUp:()=>{
+    const ctx=_ac(),t=ctx.currentTime;
+    // pop transient
+    _osc({type:'sine',freq:200,freq2:80,freqTime:0.06,vol:0.22,attack:0.002,decay:0.09,start:t});
+    _noise({vol:0.05,attack:0.001,decay:0.05,hipass:1200,start:t});
+    // cheerful rise
+    _osc({type:'sine',freq:440,freq2:660,freqTime:0.18,vol:0.12,attack:0.006,decay:0.22,start:t+0.04});
+    _osc({type:'sine',freq:550,freq2:880,freqTime:0.15,vol:0.07,attack:0.006,decay:0.18,start:t+0.09});
+  },
+
+  /* 👎 Thumbs down — dull thud + descend */
+  thumbDn:()=>{
+    const ctx=_ac(),t=ctx.currentTime;
+    _osc({type:'sawtooth',freq:160,freq2:60,freqTime:0.18,vol:0.15,attack:0.003,decay:0.22,start:t});
+    _osc({type:'square',freq:120,freq2:50,freqTime:0.2,vol:0.08,attack:0.004,decay:0.2,start:t+0.02});
+    _noise({vol:0.04,attack:0.002,decay:0.1,hipass:200,start:t});
+  },
+
+  /* ★ Star rating — xylophone notes, pitch rises with stars */
+  star:(n)=>{
+    const ctx=_ac(),t=ctx.currentTime;
+    const scale=[523,587,659,784,880]; // C D E G A — pentatonic
+    const f=scale[n-1];
+    // main note
+    _osc({type:'triangle',freq:f,freq2:f*1.004,vol:0.18,attack:0.003,hold:0.02,decay:0.28,start:t});
+    // harmonic overtone
+    _osc({type:'sine',freq:f*2,vol:0.07,attack:0.005,decay:0.18,start:t});
+    // tiny click attack like a mallet
+    _noise({vol:0.045,attack:0.001,decay:0.03,hipass:2000,start:t});
+    // trailing shimmer on 5 stars
+    if(n===5){
+      [1047,1319,1568].forEach((hf,i)=>_osc({type:'sine',freq:hf,vol:0.045,attack:0.003,decay:0.25,start:t+0.05+i*0.06}));
+    }
+  },
+
+  /* filter pill — clean soft click */
+  filter:()=>{
+    const ctx=_ac(),t=ctx.currentTime;
+    _osc({type:'sine',freq:660,freq2:700,freqTime:0.08,vol:0.08,attack:0.003,decay:0.1,start:t});
+    _noise({vol:0.025,attack:0.001,decay:0.04,hipass:3000,start:t});
+  },
+};
+
+/* ══ PHOTO FETCHING ══ */
+const savePhotos = () => localStorage.setItem('hotelPhotos', JSON.stringify(photoCache));
+
+// Proxy any image URL through weserv.nl to bypass CORS
+function proxied(url) {
+  return `https://wsrv.nl/?url=${encodeURIComponent(url)}&w=800&h=400&fit=cover&output=jpg`;
+}
+
+async function fetchHotelPhoto(hotel) {
+  if (photoCache[hotel.id]) return photoCache[hotel.id];
+
+  const prompt = `You must search the web and find a real photo of this hotel: "${hotel.name}" in ${hotel.destLabel}.
+
+IMPORTANT: Search for it now using web_search, then look through the results for any direct image URL.
+TripAdvisor CDN URLs look like: https://dynamic-media-cdn.tripadvisor.com/media/photo-o/XX/XX/XX/XX/name.jpg
+Booking.com CDN URLs look like: https://cf.bstatic.com/xdata/images/hotel/max1280x900/XXXXXXX.jpg
+
+After searching, respond with ONLY this JSON (no markdown, no explanation):
+{"url":"https://the-direct-image-url.jpg"}
+
+If you truly cannot find one after searching, respond with:
+{"url":null}`;
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 400,
+        tools: [{ type: 'web_search_20250305', name: 'web_search' }],
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+    const data = await res.json();
+    // Extract all text blocks (the final reply after tool use)
+    const text = data.content.filter(b => b.type === 'text').map(b => b.text).join('');
+    // Pull the first URL-looking thing from the JSON
+    const match = text.match(/"url"\s*:\s*"(https?:\/\/[^"]+)"/);
+    if (match && match[1]) {
+      const raw = match[1];
+      const url = proxied(raw);
+      photoCache[hotel.id] = { url, raw };
+      savePhotos();
+      return photoCache[hotel.id];
+    }
+  } catch(e) { console.warn('Photo fetch failed:', hotel.id, e); }
+  return null;
+}
+
+function applyPhoto(hotel, result) {
+  const hero = document.querySelector(`.card-hero[data-id="${hotel.id}"]`);
+  if (!hero || !result?.url) return;
+  if (hero.querySelector('.hero-img')) return; // already applied
+
+  const img = document.createElement('img');
+  img.className = 'hero-img';
+  img.alt = hotel.name;
+  img.crossOrigin = 'anonymous';
+  img.onload = () => { img.classList.add('loaded'); };
+  img.onerror = () => {
+    console.warn('Image failed to load for', hotel.id, result.url);
+    img.remove();
+    // Clear cache so we retry next time
+    delete photoCache[hotel.id];
+    savePhotos();
+  };
+  hero.insertBefore(img, hero.querySelector('.hero-fade'));
+  img.src = result.url;
+}
+
+async function loadPhotos() {
+  // Apply cached photos instantly
+  for (const h of hotels) {
+    if (photoCache[h.id]) applyPhoto(h, photoCache[h.id]);
+  }
+  // Fetch missing ones with stagger
+  const missing = hotels.filter(h => !photoCache[h.id]);
+  for (let i = 0; i < missing.length; i++) {
+    if (i > 0) await new Promise(r => setTimeout(r, 1000));
+    const result = await fetchHotelPhoto(missing[i]);
+    if (result) applyPhoto(missing[i], result);
+  }
+}
+
+setTimeout(loadPhotos, 400);
+
+document.querySelectorAll('.pill').forEach(b=>{
+  b.addEventListener('click',()=>sfx.filter());
+});
+
+/* ══ RIPPLE EFFECT ══ */
+function spawnRipple(el, e) {
+  el.classList.add('ripple-host');
+  const r = el.getBoundingClientRect();
+  const size = Math.max(r.width, r.height) * 1.4;
+  const x = (e.clientX - r.left) - size / 2;
+  const y = (e.clientY - r.top)  - size / 2;
+  const dot = document.createElement('span');
+  dot.className = 'ripple-dot';
+  dot.style.cssText = `width:${size}px;height:${size}px;left:${x}px;top:${y}px`;
+  el.appendChild(dot);
+  dot.addEventListener('animationend', () => dot.remove());
+}
+
+// attach ripple to all interactive elements — re-run after each render
+const _origRender = render;
+render = function() {
+  _origRender();
+  document.querySelectorAll('.btn,.pill,.thumb,.fav-btn,.hero-like,.lb-btn').forEach(el => {
+    if (el.dataset.ripple) return;
+    el.dataset.ripple = '1';
+    el.addEventListener('pointerdown', e => spawnRipple(el, e));
+  });
+};
+// seed on first load (render already called above, re-run ripple binding)
+document.querySelectorAll('.btn,.pill,.thumb,.fav-btn,.hero-like,.lb-btn').forEach(el => {
+  el.dataset.ripple = '1';
+  el.addEventListener('pointerdown', e => spawnRipple(el, e));
+});
 </script>
 </body>
 </html>
