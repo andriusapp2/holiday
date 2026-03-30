@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holidays Voting System</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background-color: #f4f4f4; }
+    </style>
+</head>
+<body>
+    <h1>Holidays Voting System</h1>
+    <h2>Vote for your favorite holidays!</h2>
+    <table id="holidaysTable">
+        <thead>
+            <tr>
+                <th>Holiday</th>
+                <th>Andrius Rating</th>
+                <th>Beatrix Rating</th>
+                <th>Andrius Notes</th>
+                <th>Beatrix Notes</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>New Year's Day</td>
+                <td><input type="number" class="andrius-rating" min="1" max="5"></td>
+                <td><input type="number" class="beatrix-rating" min="1" max="5"></td>
+                <td><input type="text" class="andrius-notes"></td>
+                <td><input type="text" class="beatrix-notes"></td>
+            </tr>
+            <tr>
+                <td>Christmas</td>
+                <td><input type="number" class="andrius-rating" min="1" max="5"></td>
+                <td><input type="number" class="beatrix-rating" min="1" max="5"></td>
+                <td><input type="text" class="andrius-notes"></td>
+                <td><input type="text" class="beatrix-notes"></td>
+            </tr>
+            <tr>
+                <td>Independence Day</td>
+                <td><input type="number" class="andrius-rating" min="1" max="5"></td>
+                <td><input type="number" class="beatrix-rating" min="1" max="5"></td>
+                <td><input type="text" class="andrius-notes"></td>
+                <td><input type="text" class="beatrix-notes"></td>
+            </tr>
+        </tbody>
+    </table>
+    <button id="saveButton">Save</button>
+    <script>
+        // Save votes to localStorage
+        document.getElementById('saveButton').addEventListener('click', function() {
+            const holidays = [];
+            const rows = document.querySelectorAll('#holidaysTable tbody tr');
+            rows.forEach(row => {
+                const holiday = row.cells[0].innerText;
+                const andriusRating = row.querySelector('.andrius-rating').value;
+                const beatrixRating = row.querySelector('.beatrix-rating').value;
+                const andriusNotes = row.querySelector('.andrius-notes').value;
+                const beatrixNotes = row.querySelector('.beatrix-notes').value;
+                holidays.push({
+                    holiday,
+                    andriusRating,
+                    beatrixRating,
+                    andriusNotes,
+                    beatrixNotes
+                });
+            });
+            localStorage.setItem('holidayVotes', JSON.stringify(holidays));
+            alert('Votes saved!');
+        });
+
+        // Load votes from localStorage
+        window.onload = function() {
+            const savedVotes = JSON.parse(localStorage.getItem('holidayVotes')) || [];
+            savedVotes.forEach(vote => {
+                const row = Array.from(document.querySelectorAll('#holidaysTable tbody tr')).find(r => r.cells[0].innerText === vote.holiday);
+                if (row) {
+                    row.querySelector('.andrius-rating').value = vote.andriusRating;
+                    row.querySelector('.beatrix-rating').value = vote.beatrixRating;
+                    row.querySelector('.andrius-notes').value = vote.andriusNotes;
+                    row.querySelector('.beatrix-notes').value = vote.beatrixNotes;
+                }
+            });
+        };
+    </script>
+</body>
+</html>
