@@ -69,7 +69,7 @@ body::before { content: ''; position: fixed; top: 0; left: 0; right: 0; height: 
 .btn:active { transform: translateY(0); }
 .fetch-status { font-size: 11.5px; color: var(--text-muted); margin-top: 8px; min-height: 16px; font-weight: 500; }
 
-.hotels-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(280px,1fr)); gap: 1.25rem; margin-bottom: 2rem; }
+.hotels-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(420px,1fr)); gap: 1.25rem; margin-bottom: 2rem; }
 
 /* CARD */
 .hotel-card { background: var(--card-bg); border-radius: 20px; border: 1.5px solid var(--border); overflow: hidden; transition: transform 0.2s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.2s; box-shadow: 0 4px 16px rgba(0,95,115,0.06); animation: cardIn .35s cubic-bezier(0.16,1,0.3,1) both; position: relative; }
@@ -132,6 +132,24 @@ textarea.field-input { resize: none; min-height: 52px; line-height: 1.5; }
 .hotel-url { font-size: 11.5px; color: var(--ocean); font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; align-items: center; gap: 5px; margin-bottom: 12px; text-decoration: none; }
 .hotel-url:hover { text-decoration: underline; }
 .url-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--ocean); flex-shrink: 0; }
+
+/* PRICE */
+.price-block { margin-bottom: 12px; }
+.price-block-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 7px; }
+.price-block-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.2px; color: var(--ocean); }
+.price-incl { font-size: 10px; color: var(--text-muted); font-weight: 500; font-style: italic; }
+.price-section { display: flex; gap: 8px; margin-bottom: 6px; }
+.price-field { flex: 1; }
+.price-field label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.2px; color: var(--text-muted); display: block; margin-bottom: 4px; }
+.price-input-wrap { position: relative; }
+.price-input-wrap .currency { position: absolute; left: 9px; top: 50%; transform: translateY(-50%); font-size: 13px; font-weight: 600; color: var(--text-muted); pointer-events: none; }
+.price-input { width: 100%; font-size: 13px; font-weight: 600; padding: 8px 10px 8px 22px; border: 1.5px solid var(--border); border-radius: 10px; background: var(--sand-light); color: var(--text); font-family: 'DM Sans',sans-serif; outline: none; transition: border-color .15s; }
+.price-input:focus { border-color: var(--ocean); background: #fff; }
+.price-input::placeholder { color: #C4BCB4; font-weight: 400; }
+.price-breakdown { display: flex; flex-direction: column; gap: 5px; margin-top: 8px; }
+.price-breakdown-item { display: flex; align-items: center; justify-content: space-between; background: var(--ocean-light); border-radius: 10px; padding: 8px 12px; }
+.price-breakdown-item .pb-lbl { font-size: 11px; color: var(--ocean); font-weight: 500; }
+.price-breakdown-item .pb-val { font-size: 13px; font-weight: 700; color: var(--ocean-deep); font-family: 'Playfair Display',serif; }
 
 .votes-section { border-top: 1.5px solid var(--border); padding-top: 12px; margin-top: 4px; }
 .votes-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.2px; color: var(--ocean); margin-bottom: 9px; }
@@ -221,8 +239,12 @@ textarea.field-input { resize: none; min-height: 52px; line-height: 1.5; }
   /* STARS — bigger touch targets */
   .star-btn { font-size: 26px; padding: 4px; }
 
-  /* NOTES */
+  /* Notes */
   textarea.field-input { font-size: 15px; min-height: 60px; padding: 10px 12px; }
+
+  /* PRICE */
+  .price-input { font-size: 15px; padding: 10px 10px 10px 22px; }
+  .price-breakdown-item .pb-val { font-size: 13px; }
 
   /* VOTES */
   .voter-name { width: 52px; font-size: 11px; }
@@ -294,8 +316,13 @@ textarea.field-input { resize: none; min-height: 52px; line-height: 1.5; }
     <div class="sync-bar">
       <div class="sync-dot" id="syncDot"></div>
       <span id="syncMsg">Loading...</span>
-      <button class="sync-btn" onclick="syncAll()">↻ Refresh</button>
+      <div style="display:flex;gap:6px;margin-left:auto;">
+        <button class="sync-btn" onclick="importFromFile()" title="Load database.json">📂 Import</button>
+        <button class="sync-btn" onclick="exportToFile()" title="Save database.json">💾 Export</button>
+        <button class="sync-btn" onclick="syncAll()">↻ Refresh</button>
+      </div>
     </div>
+    <input type="file" id="fileImportInput" accept=".json" style="display:none" onchange="handleFileImport(this)"/>
     <div class="add-section">
       <label class="add-label">Add a hotel</label>
       <div class="add-row">
@@ -379,10 +406,72 @@ const PALETTES=[
   {bg:'linear-gradient(135deg,#0077B6,#023E8A)',emoji:'🏙️'},
 ];
 const KEY='hotelapp_hotels_v5';
+const DB_FILENAME='database.json';
 let currentUser=null,hotels=[],syncInterval=null,saving=false;
 
 async function sGet(k,s){try{const r=await window.storage.get(k,s);return r?r.value:null}catch(e){return null}}
 async function sSet(k,v,s){try{await window.storage.set(k,v,s);return true}catch(e){return false}}
+
+/* ─── FILE SYSTEM (database.json) ─── */
+let _autoExportTimer=null;
+
+function downloadJson(){
+  // Always works — triggers browser Save dialog / Downloads folder
+  const json=JSON.stringify(hotels,null,2);
+  const blob=new Blob([json],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download=DB_FILENAME;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+}
+
+async function exportToFile(){
+  if(!hotels.length)return;
+  downloadJson();
+  setSS('ok','database.json downloaded ✓');
+}
+
+async function autoExport(){
+  if(!hotels.length)return;
+  // Always save to localStorage so data survives refresh
+  try{localStorage.setItem('db_auto_backup',JSON.stringify(hotels));}catch(e){}
+  // Debounce auto-download — only download once per batch of changes
+  clearTimeout(_autoExportTimer);
+  _autoExportTimer=setTimeout(()=>{
+    downloadJson();
+    setSS('ok','database.json saved ✓');
+  },2000);
+}
+
+function importFromFile(){
+  document.getElementById('fileImportInput').click();
+}
+
+async function handleFileImport(input){
+  const file=input.files[0];if(!file)return;
+  try{
+    const text=await file.text();
+    const data=JSON.parse(text);
+    if(!Array.isArray(data))throw new Error('Invalid format');
+    hotels=data;
+    await persist();
+    render();
+    setSS('ok',`Imported ${data.length} hotels ✓`);
+  }catch(e){setSS('err','Import failed: '+e.message);}
+  input.value='';
+}
+
+// Auto-load from localStorage backup on startup
+function tryLoadLocalBackup(){
+  try{
+    const bk=localStorage.getItem('db_auto_backup');
+    if(bk){const d=JSON.parse(bk);if(Array.isArray(d)&&d.length)return d;}
+  }catch(e){}
+  return null;
+}
 
 async function login(uid){
   SFX.login(); currentUser=uid; const u=USERS[uid];
@@ -391,7 +480,21 @@ async function login(uid){
   const p=document.getElementById('pillAvatar');
   p.style.background=u.bg;p.style.color=u.textColor;p.textContent=u.initial;
   document.getElementById('pillName').textContent=u.name;
-  await syncAll(); syncInterval=setInterval(syncAll,8000);
+  await syncAll();
+  // Merge localStorage price backup (from mid-type refresh) into freshly synced data
+  if(window._priceBackup){
+    let merged=false;
+    window._priceBackup.forEach(bh=>{
+      const h=hotels.find(h=>h.id===bh.id);
+      if(h&&(bh.price7||bh.price10)){
+        if(bh.price7&&bh.price7!==h.price7){h.price7=bh.price7;merged=true;}
+        if(bh.price10&&bh.price10!==h.price10){h.price10=bh.price10;merged=true;}
+      }
+    });
+    window._priceBackup=null;
+    if(merged){await persist();render();}
+  }
+  syncInterval=setInterval(syncAll,8000);
 }
 function logout(){
   currentUser=null;if(syncInterval)clearInterval(syncInterval);syncInterval=null;
@@ -405,34 +508,47 @@ function setSS(state,msg){
 const SEED_HOTELS=[
   {url:'https://www.tripadvisor.co.uk/Hotel_Review-g482848-d10678936-Reviews-Melia_Llana_Beach_Resort_Spa_All_Inclusive_Adults_only-Santa_Maria_Ilha_do_Sal.html',name:'Melía Llana Beach Resort & Spa',location:'Santa Maria, Sal, Cape Verde',julyTemp:29,beach:'On the beach'},
   {url:'https://www.easyjet.com/en/holidays/cape-verde/sal/santa-maria/melia-llana?ibf=true&to=05-06-2026&from=29-05-2026',name:'Melía Llana — EasyJet Package',location:'Santa Maria, Sal, Cape Verde',julyTemp:29,beach:'On the beach'},
-  {url:'https://www.tripadvisor.co.uk/Hotel_Review-g635613-d316715-Reviews-Sol_Cosmopolitan_Rhodes-Rhodes_Town_Rhodes_Dodecanese_South_Aegean.html',name:'Sol Cosmopolitan Rhodes',location:'Rhodes Town, Rhodes, Greece',julyTemp:28,beach:'~300m to beach'},
-  {url:'https://www.tripadvisor.co.uk/Hotel_Review-g635613-d500438-Reviews-Canvas_by_Mitsis_Petit_Palais-Rhodes_Town_Rhodes_Dodecanese_South_Aegean.html',name:'Canvas by Mitsis Petit Palais',location:'Rhodes Town, Rhodes, Greece',julyTemp:28,beach:'~200m to beach'},
-  {url:'https://www.tripadvisor.co.uk/Hotel_Review-g503710-d250616-Reviews-Silva_Beach-Hersonissos_Crete.html',name:'Silva Beach',location:'Hersonissos, Crete, Greece',julyTemp:29,beach:'On the beach'},
+  {url:'https://www.tripadvisor.co.uk/Hotel_Review-g635613-d316715-Reviews-Sol_Cosmopolitan_Rhodes-Rhodes_Town_Rhodes_Dodecanese_South_Aegean.html',name:'Sol Cosmopolitan Rhodes',location:'Rhodes Town, Rhodes, Greece',julyTemp:28,beach:'~300m to beach',image:'Sol Cosmopolitan Rhodes.webp'},
+  {url:'https://www.tripadvisor.co.uk/Hotel_Review-g635613-d500438-Reviews-Canvas_by_Mitsis_Petit_Palais-Rhodes_Town_Rhodes_Dodecanese_South_Aegean.html',name:'Canvas by Mitsis Petit Palais',location:'Rhodes Town, Rhodes, Greece',julyTemp:28,beach:'~200m to beach',image:'Canvas by Mitsis Petit Palais.webp'},
+  {url:'https://www.tripadvisor.co.uk/Hotel_Review-g503710-d250616-Reviews-Silva_Beach-Hersonissos_Crete.html',name:'Silva Beach',location:'Hersonissos, Crete, Greece',julyTemp:29,beach:'On the beach',image:'Silva Beach.webp'},
   {url:'https://www.tripadvisor.co.uk/Hotel_Review-g659629-d496247-Reviews-Golden_Sun_Resort_Spa-Kalamaki_Zakynthos_Ionian_Islands.html',name:'Golden Sun Resort & Spa',location:'Kalamaki, Zakynthos, Greece',julyTemp:30,beach:'~150m to beach'},
-  {url:'https://www.tripadvisor.co.uk/Hotel_Review-g8242451-d595581-Reviews-Blue_Bay_Resort_Hotel-Mononaftis_Crete.html',name:'Blue Bay Resort Hotel',location:'Mononaftis, Crete, Greece',julyTemp:29,beach:'On the beach'},
+  {url:'https://www.tripadvisor.co.uk/Hotel_Review-g8242451-d595581-Reviews-Blue_Bay_Resort_Hotel-Mononaftis_Crete.html',name:'Blue Bay Resort Hotel',location:'Mononaftis, Crete, Greece',julyTemp:29,beach:'On the beach',image:'Blue Bay Resort Hotel.webp'},
   {url:'https://www.tripadvisor.co.uk/Hotel_Review-g503710-d500649-Reviews-Grand_Hotel_Holiday_Resort-Hersonissos_Crete.html',name:'Grand Hotel Holiday Resort',location:'Hersonissos, Crete, Greece',julyTemp:29,beach:'~100m to beach'},
   {url:'https://www.tripadvisor.co.uk/Hotel_Review-g635614-d289547-Reviews-Blue_Bay_Beach_Resort-Ialysos_Rhodes_Dodecanese_South_Aegean.html',name:'Blue Bay Beach Resort',location:'Ialysos, Rhodes, Greece',julyTemp:28,beach:'On the beach'},
   {url:'https://www.tripadvisor.co.uk/Hotel_Review-g1191167-d549385-Reviews-Kalyves_Beach_Hotel-Kalyves_Apokoronas_Chania_Prefecture_Crete.html',name:'Kalyves Beach Hotel',location:'Kalyves, Chania, Crete, Greece',julyTemp:29,beach:'On the beach'},
-  {url:'https://www.tripadvisor.co.uk/Hotel_Review-g635615-d23909093-Reviews-Blue_Sea_Island-Kolimbia_Rhodes_Dodecanese_South_Aegean.html',name:'Blue Sea Island',location:'Kolimbia, Rhodes, Greece',julyTemp:28,beach:'~50m to beach'},
-  {url:'https://www.tripadvisor.co.uk/Hotel_Review-g659630-d576480-Reviews-Canvas_by_Mitsis_Family_Village-Kardamena_Kos_Dodecanese_South_Aegean.html',name:'Canvas by Mitsis Family Village',location:'Kardamena, Kos, Greece',julyTemp:29,beach:'On the beach'},
-  {url:'https://www.tripadvisor.co.uk/Hotel_Review-g2290791-d20142612-Reviews-Mythos_Palace_Resort_Adults_Only-Chlomos_Corfu_Ionian_Islands.html',name:'Mythos Palace Resort (Adults Only)',location:'Chlomos, Corfu, Greece',julyTemp:32,beach:'~400m to beach'},
+  {url:'https://www.tripadvisor.co.uk/Hotel_Review-g635615-d23909093-Reviews-Blue_Sea_Island-Kolimbia_Rhodes_Dodecanese_South_Aegean.html',name:'Blue Sea Island',location:'Kolimbia, Rhodes, Greece',julyTemp:28,beach:'~50m to beach',image:'Blue Sea Island.webp'},
+  {url:'https://www.tripadvisor.co.uk/Hotel_Review-g659630-d576480-Reviews-Canvas_by_Mitsis_Family_Village-Kardamena_Kos_Dodecanese_South_Aegean.html',name:'Canvas by Mitsis Family Village',location:'Kardamena, Kos, Greece',julyTemp:29,beach:'On the beach',image:'Canvas by Mitsis Family Village.webp'},
+  {url:'https://www.tripadvisor.co.uk/Hotel_Review-g2290791-d20142612-Reviews-Mythos_Palace_Resort_Adults_Only-Chlomos_Corfu_Ionian_Islands.html',name:'Mythos Palace Resort (Adults Only)',location:'Chlomos, Corfu, Greece',julyTemp:32,beach:'~400m to beach',image:'Mythos Palace Resort (Adults Only).webp'},
 ];
 function makeSeedHotels(){
-  return SEED_HOTELS.map((h,i)=>({id:1700000000000+i,url:h.url,name:h.name,location:h.location,julyTemp:h.julyTemp||null,beach:h.beach||'',stars:0,image:'',notes:'',
+  return SEED_HOTELS.map((h,i)=>({id:1700000000000+i,url:h.url,name:h.name,location:h.location,julyTemp:h.julyTemp||null,beach:h.beach||'',stars:0,image:'',notes:'',price7:'',price10:'',
     votes:{andrius:0,beatrix:0},reactions:{andrius:{heart:false,up:false,down:false},beatrix:{heart:false,up:false,down:false}},
-    paletteIdx:i%PALETTES.length,addedBy:'andrius'}));
+    paletteIdx:i%PALETTES.length,addedBy:'andrius',image:h.image||''}));
 }
 async function syncAll(){
   setSS('syncing','Syncing...');
+  // Don't overwrite if a price debounce timer is pending
+  const pendingPriceSave=Object.keys(priceTimers).some(k=>priceTimers[k]);
   try{
     const r=await sGet(KEY,true);
-    if(r&&!saving){
+    if(r&&!saving&&!pendingPriceSave){
       const fresh=JSON.parse(r);
       const changed=JSON.stringify(fresh)!==JSON.stringify(hotels);
-      hotels=fresh;
-      if(changed)render();
+      if(changed){hotels=fresh;}
+      // Backfill images from seed data for existing hotels that have none
+      let backfilled=false;
+      hotels.forEach(h=>{
+        const seed=SEED_HOTELS.find(s=>s.url===h.url||s.name===h.name);
+        if(seed&&seed.image&&!h.image){h.image=seed.image;backfilled=true;}
+      });
+      if(backfilled){await sSet(KEY,JSON.stringify(hotels),true);}
+      if(changed||backfilled)render();
     }
-    if(!hotels.length){hotels=makeSeedHotels();await sSet(KEY,JSON.stringify(hotels),true);render();}
+    if(!hotels.length){
+      const bk=tryLoadLocalBackup();
+      if(bk){hotels=bk;await sSet(KEY,JSON.stringify(hotels),true);render();setSS('ok','Restored from local backup ✓');}
+      else{hotels=makeSeedHotels();await sSet(KEY,JSON.stringify(hotels),true);render();}
+    }
     setSS('ok','Up to date · syncs every 8s');
   }
   catch(e){if(!hotels.length){hotels=makeSeedHotels();render();}setSS('err','Sync error');}
@@ -440,7 +556,8 @@ async function syncAll(){
 async function persist(){
   saving=true;setSS('syncing','Saving...');
   const ok=await sSet(KEY,JSON.stringify(hotels),true);
-  saving=false;if(ok)setSS('ok','Saved ✓');else setSS('err','Save failed');
+  saving=false;
+  if(ok){setSS('ok','Saved ✓');await autoExport();}else setSS('err','Save failed');
 }
 function getDomain(url){try{return new URL(url).hostname.replace('www.','')}catch(e){return url}}
 function cap(s){return s.split(' ').map(w=>w[0].toUpperCase()+w.slice(1)).join(' ')}
@@ -487,7 +604,7 @@ async function addHotel(){
   if(!url.startsWith('http')){setStatus('Please enter a valid URL starting with https://');return;}
   try{const r=await sGet(KEY,true);if(r)hotels=JSON.parse(r);}catch(e){}
   const info=extractInfo(url);
-  hotels.push({id:Date.now(),url,name:info.name,location:info.location,stars:info.stars,image:'',notes:'',
+  hotels.push({id:Date.now(),url,name:info.name,location:info.location,stars:info.stars,image:'',notes:'',price7:'',price10:'',
     votes:{andrius:0,beatrix:0},reactions:{andrius:{heart:false,up:false,down:false},beatrix:{heart:false,up:false,down:false}},
     paletteIdx:hotels.length%PALETTES.length,addedBy:currentUser});
   SFX.add();await persist();inp.value='';setStatus('✅ Hotel added!',true);render();
@@ -506,7 +623,7 @@ function getTopId(){
 async function setVote(id,score){
   const h=hotels.find(h=>h.id===id);if(!h)return;
   const prev=getTopId();
-  SFX.star();h.votes[currentUser]=score;
+  SFX.star();h.votes[currentUser]=h.votes[currentUser]===score?0:score;
   await persist();render();
   const nw=getTopId();if(nw&&nw!==prev){SFX.winner();confetti();}
 }
@@ -514,6 +631,58 @@ async function setHotelStars(id,n){const h=hotels.find(h=>h.id===id);if(!h)retur
 async function setImage(id,url){const h=hotels.find(h=>h.id===id);if(!h)return;const v=url.trim();if(h.image===v)return;h.image=v;await persist();render();}
 async function updateField(id,field,value){const h=hotels.find(h=>h.id===id);if(!h)return;if(h[field]===value)return;h[field]=value;await persist();}
 async function updateNotes(id,value){const h=hotels.find(h=>h.id===id);if(!h)return;if(h.notes===value)return;h.notes=value;await persist();}
+async function updatePrice(id,field,value){const h=hotels.find(h=>h.id===id);if(!h)return;const v=value?String(Math.round(Number(value))):'';if(h[field]===v)return;h[field]=v;await persist();}
+
+/* Called on every keystroke — auto-fills sibling, saves immediately */
+const priceTimers={};
+function onPriceInput(id,field,rawVal){
+  const h=hotels.find(h=>h.id===id);if(!h)return;
+  const v=Number(rawVal);
+  // nights for THIS field and the OTHER field
+  const myNights  = field==='price7' ? 7  : 10;
+  const otherField= field==='price7' ? 'price10' : 'price7';
+  const otherNights= field==='price7' ? 10 : 7;
+
+  // Per-night rate from what user typed, then scale to other duration
+  if(v>0){
+    const perNight=v/myNights;
+    const suggested=Math.round(perNight*otherNights);
+    const otherEl=document.getElementById(field==='price7'?`p10_${id}`:`p7_${id}`);
+    if(otherEl)otherEl.value=suggested;
+    h[otherField]=String(suggested);
+  }
+
+  h[field]=v>0?String(Math.round(v)):'';
+
+  // Update breakdown live without re-render
+  const bdEl=document.getElementById(`pbd_${id}`);
+  if(bdEl)bdEl.innerHTML=renderPriceBreakdown(h.price7,h.price10);
+
+  // Debounce the storage write — but hotels object is already updated in memory
+  clearTimeout(priceTimers[id]);
+  priceTimers[id]=setTimeout(()=>persistNow(),300);
+}
+
+// Dedicated immediate save for prices — bypasses saving flag check
+async function persistNow(){
+  setSS('syncing','Saving...');
+  const snap=JSON.stringify(hotels);
+  const ok=await sSet(KEY,snap,true);
+  if(ok){setSS('ok','Saved ✓');await autoExport();}else setSS('err','Save failed');
+}
+
+function renderPriceBreakdown(p7,p10){
+  const v7=Number(p7||0),v10=Number(p10||0);
+  if(!v7&&!v10)return'';
+  const items=[];
+  // Per-night is the same regardless of duration — just show once
+  const perNight=v7?Math.round(v7/7):(v10?Math.round(v10/10):0);
+  items.push(`<div class="price-breakdown-item"><span class="pb-lbl">Per night</span><span class="pb-val">£${perNight}</span></div>`);
+  // Per person differs by duration so show both
+  if(v7) items.push(`<div class="price-breakdown-item"><span class="pb-lbl">Per person · 7 nights</span><span class="pb-val">£${Math.round(v7/2)}</span></div>`);
+  if(v10) items.push(`<div class="price-breakdown-item"><span class="pb-lbl">Per person · 10 nights</span><span class="pb-val">£${Math.round(v10/2)}</span></div>`);
+  return items.join('');
+}
 
 /* ─── REACTIONS ─── */
 async function toggleReaction(id,type,btnEl){
@@ -580,6 +749,29 @@ function render(){
         <span class="section-label">Notes</span>
         <textarea class="field-input" placeholder="Great pool, near beach, free breakfast..." onblur="updateNotes(${h.id},this.value)">${h.notes||''}</textarea>
         <a class="hotel-url" href="${h.url}" target="_blank"><span class="url-dot"></span>${getDomain(h.url)}</a>
+        <div class="price-block">
+          <div class="price-block-header">
+            <span class="price-block-label">💷 Total price</span>
+            <span class="price-incl">incl. flights &amp; transfers</span>
+          </div>
+          <div class="price-section">
+            <div class="price-field">
+              <label>7 nights</label>
+              <div class="price-input-wrap">
+                <span class="currency">£</span>
+                <input class="price-input" id="p7_${h.id}" type="number" min="0" placeholder="e.g. 1400" value="${h.price7||''}" oninput="onPriceInput(${h.id},'price7',this.value)"/>
+              </div>
+            </div>
+            <div class="price-field">
+              <label>10 nights</label>
+              <div class="price-input-wrap">
+                <span class="currency">£</span>
+                <input class="price-input" id="p10_${h.id}" type="number" min="0" placeholder="e.g. 1800" value="${h.price10||''}" oninput="onPriceInput(${h.id},'price10',this.value)"/>
+              </div>
+            </div>
+          </div>
+          <div class="price-breakdown" id="pbd_${h.id}">${renderPriceBreakdown(h.price7,h.price10)}</div>
+        </div>
         <div class="votes-section">
           <div class="votes-label">Star ratings</div>
           <div class="voter-row">
@@ -617,6 +809,30 @@ function render(){
 }
 
 document.getElementById('urlInput').addEventListener('keydown',e=>{if(e.key==='Enter')addHotel();});
+
+// Flush any pending price save immediately before page unloads
+window.addEventListener('beforeunload',()=>{
+  const hasPending=Object.keys(priceTimers).some(k=>priceTimers[k]);
+  if(hasPending){
+    Object.keys(priceTimers).forEach(k=>{clearTimeout(priceTimers[k]);priceTimers[k]=null;});
+    // Use sendBeacon for a fire-and-forget save on unload
+    // Fallback: synchronous localStorage mirror so reload doesn't lose data
+    try{localStorage.setItem('hotelapp_price_backup',JSON.stringify(hotels));}catch(e){}
+  }
+});
+
+// On load, merge any price backup that wasn't flushed to shared storage
+(function(){
+  try{
+    const bk=localStorage.getItem('hotelapp_price_backup');
+    if(bk){
+      const backed=JSON.parse(bk);
+      // Will be used in login to pre-populate prices after sync
+      window._priceBackup=backed;
+      localStorage.removeItem('hotelapp_price_backup');
+    }
+  }catch(e){}
+})();
 </script>
 </body>
 </html>

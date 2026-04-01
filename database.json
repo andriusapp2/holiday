@@ -1,0 +1,405 @@
+[
+  {
+    "id": 1700000000000,
+    "url": "https://www.tripadvisor.co.uk/Hotel_Review-g482848-d10678936-Reviews-Melia_Llana_Beach_Resort_Spa_All_Inclusive_Adults_only-Santa_Maria_Ilha_do_Sal.html",
+    "name": "Melía Llana Beach Resort & Spa",
+    "location": "Santa Maria, Sal, Cape Verde",
+    "julyTemp": 29,
+    "beach": "On the beach",
+    "stars": 0,
+    "image": "",
+    "notes": "",
+    "price7": "",
+    "price10": "",
+    "votes": {
+      "andrius": 0,
+      "beatrix": 0
+    },
+    "reactions": {
+      "andrius": {
+        "heart": false,
+        "up": false,
+        "down": false
+      },
+      "beatrix": {
+        "heart": false,
+        "up": false,
+        "down": false
+      }
+    },
+    "paletteIdx": 0,
+    "addedBy": "andrius"
+  },
+  {
+    "id": 1700000000001,
+    "url": "https://www.easyjet.com/en/holidays/cape-verde/sal/santa-maria/melia-llana?ibf=true&to=05-06-2026&from=29-05-2026",
+    "name": "Melía Llana — EasyJet Package",
+    "location": "Santa Maria, Sal, Cape Verde",
+    "julyTemp": 29,
+    "beach": "On the beach",
+    "stars": 0,
+    "image": "",
+    "notes": "",
+    "price7": "",
+    "price10": "",
+    "votes": {
+      "andrius": 0,
+      "beatrix": 0
+    },
+    "reactions": {
+      "andrius": {
+        "heart": false,
+        "up": false,
+        "down": false
+      },
+      "beatrix": {
+        "heart": false,
+        "up": false,
+        "down": false
+      }
+    },
+    "paletteIdx": 1,
+    "addedBy": "andrius"
+  },
+  {
+    "id": 1700000000002,
+    "url": "https://www.tripadvisor.co.uk/Hotel_Review-g635613-d316715-Reviews-Sol_Cosmopolitan_Rhodes-Rhodes_Town_Rhodes_Dodecanese_South_Aegean.html",
+    "name": "Sol Cosmopolitan Rhodes",
+    "location": "Rhodes Town, Rhodes, Greece",
+    "julyTemp": 28,
+    "beach": "~300m to beach",
+    "stars": 0,
+    "image": "Sol Cosmopolitan Rhodes.webp",
+    "notes": "",
+    "price7": "1954",
+    "price10": "2791",
+    "votes": {
+      "andrius": 0,
+      "beatrix": 0
+    },
+    "reactions": {
+      "andrius": {
+        "heart": false,
+        "up": false,
+        "down": false
+      },
+      "beatrix": {
+        "heart": false,
+        "up": false,
+        "down": false
+      }
+    },
+    "paletteIdx": 2,
+    "addedBy": "andrius"
+  },
+  {
+    "id": 1700000000003,
+    "url": "https://www.tripadvisor.co.uk/Hotel_Review-g635613-d500438-Reviews-Canvas_by_Mitsis_Petit_Palais-Rhodes_Town_Rhodes_Dodecanese_South_Aegean.html",
+    "name": "Canvas by Mitsis Petit Palais",
+    "location": "Rhodes Town, Rhodes, Greece",
+    "julyTemp": 28,
+    "beach": "~200m to beach",
+    "stars": 0,
+    "image": "Canvas by Mitsis Petit Palais.webp",
+    "notes": "",
+    "price7": "1889",
+    "price10": "2699",
+    "votes": {
+      "andrius": 0,
+      "beatrix": 0
+    },
+    "reactions": {
+      "andrius": {
+        "heart": false,
+        "up": false,
+        "down": false
+      },
+      "beatrix": {
+        "heart": false,
+        "up": false,
+        "down": false
+      }
+    },
+    "paletteIdx": 3,
+    "addedBy": "andrius"
+  },
+  {
+    "id": 1700000000004,
+    "url": "https://www.tripadvisor.co.uk/Hotel_Review-g503710-d250616-Reviews-Silva_Beach-Hersonissos_Crete.html",
+    "name": "Silva Beach",
+    "location": "Hersonissos, Crete, Greece",
+    "julyTemp": 29,
+    "beach": "On the beach",
+    "stars": 0,
+    "image": "Silva Beach.webp",
+    "notes": "",
+    "price7": "1913",
+    "price10": "2733",
+    "votes": {
+      "andrius": 0,
+      "beatrix": 0
+    },
+    "reactions": {
+      "andrius": {
+        "heart": false,
+        "up": false,
+        "down": false
+      },
+      "beatrix": {
+        "heart": false,
+        "up": false,
+        "down": false
+      }
+    },
+    "paletteIdx": 4,
+    "addedBy": "andrius"
+  },
+  {
+    "id": 1700000000005,
+    "url": "https://www.tripadvisor.co.uk/Hotel_Review-g659629-d496247-Reviews-Golden_Sun_Resort_Spa-Kalamaki_Zakynthos_Ionian_Islands.html",
+    "name": "Golden Sun Resort & Spa",
+    "location": "Kalamaki, Zakynthos, Greece",
+    "julyTemp": 30,
+    "beach": "~150m to beach",
+    "stars": 0,
+    "image": "",
+    "notes": "",
+    "price7": "",
+    "price10": "",
+    "votes": {
+      "andrius": 0,
+      "beatrix": 0
+    },
+    "reactions": {
+      "andrius": {
+        "heart": false,
+        "up": false,
+        "down": false
+      },
+      "beatrix": {
+        "heart": false,
+        "up": false,
+        "down": false
+      }
+    },
+    "paletteIdx": 5,
+    "addedBy": "andrius"
+  },
+  {
+    "id": 1700000000006,
+    "url": "https://www.tripadvisor.co.uk/Hotel_Review-g8242451-d595581-Reviews-Blue_Bay_Resort_Hotel-Mononaftis_Crete.html",
+    "name": "Blue Bay Resort Hotel",
+    "location": "Mononaftis, Crete, Greece",
+    "julyTemp": 29,
+    "beach": "On the beach",
+    "stars": 0,
+    "image": "Blue Bay Resort Hotel.webp",
+    "notes": "",
+    "price7": "1934",
+    "price10": "2763",
+    "votes": {
+      "andrius": 0,
+      "beatrix": 0
+    },
+    "reactions": {
+      "andrius": {
+        "heart": false,
+        "up": false,
+        "down": false
+      },
+      "beatrix": {
+        "heart": false,
+        "up": false,
+        "down": false
+      }
+    },
+    "paletteIdx": 6,
+    "addedBy": "andrius"
+  },
+  {
+    "id": 1700000000007,
+    "url": "https://www.tripadvisor.co.uk/Hotel_Review-g503710-d500649-Reviews-Grand_Hotel_Holiday_Resort-Hersonissos_Crete.html",
+    "name": "Grand Hotel Holiday Resort",
+    "location": "Hersonissos, Crete, Greece",
+    "julyTemp": 29,
+    "beach": "~100m to beach",
+    "stars": 0,
+    "image": "",
+    "notes": "",
+    "price7": "",
+    "price10": "",
+    "votes": {
+      "andrius": 0,
+      "beatrix": 0
+    },
+    "reactions": {
+      "andrius": {
+        "heart": false,
+        "up": false,
+        "down": false
+      },
+      "beatrix": {
+        "heart": false,
+        "up": false,
+        "down": false
+      }
+    },
+    "paletteIdx": 7,
+    "addedBy": "andrius"
+  },
+  {
+    "id": 1700000000008,
+    "url": "https://www.tripadvisor.co.uk/Hotel_Review-g635614-d289547-Reviews-Blue_Bay_Beach_Resort-Ialysos_Rhodes_Dodecanese_South_Aegean.html",
+    "name": "Blue Bay Beach Resort",
+    "location": "Ialysos, Rhodes, Greece",
+    "julyTemp": 28,
+    "beach": "On the beach",
+    "stars": 0,
+    "image": "",
+    "notes": "",
+    "price7": "",
+    "price10": "",
+    "votes": {
+      "andrius": 0,
+      "beatrix": 0
+    },
+    "reactions": {
+      "andrius": {
+        "heart": false,
+        "up": false,
+        "down": false
+      },
+      "beatrix": {
+        "heart": false,
+        "up": false,
+        "down": false
+      }
+    },
+    "paletteIdx": 0,
+    "addedBy": "andrius"
+  },
+  {
+    "id": 1700000000009,
+    "url": "https://www.tripadvisor.co.uk/Hotel_Review-g1191167-d549385-Reviews-Kalyves_Beach_Hotel-Kalyves_Apokoronas_Chania_Prefecture_Crete.html",
+    "name": "Kalyves Beach Hotel",
+    "location": "Kalyves, Chania, Crete, Greece",
+    "julyTemp": 29,
+    "beach": "On the beach",
+    "stars": 0,
+    "image": "",
+    "notes": "",
+    "price7": "",
+    "price10": "",
+    "votes": {
+      "andrius": 0,
+      "beatrix": 0
+    },
+    "reactions": {
+      "andrius": {
+        "heart": false,
+        "up": false,
+        "down": false
+      },
+      "beatrix": {
+        "heart": false,
+        "up": false,
+        "down": false
+      }
+    },
+    "paletteIdx": 1,
+    "addedBy": "andrius"
+  },
+  {
+    "id": 1700000000010,
+    "url": "https://www.tripadvisor.co.uk/Hotel_Review-g635615-d23909093-Reviews-Blue_Sea_Island-Kolimbia_Rhodes_Dodecanese_South_Aegean.html",
+    "name": "Blue Sea Island",
+    "location": "Kolimbia, Rhodes, Greece",
+    "julyTemp": 28,
+    "beach": "~50m to beach",
+    "stars": 0,
+    "image": "Blue Sea Island.webp",
+    "notes": "",
+    "price7": "1998",
+    "price10": "2854",
+    "votes": {
+      "andrius": 0,
+      "beatrix": 0
+    },
+    "reactions": {
+      "andrius": {
+        "heart": false,
+        "up": false,
+        "down": false
+      },
+      "beatrix": {
+        "heart": false,
+        "up": false,
+        "down": false
+      }
+    },
+    "paletteIdx": 2,
+    "addedBy": "andrius"
+  },
+  {
+    "id": 1700000000011,
+    "url": "https://www.tripadvisor.co.uk/Hotel_Review-g659630-d576480-Reviews-Canvas_by_Mitsis_Family_Village-Kardamena_Kos_Dodecanese_South_Aegean.html",
+    "name": "Canvas by Mitsis Family Village",
+    "location": "Kardamena, Kos, Greece",
+    "julyTemp": 29,
+    "beach": "On the beach",
+    "stars": 0,
+    "image": "Canvas by Mitsis Family Village.webp",
+    "notes": "",
+    "price7": "2081",
+    "price10": "2973",
+    "votes": {
+      "andrius": 0,
+      "beatrix": 0
+    },
+    "reactions": {
+      "andrius": {
+        "heart": false,
+        "up": false,
+        "down": false
+      },
+      "beatrix": {
+        "heart": false,
+        "up": false,
+        "down": false
+      }
+    },
+    "paletteIdx": 3,
+    "addedBy": "andrius"
+  },
+  {
+    "id": 1700000000012,
+    "url": "https://www.tripadvisor.co.uk/Hotel_Review-g2290791-d20142612-Reviews-Mythos_Palace_Resort_Adults_Only-Chlomos_Corfu_Ionian_Islands.html",
+    "name": "Mythos Palace Resort (Adults Only)",
+    "location": "Chlomos, Corfu, Greece",
+    "julyTemp": 32,
+    "beach": "~400m to beach",
+    "stars": 0,
+    "image": "Mythos Palace Resort (Adults Only).webp",
+    "notes": "",
+    "price7": "2207",
+    "price10": "3153",
+    "votes": {
+      "andrius": 0,
+      "beatrix": 0
+    },
+    "reactions": {
+      "andrius": {
+        "heart": false,
+        "up": false,
+        "down": false
+      },
+      "beatrix": {
+        "heart": false,
+        "up": false,
+        "down": false
+      }
+    },
+    "paletteIdx": 4,
+    "addedBy": "andrius"
+  }
+]
